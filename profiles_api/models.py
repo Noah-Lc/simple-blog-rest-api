@@ -47,7 +47,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name']
 
-    def get_name(self):
+    def get_short_name(self):
         """Used to get a user name."""
 
         return self.name
