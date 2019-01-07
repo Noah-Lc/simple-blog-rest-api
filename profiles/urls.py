@@ -5,10 +5,9 @@ from rest_framework.routers import DefaultRouter
 
 from . import views
 
-router = DefaultRouter()
-router.register('profile', views.UserProfileViewSet, base_name='profile')
-router.register('login', views.LoginViewSet, base_name='login')
+app_name = 'profile'
 
 urlpatterns = [
-    url(r'', include(router.urls))
+    url(r'profile', views.UserProfileViewSet.as_view(), name='profile'),
+    url(r'login', views.LoginViewSet.as_view(), name='login')
 ]
