@@ -28,4 +28,5 @@ class ManagerUserProfileViewSet(generics.RetrieveUpdateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     authentication_classes = (TokenAuthentication,)
 
-    queryset = get_user_model().objects.all()
+    def get_object(self):
+        return self.request.user

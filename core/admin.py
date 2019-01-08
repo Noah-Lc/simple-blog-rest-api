@@ -17,3 +17,4 @@ class UserAdmin(BaseUserAdmin):
 )
 
 admin.site.register(models.UserProfile, UserAdmin)
+admin.site.register(models.Tag)

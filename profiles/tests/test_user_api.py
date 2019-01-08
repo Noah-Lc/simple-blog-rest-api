@@ -6,6 +6,7 @@ from rest_framework.test import APIClient
 from rest_framework import status
 
 CREAT_USER_URL = reverse('profile:profile')
+UPDATE_USER_URL = reverse('profile:update')
 TOKEN_URL = reverse('profile:login')
 
 def create_user(**params):
@@ -76,3 +77,42 @@ class PublicUserApiTests(TestCase):
 
         self.assertNotIn('token', res.data)
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_retrieve_user_unauthorized(self):
+        """Test that authentication required for user"""
+
+        res = self.client.get(UPDATE_USER_URL)
+
+        self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
+
+class PrivateUserApiTests(TestCase):
+    """Test API requests that require authentication"""
+
+    def setUp(self):
+        self.user = create_user(email='test@noah-lc.com', password='testPASS@123', name='test', )
+        self.client = APIClient()
+        self.client.force_authenticate(user=self.user)
+
+    def test_retrieve_profile_success(self):
+        """Test retrieving profile for logged in user"""
+        res = self.client.get(UPDATE_USER_URL)
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(res.data, { 'email': self.user.email, 'name': self.user.name  })
+
+    def test_post_me_not_allowed(self):
+        """Test that POST is not allowed on the me URL"""
+        res = self.client.post(UPDATE_USER_URL, {})
+
+        self.assertEqual(res.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    def test_update_user_profile(self):
+        """Test updating the user profile for authenticated user"""
+        payload = {'name': 'new test', 'password': 'newPASS@123'}
+
+        res = self.client.patch(UPDATE_USER_URL, payload)
+
+        self.user.refresh_from_db()
+        self.assertEqual(self.user.name, payload['name'])
+        self.assertTrue(self.user.check_password(payload['password']))
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
