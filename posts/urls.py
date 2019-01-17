@@ -7,9 +7,10 @@ from posts import views
 router = DefaultRouter()
 router.register('tags', views.TagViewSet)
 router.register('categories', views.CategoryViewSet)
+router.register('post', views.PostViewSet)
 
 app_name = 'posts'
 
 urlpatterns = [
-    path(r'\tags', include(router.urls))
+    path(r'posts/', include(router.urls))
 ]

@@ -51,3 +51,11 @@ class ModelTests(TestCase):
         category = models.Category.objects.create(user=sample_user(), name='Cat01')
 
         self.assertEqual(str(category), category.name)
+
+    def test_post_str(self):
+        """Test the post string representation"""
+        user = sample_user()
+        category = models.Category.objects.create(user=user, name='Cat01')
+        recipe = models.Post.objects.create(user=user, title='Test Post', content='Hello World!', category= category,)
+
+        self.assertEqual(str(recipe), recipe.title)
