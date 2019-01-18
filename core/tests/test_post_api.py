@@ -80,41 +80,41 @@ class PrivatePostApiTests(TestCase):
         self.assertEqual(len(res.data), 1)
         self.assertEqual(res.data, serializer.data)
 
-def test_create_basic_post(self):
-    """Test creating post"""
-    category = sample_category(user=self.user, name='Category 1')
-    payload = {'title': 'Test Post', 'content': 'Hello wolrd!', 'category': category, }
-    res = self.client.post(POSTS_URL, payload)
+    def test_create_basic_post(self):
+        """Test creating post"""
+        category = sample_category(user=self.user, name='Category 1')
+        payload = {'title': 'Test Post', 'content': 'Hello wolrd!', 'category': category, }
+        res = self.client.post(POSTS_URL, payload)
 
-    self.assertEqual(res.status_code, status.HTTP_201_CREATED)
-    post = Post.objects.get(id=res.data['id'])
-    for key in payload.keys():
-        self.assertEqual(payload[key], getattr(post, key))
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        post = Post.objects.get(id=res.data['id'])
+        for key in payload.keys():
+            self.assertEqual(payload[key], getattr(post, key))
 
-def test_create_post_with_tags(self):
-    """Test creating a post with tags"""
-    tag1 = sample_tag(user=self.user, name='Tag 1')
-    tag2 = sample_tag(user=self.user, name='Tag 2')
-    category = sample_category(user=self.user, name='Category 1')
-    payload = {'title': 'Test post with two tags', 'tags': [tag1.id, tag2.id], 'content': 'Hello wolrd!', 'category': category.id, }
-    res = self.client.post(POSTS_URL, payload)
+    def test_create_post_with_tags(self):
+        """Test creating a post with tags"""
+        tag1 = sample_tag(user=self.user, name='Tag 1')
+        tag2 = sample_tag(user=self.user, name='Tag 2')
+        category = sample_category(user=self.user, name='Category 1')
+        payload = {'title': 'Test post with two tags', 'tags': [tag1.id, tag2.id], 'content': 'Hello wolrd!', 'category': category, }
+        res = self.client.post(POSTS_URL, payload)
 
-    self.assertEqual(res.status_code, status.HTTP_201_CREATED)
-    post = Post.objects.get(id=res.data['id'])
-    tags = post.tags.all()
-    self.assertEqual(tags.count(), 2)
-    self.assertIn(tag1, tags)
-    self.assertIn(tag2, tags)
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        post = Post.objects.get(id=res.data['id'])
+        tags = post.tags.all()
+        self.assertEqual(tags.count(), 2)
+        self.assertIn(tag1, tags)
+        self.assertIn(tag2, tags)
 
-def test_create_post_with_category(self):
-    """Test creating post with ingredients"""
-    category = sample_category(user=self.user, name='Category 1')
-    payload = {'title': 'Test post with category', 'category': category.id, 'content': 'Hello wolrd!', }
+    def test_create_post_with_category(self):
+        """Test creating post with ingredients"""
+        category = sample_category(user=self.user, name='Category 1')
+        payload = {'title': 'Test post with category', 'category': category, 'content': 'Hello wolrd!', }
 
-    res = self.client.post(POSTS_URL, payload)
+        res = self.client.post(POSTS_URL, payload)
 
-    self.assertEqual(res.status_code, status.HTTP_201_CREATED)
-    post = Post.objects.get(id=res.data['id'])
-    categories = post.Category.all()
-    self.assertEqual(categories.count(), 1)
-    self.assertIn(category, categories)
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        post = Post.objects.get(id=res.data['id'])
+        categories = Category.objects.all()
+        self.assertEqual(categories.count(), 1)
+        self.assertIn(category, categories)

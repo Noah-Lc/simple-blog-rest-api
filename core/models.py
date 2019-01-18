@@ -80,7 +80,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     link = models.CharField(max_length=255, blank=True)
-    category = models.ForeignKey(Category , on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     tags = models.ManyToManyField('Tag')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -21,7 +21,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     """Serialize a post"""
-    category = serializers.PrimaryKeyRelatedField(queryset=Tag.objects.all())
+    category = serializers.SlugRelatedField(queryset=Category.objects.all(), slug_field='name')
     tags = serializers.PrimaryKeyRelatedField(many=True, queryset=Tag.objects.all())
 
     class Meta:
