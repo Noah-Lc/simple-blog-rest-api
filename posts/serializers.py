@@ -26,5 +26,17 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('id', 'title', 'content', 'tags', 'category', 'link', 'created_at', 'updated_at',)
+        fields = ('id', 'title', 'content', 'image', 'tags', 'category', 'link', 'created_at', 'updated_at',)
+        read_only_fields = ('id',)
+
+class PostDetailSerializer(PostSerializer):
+    category = CategorySerializer(read_only=True)
+    tags = TagSerializer(many=True, read_only=True)
+
+class PostImageSerializer(serializers.ModelSerializer):
+    """Serializer for uploading images to post"""
+
+    class Meta:
+        model = Post
+        fields = ('id', 'image')
         read_only_fields = ('id',)

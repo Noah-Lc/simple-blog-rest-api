@@ -4,6 +4,15 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
 
+import uuid
+import os
+
+def post_image_file_path(instance, filename):
+    """Generate file path for new post image"""
+    ext = filename.split('.')[-1]
+    filename = f'{uuid.uuid4()}.{ext}'
+
+    return os.path.join('uploads/post/', filename)
 
 class UserProfileManager(BaseUserManager):
     """Help Django work with our custom user model."""
@@ -79,6 +88,7 @@ class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     content = models.TextField()
+    image = models.ImageField(null=True, default='', upload_to=post_image_file_path)
     link = models.CharField(max_length=255, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     tags = models.ManyToManyField('Tag')
