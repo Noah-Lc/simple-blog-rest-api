@@ -27,7 +27,6 @@ class TagViewSet(BasePostsAttrViewSet):
     queryset = Tag.objects.all()
     serializer_class = serializers.TagSerializer
 
-
 class CategoryViewSet(BasePostsAttrViewSet):
     """Manage category in the database"""
     queryset = Category.objects.all()
@@ -40,9 +39,23 @@ class PostViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
 
+    def _params_to_ints(self, qs):
+        """Convert a list of string IDs to a list of integers"""
+        return [int(str_id) for str_id in qs.split(',')]
+
     def get_queryset(self):
         """Retrieve the posts for the authenticated user"""
-        return self.queryset.filter(user=self.request.user)
+        tags = self.request.query_params.get('tags')
+        categories = self.request.query_params.get('categories')
+        queryset = self.queryset
+        if tags:
+            tag_ids = self._params_to_ints(tags)
+            queryset = queryset.filter(tags__id__in=tag_ids)
+        if categories:
+            category_ids = self._params_to_ints(categories)
+            queryset = queryset.filter(category__id__in=category_ids)
+
+        return queryset.filter(user=self.request.user)
 
     def get_serializer_class(self):
         if self.action == 'retrieve':

@@ -44,7 +44,7 @@ class PrivateCategorysApiTests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer.data)
 
-    def test_Categories_limited_to_user(self):
+    def test_categories_limited_to_user(self):
         """Test that Categories returned are for authenticated user"""
         user2 = get_user_model().objects.create_user('admin@noah-lc.com', 'adminPASS@123')
         Category.objects.create(user=user2, name='Cat03')

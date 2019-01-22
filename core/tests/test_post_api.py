@@ -191,3 +191,46 @@ class PostImageUploadTests(TestCase):
         res = self.client.post(url, {'image': 'notimage'}, format='multipart')
 
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_filter_posts_by_tags(self):
+        """Test returning posts with specific tags"""
+        post1 = sample_post(user=self.user, title='Post 01')
+        post2 = sample_post(user=self.user, title='Post 02')
+        tag1 = sample_tag(user=self.user, name='Tag 01')
+        tag2 = sample_tag(user=self.user, name='Tag 02')
+        post1.tags.add(tag1)
+        post2.tags.add(tag2)
+        post3 = sample_post(user=self.user, title='Post 03')
+
+        res = self.client.get(
+            POSTS_URL,
+            {'tags': '{},{}'.format(tag1.id, tag2.id)}
+        )
+
+        serializer1 = PostSerializer(post1)
+        serializer2 = PostSerializer(post2)
+        serializer3 = PostSerializer(post3)
+        self.assertIn(serializer1.data, res.data)
+        self.assertIn(serializer2.data, res.data)
+        self.assertNotIn(serializer3.data, res.data)
+
+    def test_filter_posts_by_categories(self):
+        """Test returning posts with specific category"""
+        category01 = sample_category(user=self.user, name='Cat 01')
+        category02 = sample_category(user=self.user, name='Cat 02')
+
+        post1 = sample_post(user=self.user, title='Post 01', category=category01)
+        post2 = sample_post(user=self.user, title='Post 02', category=category02)
+        post3 = sample_post(user=self.user, title='Post 03')
+
+        res = self.client.get(
+            POSTS_URL,
+            {'categories': '{},{}'.format(category01.id, category02.id)}
+        )
+        serializer1 = PostSerializer(post1)
+        serializer2 = PostSerializer(post2)
+        serializer3 = PostSerializer(post3)
+
+        self.assertIn(serializer1.data, res.data)
+        self.assertIn(serializer2.data, res.data)
+        self.assertNotIn(serializer3.data, res.data)
