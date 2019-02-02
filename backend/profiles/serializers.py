@@ -3,6 +3,7 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model, authenticate
 from django.utils.translation import ugettext_lazy as _
 
+
 class UserProfileSerializer(serializers.ModelSerializer):
     """Serializer for our profile object."""
 
@@ -33,7 +34,7 @@ class AuthTokenSerializer(serializers.Serializer):
     """Serializer for user authentication object"""
 
     email = serializers.CharField()
-    password = serializers.CharField(style = {'input_type' : 'password' }, trim_whitespace = False)
+    password = serializers.CharField(style = {'input_type': 'password'}, trim_whitespace = False)
 
     def validate(self, attrs):
         """Validate and authentiate the user"""

@@ -16,21 +16,26 @@ from PIL import Image
 
 POSTS_URL = reverse('posts:post-list')
 
+
 def image_upload_url(post_id):
     """Return URL for post image upload"""
     return reverse('posts:post-upload-image', args=[post_id])
+
 
 def sample_tag(user, name):
     """Create and return a sample tag"""
     return Tag.objects.create(user=user, name=name)
 
+
 def detail_url(post_id):
     """Return post detail URL"""
     return reverse('posts:post-detail', args=[post_id])
 
+
 def sample_category(user, name):
     """Create and return a sample category"""
     return Category.objects.create(user=user, name=name)
+
 
 def sample_post(user, **params):
     """Create and return a sample post"""
@@ -47,11 +52,11 @@ class PublicPostApiTests(TestCase):
     def setUp(self):
         self.client = APIClient()
 
-    def test_required_auth(self):
+    def test_not_required_auth(self):
         """Test the authenticaiton is required"""
         res = self.client.get(POSTS_URL)
 
-        self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
 
 
 class PrivatePostApiTests(TestCase):
@@ -69,7 +74,7 @@ class PrivatePostApiTests(TestCase):
 
         res = self.client.get(POSTS_URL)
 
-        posts = Post.objects.all().order_by('-id')
+        posts = Post.objects.all().order_by('id')
         serializer = PostSerializer(posts, many=True)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer.data)
@@ -80,12 +85,12 @@ class PrivatePostApiTests(TestCase):
         sample_post(user=user2)
         sample_post(user=self.user)
 
-        res = self.client.get(POSTS_URL)
+        res = self.client.get(POSTS_URL, {'user': self.user.id})
 
         posts = Post.objects.filter(user=self.user)
         serializer = PostSerializer(posts, many=True)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(res.data), 1)
+        self.assertEqual(len(posts), 1)
         self.assertEqual(res.data, serializer.data)
 
     def test_create_basic_post(self):
@@ -122,7 +127,6 @@ class PrivatePostApiTests(TestCase):
         res = self.client.post(POSTS_URL, payload)
 
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
-        post = Post.objects.get(id=res.data['id'])
         categories = Category.objects.all()
         self.assertEqual(categories.count(), 1)
         self.assertIn(category, categories)
@@ -159,6 +163,7 @@ class PrivatePostApiTests(TestCase):
         self.assertEqual(post.content, payload['content'])
         tags = post.tags.all()
         self.assertEqual(len(tags), 0)
+
 
 class PostImageUploadTests(TestCase):
 

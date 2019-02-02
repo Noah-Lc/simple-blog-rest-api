@@ -7,12 +7,14 @@ from django.contrib.auth.models import BaseUserManager
 import uuid
 import os
 
+
 def post_image_file_path(instance, filename):
     """Generate file path for new post image"""
     ext = filename.split('.')[-1]
     filename = f'{uuid.uuid4()}.{ext}'
 
     return os.path.join('uploads/post/', filename)
+
 
 class UserProfileManager(BaseUserManager):
     """Help Django work with our custom user model."""
@@ -50,7 +52,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
-    objects = UserProfileManager();
+    objects = UserProfileManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name']
@@ -65,13 +67,15 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
 
         return self.email
 
+
 class Tag(models.Model):
     """Tag to be used for a post."""
-    name = models.CharField(max_length=255)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
+
 
 class Category(models.Model):
     """Category to be used in a posts"""
@@ -93,7 +97,6 @@ class Post(models.Model):
     tags = models.ManyToManyField('Tag')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
 
     def __str__(self):
         return self.title

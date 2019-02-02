@@ -43,7 +43,7 @@ lib64/
 parts/
 sdist/
 var/
-migrations/
+
 *.egg-info/
 .installed.cfg
 *.egg
@@ -86,5 +86,3 @@ local_settings.py
 
 .env
 db.sqlite3
-.travis.yml
-.flake8

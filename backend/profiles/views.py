@@ -1,6 +1,3 @@
-from django.shortcuts import render
-from django.contrib.auth import get_user_model
-
 from rest_framework import generics, permissions
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -13,6 +10,7 @@ class UserProfileViewSet(generics.CreateAPIView):
     """Handle creating profiles."""
 
     serializer_class = serializers.UserProfileSerializer
+
 
 class LoginViewSet(ObtainAuthToken):
     """Check email and password and returns an auth token."""

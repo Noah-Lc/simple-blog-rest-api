@@ -1,4 +1,4 @@
-FROM python:3.7-alpine
+FROM python:3.6-alpine
 MAINTAINER Noah Lc
 
 ENV PYTHONUNBUFFERED 1
@@ -12,9 +12,9 @@ RUN pip install -r /requirements.txt
 RUN apk del .tmp-build-deps
 
 # Setup directory structure
-RUN mkdir /app
-WORKDIR /app
-COPY ./ /app
+RUN mkdir /backend
+WORKDIR /backend
+COPY . /backend
 
 RUN mkdir -p /vol/web/media
 RUN mkdir -p /vol/web/static

@@ -15,29 +15,35 @@ class BasePostsAttrViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixin
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        """Return objects for the current authenticated user only"""
-        return self.queryset.filter(user=self.request.user)
+        """Return objects for current user"""
+        assigned_only = bool(self.request.query_params.get('assigned_only'))
+        queryset = self.queryset
+        if assigned_only:
+            queryset = queryset.filter(post__isnull=False)
+
+        return queryset.filter(user=self.request.user).order_by('-name')
 
     def perform_create(self, serializer):
         """Create a new object"""
         serializer.save(user=self.request.user)
+
 
 class TagViewSet(BasePostsAttrViewSet):
     """Manage tags in the database"""
     queryset = Tag.objects.all()
     serializer_class = serializers.TagSerializer
 
+
 class CategoryViewSet(BasePostsAttrViewSet):
     """Manage category in the database"""
     queryset = Category.objects.all()
     serializer_class = serializers.CategorySerializer
 
+
 class PostViewSet(viewsets.ModelViewSet):
     """Manage posts in the database"""
     serializer_class = serializers.PostSerializer
     queryset = Post.objects.all()
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
 
     def _params_to_ints(self, qs):
         """Convert a list of string IDs to a list of integers"""
@@ -47,6 +53,7 @@ class PostViewSet(viewsets.ModelViewSet):
         """Retrieve the posts for the authenticated user"""
         tags = self.request.query_params.get('tags')
         categories = self.request.query_params.get('categories')
+        user = self.request.query_params.get('user')
         queryset = self.queryset
         if tags:
             tag_ids = self._params_to_ints(tags)
@@ -54,8 +61,10 @@ class PostViewSet(viewsets.ModelViewSet):
         if categories:
             category_ids = self._params_to_ints(categories)
             queryset = queryset.filter(category__id__in=category_ids)
+        if user:
+            queryset = queryset.filter(user=user)
 
-        return queryset.filter(user=self.request.user)
+        return queryset.all()
 
     def get_serializer_class(self):
         if self.action == 'retrieve':

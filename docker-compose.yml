@@ -1,20 +1,25 @@
 version: '3'
 
 services:
- app:
-   build:
-     context: .
+ backend:
+   build: ./backend
    ports:
      - "8000:8000"
    volumes:
-     - .:/app
+     - ./backend:/app
    command: >
-     sh -c "python manage.py wait_for_db &&
-            python manage.py migrate &&
+     sh -c "python manage.py wait_for_db
+            python manage.py makemigrations
+            python manage.py migrate
+            python manage.py create_default_user
+            python manage.py create_demo_users
+            python manage.py create_tags
+            python manage.py create_categories
+            python manage.py create_posts
             python manage.py runserver 0.0.0.0:8000"
    environment:
       - DB_HOST=db
-      - DB_NAME=app
+      - DB_NAME=blog
       - DB_USER=postgres
       - DB_PASS=supersecretpassword
    depends_on:
@@ -22,6 +27,6 @@ services:
  db:
   image: postgres:10-alpine
   environment:
-    - POSTGRES_DB=app
+    - POSTGRES_DB=blog
     - POSTGRES_USER=postgres
     - POSTGRES_PASSWORD=supersecretpassword

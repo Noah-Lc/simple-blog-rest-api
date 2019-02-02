@@ -11,6 +11,7 @@ class TagSerializer(serializers.ModelSerializer):
         fields = ('id', 'name')
         read_only_Fields = ('id',)
 
+
 class CategorySerializer(serializers.ModelSerializer):
     """Serializer for an category object"""
 
@@ -18,6 +19,7 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ('id', 'name')
         read_only_fields = ('id',)
+
 
 class PostSerializer(serializers.ModelSerializer):
     """Serialize a post"""
@@ -29,9 +31,11 @@ class PostSerializer(serializers.ModelSerializer):
         fields = ('id', 'title', 'content', 'image', 'tags', 'category', 'link', 'created_at', 'updated_at',)
         read_only_fields = ('id',)
 
+
 class PostDetailSerializer(PostSerializer):
     category = CategorySerializer(read_only=True)
     tags = TagSerializer(many=True, read_only=True)
+
 
 class PostImageSerializer(serializers.ModelSerializer):
     """Serializer for uploading images to post"""

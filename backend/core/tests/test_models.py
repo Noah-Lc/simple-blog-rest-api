@@ -5,10 +5,12 @@ from unittest.mock import patch
 
 from core import models
 
+
 def sample_user(email='test@noah-lc.com', password='testPASS@123'):
     """Create a sample user"""
 
     return get_user_model().objects.create_user(email, password)
+
 
 class ModelTests(TestCase):
 
@@ -24,11 +26,11 @@ class ModelTests(TestCase):
         self.assertTrue(user.check_password(password))
 
     def test_new_user_email_normalized(self):
-    	"""Test the email for a new user is normalized"""
-    	email = 'test@NOAH-LC.com'
-    	user = get_user_model().objects.create_user(email, 'testPASS@123')
+        """Test the email for a new user is normalized"""
+        email = 'test@NOAH-LC.com'
+        user = get_user_model().objects.create_user(email, 'testPASS@123')
 
-    	self.assertEqual(user.email, email.lower())
+        self.assertEqual(user.email, email.lower())
 
     def test_new_user_invalid_email(self):
         """Test creating user with no email raises error"""

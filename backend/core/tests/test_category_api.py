@@ -5,11 +5,12 @@ from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APIClient
 
-from core.models import Category
+from core.models import Category, Post
 
 from posts.serializers import CategorySerializer
 
 CATEGORIES_URL = reverse('posts:category-list')
+
 
 class PublicCategorysApiTests(TestCase):
     """Test the Category API (public)"""
@@ -70,3 +71,17 @@ class PrivateCategorysApiTests(TestCase):
         res = self.client.post(CATEGORIES_URL, payload)
 
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_retrieve_categories_assigned_to_posts(self):
+        """Test filtering categories by those assigned to posts"""
+        cat01 = Category.objects.create(user=self.user, name='Unity')
+        cat02 = Category.objects.create(user=self.user, name='Unreal')
+        cat03 = Category.objects.create(user=self.user, name='DevX')  # noqa: F841
+
+        post = Post.objects.create(user=self.user, title='Test Post', content='Hello World!', category= cat01,)  # noqa: F841
+        res = self.client.get(CATEGORIES_URL, {'assigned_only': 1})
+
+        serializer1 = CategorySerializer(cat01)
+        serializer2 = CategorySerializer(cat02)
+        self.assertIn(serializer1.data, res.data)
+        self.assertNotIn(serializer2.data, res.data)

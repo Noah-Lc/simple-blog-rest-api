@@ -5,12 +5,13 @@ from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APIClient
 
-from core.models import Tag
+from core.models import Tag, Category, Post
 
 from posts.serializers import TagSerializer
 
 
 TAGS_URL = reverse('posts:tag-list')
+
 
 class PublicTagsApiTests(TestCase):
     """Test the TAG API (public)"""
@@ -23,6 +24,7 @@ class PublicTagsApiTests(TestCase):
         res = self.client.post(TAGS_URL)
 
         self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
+
 
 class PrivateTagsApiTests(TestCase):
     """Test TAG that require authentication"""
@@ -56,7 +58,6 @@ class PrivateTagsApiTests(TestCase):
         self.assertEqual(len(res.data), 1)
         self.assertEqual(res.data[0]['name'], tag.name)
 
-
     def test_create_tag_successful(self):
         """Test creating a new tag"""
         payload = {'name': 'Tag5'}
@@ -71,3 +72,19 @@ class PrivateTagsApiTests(TestCase):
         res = self.client.post(TAGS_URL, payload)
 
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_retrieve_tags_assigned_to_posts(self):
+        """Test filtering tags by those assigned to posts"""
+        tag1 = Tag.objects.create(user=self.user, name='PHP')
+        tag2 = Tag.objects.create(user=self.user, name='Pyhton')
+        cat1 = Category.objects.create(user=self.user, name='cat1')
+        post = Post.objects.create(title='Post PHP', user=self.user, category=cat1)
+        post.tags.add(tag1)
+
+        res = self.client.get(TAGS_URL, {'assigned_only': 1})
+
+        serializer1 = TagSerializer(tag1)
+        serializer2 = TagSerializer(tag2)
+
+        self.assertIn(serializer1.data, res.data)
+        self.assertNotIn(serializer2.data, res.data)
