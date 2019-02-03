@@ -14,6 +14,8 @@ RUN apk del .tmp-build-deps
 # Setup directory structure
 RUN mkdir /backend
 WORKDIR /backend
+COPY scripts/start_dev.sh /
+RUN dos2unix /start_dev.sh
 COPY . /backend
 
 RUN mkdir -p /vol/web/media

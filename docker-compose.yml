@@ -1,32 +1,34 @@
 version: '3'
 
 services:
+ db:
+   container_name: db_dev_blog
+   image: postgres:10-alpine
+   networks:
+     - main
+   environment:
+     - POSTGRES_DB=blog
+     - POSTGRES_USER=postgres
+     - POSTGRES_PASSWORD=supersecretpassword
+
  backend:
+   container_name: backend_dev_blog
    build: ./backend
+   command: "sh -c /start_dev.sh"
+   volumes:
+     - ./backend:/backend
    ports:
      - "8000:8000"
-   volumes:
-     - ./backend:/app
-   command: >
-     sh -c "python manage.py wait_for_db
-            python manage.py makemigrations
-            python manage.py migrate
-            python manage.py create_default_user
-            python manage.py create_demo_users
-            python manage.py create_tags
-            python manage.py create_categories
-            python manage.py create_posts
-            python manage.py runserver 0.0.0.0:8000"
+   networks:
+     - main
    environment:
-      - DB_HOST=db
-      - DB_NAME=blog
-      - DB_USER=postgres
-      - DB_PASS=supersecretpassword
+     - DB_HOST=db
+     - DB_NAME=blog
+     - DB_USER=postgres
+     - DB_PASS=supersecretpassword
    depends_on:
-      - db
- db:
-  image: postgres:10-alpine
-  environment:
-    - POSTGRES_DB=blog
-    - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=supersecretpassword
+     - db
+
+networks:
+  main:
+    driver: bridge
