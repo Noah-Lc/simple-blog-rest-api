@@ -17,7 +17,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         categories = Category.objects.all()
         if not categories:
-            for i in range(10):
+            for i in range(4):
                 category = CategoryFactory()
                 category.save()
             print("Created categories")

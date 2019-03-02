@@ -17,7 +17,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         tags = Tag.objects.all()
         if not tags:
-            for i in range(10):
+            for i in range(5):
                 tag = TagFactory()
                 tag.save()
             print("Created tags")

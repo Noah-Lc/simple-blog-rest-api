@@ -1,0 +1,10 @@
+<h1>Posts</h1>
+<div  *ngIf="posts.length > 0">
+  <div  *ngFor="let post of posts">
+    <h3>
+      <p>{{ post.title }}</p>
+    </h3>
+    <p>{{ post.content }}</p>
+  </div  >
+</div  >
+<p *ngIf="posts.length <= 0" class="mat-body-1">No posts Yet!</p>

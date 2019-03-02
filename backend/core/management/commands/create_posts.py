@@ -19,7 +19,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         posts = Post.objects.all()
         if not posts:
-            for i in range(100):
+            for i in range(12):
                 post = PostFactory()
                 post.tags.set(Tag.objects.order_by("?")[:2])
                 post.save()

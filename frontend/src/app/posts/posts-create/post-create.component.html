@@ -1,0 +1,11 @@
+<div>
+  <form (submit)="onAddPost(postForm)" #postForm="ngForm">
+    <div>
+      <input type="text" name="title" ngModel/>
+    </div>
+    <div>
+      <textarea style="resize: none;" name="desription" ngModel ></textarea>
+    </div>
+    <button color="primary" type="submit" name="button">Test</button>
+  </form>
+</div>
