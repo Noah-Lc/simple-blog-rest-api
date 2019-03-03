@@ -2,17 +2,18 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import viewsets, mixins, status
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from core.models import Tag, Category, Post
 
+from posts import permissions
 from posts import serializers
 
 
 class BasePostsAttrViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin):
     """Base viewset for user owned post attributes"""
     authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (permissions.PostOwnObjects, IsAuthenticatedOrReadOnly)
 
     def get_queryset(self):
         """Return objects for current user"""
@@ -21,7 +22,7 @@ class BasePostsAttrViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixin
         if assigned_only:
             queryset = queryset.filter(post__isnull=False)
 
-        return queryset.filter(user=self.request.user).order_by('-name')
+        return queryset.order_by('-name')
 
     def perform_create(self, serializer):
         """Create a new object"""
@@ -43,6 +44,8 @@ class CategoryViewSet(BasePostsAttrViewSet):
 class PostViewSet(viewsets.ModelViewSet):
     """Manage posts in the database"""
     serializer_class = serializers.PostSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (permissions.PostOwnObjects, permissions.UpdateOwnPost, IsAuthenticatedOrReadOnly,)
     queryset = Post.objects.all()
 
     def _params_to_ints(self, qs):

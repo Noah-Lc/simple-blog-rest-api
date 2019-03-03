@@ -1,0 +1,15 @@
+<header id="masthead" role="banner">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <div class="navbar-brand mb-0"><a href="#" rel="home">StanleyWP</a></div>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul id="menu-menu-1" class="navbar-nav ml-auto" *ngIf="categories.length > 0">
+              <li class="menu-item menu-item-type-post_type menu-item-object-page nav-item" *ngFor="let category of categories"><a href="#" class="nav-link">{{ category.name }}</a></li>
+          </ul>
+      </div>
+    </div>
+  </nav>
+</header>

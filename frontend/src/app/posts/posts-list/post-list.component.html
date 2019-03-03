@@ -1,10 +1,90 @@
-<h1>Posts</h1>
-<div  *ngIf="posts.length > 0">
-  <div  *ngFor="let post of posts">
-    <h3>
-      <p>{{ post.title }}</p>
-    </h3>
-    <p>{{ post.content }}</p>
-  </div  >
-</div  >
-<p *ngIf="posts.length <= 0" class="mat-body-1">No posts Yet!</p>
+<div id="content" class="site-content">
+
+  <div class="banner">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div id="primary" class="content-area">
+					<main id="main" class="site-main text-center" role="main">
+
+
+<article id="post-7" class="post-7 page type-page status-publish has-post-thumbnail hentry">
+	<img width="155" height="155" src="./StanleyWP – Just another BootstrapWP Demos site_files/user.png" class="mb-3 wp-post-image" alt="" srcset="https://bootstrapwp.com/demo/stanleywp/wp-content/uploads/sites/16/2014/01/user.png 155w, https://bootstrapwp.com/demo/stanleywp/wp-content/uploads/sites/16/2014/01/user-150x150.png 150w" sizes="(max-width: 155px) 100vw, 155px">	<header class="entry-header">
+		<h1 class="entry-title">Hi, I am Stanley!</h1>	</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<p>Hello everybody. I’m Stanley, a free handsome bootstrap theme coded by BlackTie.co. A really simple theme for those wanting to showcase their work with a cute &amp; clean style.</p>
+<p>Please, consider to register to our newsletter to be updated with our latest themes and freebies. Like always, you can use this theme in any project freely. Share it with your friends.</p>
+	</div><!-- .entry-content -->
+
+	</article><!-- #post-## -->
+
+					</main><!-- #main -->
+				</div><!-- #primary -->
+			</div>
+		</div>
+	</div><!--  .banner -->
+
+   <!--  .banner -->
+   <div class="home-projects">
+      <div class="container">
+         <div class="row mt-5" *ngIf="posts.length > 0">
+            <!-- pagination here -->
+            <!-- the loop -->
+            <article id="post-78" class="col-md-4 post-78 project type-project status-publish has-post-thumbnail hentry project_category-design project_category-website" *ngFor="let post of posts | paginate: { itemsPerPage: 6, currentPage: p }">
+               <div class="post-thumbnail">
+                  <a href="https://bootstrapwp.com/demo/stanleywp/projects/ape/" title="Ape">
+                  <img width="400" height="300" src="./StanleyWP – Just another BootstrapWP Demos site_files/port01.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" srcset="https://bootstrapwp.com/demo/stanleywp/wp-content/uploads/sites/16/2014/01/port01.jpg 400w, https://bootstrapwp.com/demo/stanleywp/wp-content/uploads/sites/16/2014/01/port01-300x225.jpg 300w" sizes="(max-width: 400px) 100vw, 400px">		    </a>
+               </div>
+               <!--  .post-thumbnail -->
+               <header class="entry-header">
+                  <h2 class="entry-title"><a href="https://bootstrapwp.com/demo/stanleywp/projects/ape/" rel="bookmark">{{ post.title }}</a></h2>
+               </header>
+               <!-- .entry-header -->
+            </article>
+            <!-- #post-## -->
+            <!-- end of the loop -->
+            <!-- pagination here -->
+
+         </div>
+         <p *ngIf="posts.length <= 0" class="mat-body-1">No posts Yet!</p>
+         <!--  .row -->
+      </div>
+   </div>
+   <!--  .home-projects -->
+</div>
+<!-- #content -->
+<style>
+
+  .my-pagination {
+      text-align: center;
+  }
+.my-pagination /deep/ .ngx-pagination a {
+    text-decoration: none;
+}
+.my-pagination /deep/ .ngx-pagination a  {
+    font-size: 15px;
+    color: #fff!important;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.my-pagination /deep/ .ngx-pagination a {
+    background: #2980b9;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 5px;
+    color: #000;
+    font-weight: 700;
+}
+.my-pagination /deep/ .ngx-pagination .current {
+    background: #222;
+    color: #fff;
+    font-size: 15px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 5px;
+    font-weight: 700;
+}
+</style>
+<pagination-controls class="my-pagination" (pageChange)="p = $event"></pagination-controls>

@@ -9,13 +9,13 @@ import { PostService } from '../../services/post.service'
   templateUrl: './post-create.component.html'
 })
 export class PostCreateComponent{
-  
+
   constructor(public postService: PostService){}
 
   onAddPost(postForm: NgForm){
     if(postForm.invalid) return;
 
-    this.postService.addPosts(postForm.value.title, postForm.value.desription);
+    this.postService.addPosts(postForm.value.title, postForm.value.content);
     postForm.resetForm();
   }
 }

@@ -26,8 +26,8 @@ export class PostService{
 
   //Get a blog by ID
   getBlog(id: Number) {
-    const url = this.strUrl + 'posts/post/' + id;
-    /*return this.http.get(url)
+    /*const url = this.strUrl + 'posts/post/' + id;
+    return this.http.get(url)
       .toPromise()
       .then(response => response.json().data)
       .catch(this.handleError);*/
@@ -35,8 +35,8 @@ export class PostService{
 
   addPosts(title: string, content: string){
     let url = this.strUrl + 'posts/post/';
-    const post: Post = {id:null, user:null, title:title, content:content, image: "", link:"", category:"", tags:"", created_at:null, updated_at:null};
-    /*this.http.post(url, post)
+    /*const post: Post = {title:title, content:content, image: null, link:"", category:"hospital", tags:[1]};
+    this.http.post(url, post)
     .subscribe(responseData => {
       console.log(responseData);
       this.posts.push(post);

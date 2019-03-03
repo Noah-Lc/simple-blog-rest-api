@@ -8,10 +8,14 @@ import { AppComponent } from './app.component';
 
 import { AuthInterceptor } from './auth/helpers/auth.interceptor';
 
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+
 import { PostListComponent } from './posts/posts-list/post-list.component';
 import { PostCreateComponent } from './posts/posts-create/post-create.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -19,13 +23,16 @@ import { RegisterComponent } from './auth/register/register.component';
     PostListComponent,
     PostCreateComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]
