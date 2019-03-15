@@ -1,29 +1,4 @@
 <div id="content" class="site-content">
-
-  <div class="banner">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div id="primary" class="content-area">
-					<main id="main" class="site-main text-center" role="main">
-
-
-<article id="post-7" class="post-7 page type-page status-publish has-post-thumbnail hentry">
-	<img width="155" height="155" src="./StanleyWP – Just another BootstrapWP Demos site_files/user.png" class="mb-3 wp-post-image" alt="" srcset="https://bootstrapwp.com/demo/stanleywp/wp-content/uploads/sites/16/2014/01/user.png 155w, https://bootstrapwp.com/demo/stanleywp/wp-content/uploads/sites/16/2014/01/user-150x150.png 150w" sizes="(max-width: 155px) 100vw, 155px">	<header class="entry-header">
-		<h1 class="entry-title">Hi, I am Stanley!</h1>	</header><!-- .entry-header -->
-
-	<div class="entry-content">
-		<p>Hello everybody. I’m Stanley, a free handsome bootstrap theme coded by BlackTie.co. A really simple theme for those wanting to showcase their work with a cute &amp; clean style.</p>
-<p>Please, consider to register to our newsletter to be updated with our latest themes and freebies. Like always, you can use this theme in any project freely. Share it with your friends.</p>
-	</div><!-- .entry-content -->
-
-	</article><!-- #post-## -->
-
-					</main><!-- #main -->
-				</div><!-- #primary -->
-			</div>
-		</div>
-	</div><!--  .banner -->
-
    <!--  .banner -->
    <div class="home-projects">
       <div class="container">
@@ -32,12 +7,12 @@
             <!-- the loop -->
             <article id="post-78" class="col-md-4 post-78 project type-project status-publish has-post-thumbnail hentry project_category-design project_category-website" *ngFor="let post of posts | paginate: { itemsPerPage: 6, currentPage: p }">
                <div class="post-thumbnail">
-                  <a href="https://bootstrapwp.com/demo/stanleywp/projects/ape/" title="Ape">
-                  <img width="400" height="300" src="./StanleyWP – Just another BootstrapWP Demos site_files/port01.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" srcset="https://bootstrapwp.com/demo/stanleywp/wp-content/uploads/sites/16/2014/01/port01.jpg 400w, https://bootstrapwp.com/demo/stanleywp/wp-content/uploads/sites/16/2014/01/port01-300x225.jpg 300w" sizes="(max-width: 400px) 100vw, 400px">		    </a>
+                  <a [routerLink]="['/post/',post.id]" title="Ape">
+                  <img width="400" height="300" [src]="post.image" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" [alt]="post.title" sizes="(max-width: 400px) 100vw, 400px">		    </a>
                </div>
                <!--  .post-thumbnail -->
                <header class="entry-header">
-                  <h2 class="entry-title"><a href="https://bootstrapwp.com/demo/stanleywp/projects/ape/" rel="bookmark">{{ post.title }}</a></h2>
+                  <h2 class="entry-title"><a [routerLink]="['/post/',post.id]" [rel]="post.title">{{ post.title }}</a></h2>
                </header>
                <!-- .entry-header -->
             </article>
@@ -54,10 +29,9 @@
 </div>
 <!-- #content -->
 <style>
-
-  .my-pagination {
-      text-align: center;
-  }
+.my-pagination {
+    text-align: center;
+}
 .my-pagination /deep/ .ngx-pagination a {
     text-decoration: none;
 }
@@ -68,7 +42,7 @@
     padding-right: 15px;
 }
 .my-pagination /deep/ .ngx-pagination a {
-    background: #2980b9;
+    background: #1abc9c;
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;

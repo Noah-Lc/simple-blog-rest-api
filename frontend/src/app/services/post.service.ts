@@ -2,21 +2,19 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http'
 
-import { Config } from '../../config/configuration.config'
 import { Post } from '../models/post.model';
 
 @Injectable({providedIn: 'root'})
 export class PostService{
   private posts: Post[] = [];
+  private post: Post;
   private postsUpdate = new Subject<Post[]>();
-  private headers = new Headers({ 'Content-Type': 'application/json' });
-  private strUrl = Config.URL;
 
   constructor(private http: HttpClient) { }
 
-  //Get all bolgs
+  //Get all posts
   getPosts(){
-    let url = this.strUrl + 'posts/post/';
+    let url = 'api/posts/post/';
     this.http.get<Post[]>(url)
     .subscribe((postData) => {
       this.posts = postData;
@@ -24,27 +22,28 @@ export class PostService{
     });
   }
 
-  //Get a blog by ID
-  getBlog(id: Number) {
-    /*const url = this.strUrl + 'posts/post/' + id;
-    return this.http.get(url)
-      .toPromise()
-      .then(response => response.json().data)
-      .catch(this.handleError);*/
+  //Get a post by ID
+  getPost(id: string) {
+    const url = 'api/posts/post/' + id;
+    this.http.get<Post>(url)
+    .subscribe((postData) => {
+      this.post = postData;
+      this.postsUpdate.next([this.post]);
+    });
   }
 
-  addPosts(title: string, content: string){
-    let url = this.strUrl + 'posts/post/';
-    /*const post: Post = {title:title, content:content, image: null, link:"", category:"hospital", tags:[1]};
+  //Add a post
+  addPosts(title: string, content: string, image: string, link: string, category: string[], tags: string[]){
+    let url = 'posts/post/';
+    const post: Post = {title:title, content:content, image: image, link:link, category:category, tags:tags};
     this.http.post(url, post)
     .subscribe(responseData => {
-      console.log(responseData);
       this.posts.push(post);
       this.postsUpdate.next([...this.posts]);
-    });*/
+    });
   }
 
-  getPostUpdateListener(){
+  getPostsUpdateListener(){
     return this.postsUpdate.asObservable();
   }
 }

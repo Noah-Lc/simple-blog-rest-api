@@ -1,0 +1,45 @@
+ <div class="row mt-5" *ngIf="post != undefined">
+
+
+ </div>
+ <div id="content" class="site-content single-project">
+    <div id="primary" class="content-area-full">
+       <main id="main" class="site-main" role="main" *ngIf="post != undefined">
+          <article id="post-78" class="project type-project status-publish has-post-thumbnail hentry project_category-design project_category-website">
+             <div class="container">
+                <div class="row justify-content-center text-center">
+                   <div class="col-md-6">
+                      <header class="entry-header">
+                         <h1 class="entry-title">{{ post.title }}</h1>
+                      </header>
+                      <div class="row justify-content-center text-center">
+                         <div class="col-md-8">
+                            <div class="mb-4"><img width="700" height="446" [src]="post.image" class="attachment-full size-full" [alt]="post.title" sizes="(max-width: 700px) 100vw, 700px"></div>
+                         </div>
+                         <!--  .col-md-8 -->
+                      </div>
+                      <!-- .entry-header -->
+                      <div class="entry-content">
+                         <p>{{ post.content }}</p>
+                      </div>
+                      <!-- .entry-content -->
+                   </div>
+                   <!--  .col-md-6 -->
+                </div>
+                <!--  .row -->
+                <div class="row justify-content-center text-center">
+                   <div class="col-md-8">
+                      Type: <span *ngFor="let tag of post.tags"><a href="#" [rel]="tag.name">{{ tag.name }}</a>, </span>
+                   </div>
+                   <!--  .col-md-8 -->
+                </div>
+                <!-- .entry-footer -->
+             </div>
+             <!--  .container -->
+          </article>
+          <!-- #post-## -->
+       </main>
+       <!-- #main -->
+    </div>
+    <!-- #primary -->
+ </div>

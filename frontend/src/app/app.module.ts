@@ -12,6 +12,7 @@ import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 import { PostListComponent } from './posts/posts-list/post-list.component';
 import { PostCreateComponent } from './posts/posts-create/post-create.component';
+import { PostDetailsComponent } from './posts/post-details/post-details.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { HeaderComponent } from './header/header.component';
@@ -22,6 +23,7 @@ import { FooterComponent } from './footer/footer.component';
     AppComponent,
     PostListComponent,
     PostCreateComponent,
+    PostDetailsComponent,
     LoginComponent,
     RegisterComponent,
     HeaderComponent,
