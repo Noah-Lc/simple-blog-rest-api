@@ -29,6 +29,21 @@ services:
    depends_on:
      - db
 
+ frontend:
+  container_name: frontend_dev_blog
+  build: ./frontend
+  command: "npm start"
+  volumes:
+    - ./frontend:/frontend/
+  ports:
+    - "4200:4200"
+  networks:
+    - main
+  depends_on:
+    - backend
+    - db
+
+
 networks:
   main:
     driver: bridge
