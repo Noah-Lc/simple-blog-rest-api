@@ -24,12 +24,12 @@ class Command(BaseCommand):
 
         posts = Post.objects.all()
 
-        images = ["port01.jpg", "port02.jpg", "port03.jpg", "port04.jpg", "port05.jpg", "port06.jpg", "port01.jpg", "port02.jpg", "port03.jpg", "port04.jpg", "port05.jpg", "port06.jpg", ]
+        images = ["port01.jpg", "port02.jpg", "port03.jpg", "port04.jpg", "port05.jpg", "port06.jpg", "port01.jpg", "port02.jpg", "port03.jpg", "port04.jpg", "port05.jpg", "port06.jpg"]  # noqa: E501
 
-        if posts:
-            for i in range(1):
+        if not posts:
+            for i in range(12):
                 post = PostFactory()
-                avatar = open(os.path.abspath(os.path.join(os.path.dirname(__file__),'..','img',images[i])), "rb")
+                avatar = open(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'img', images[i])), "rb")  # noqa: E501
 
                 django_file = File(avatar)
 
