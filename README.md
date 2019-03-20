@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/Noah-Lc/simple-blog-rest-api.svg?branch=master)](https://travis-ci.org/Noah-Lc/simple-blog-rest-api)
+[![Coverage Status](https://coveralls.io/repos/github/Noah-Lc/simple-blog-rest-api/badge.svg?branch=master)](https://coveralls.io/github/Noah-Lc/simple-blog-rest-api?branch=master)
+
 # simple-blog-rest-api
 Create a Simple Blog REST API with Python, Django REST Framework and Docker using Test Driven Development (TDD)
 

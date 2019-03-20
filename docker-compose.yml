@@ -15,6 +15,7 @@ services:
    container_name: backend_dev_blog
    build: ./backend
    command: "sh -c /start_dev.sh"
+   user: root
    volumes:
      - ./backend:/backend
    ports:
