@@ -28,8 +28,12 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('id', 'title', 'content', 'image', 'tags', 'category', 'link', 'created_at', 'updated_at',)
-        read_only_fields = ('id',)
+        fields = ('id', 'title', 'content', 'image', 'tags', 'category', 'slug', 'created_at', 'updated_at',)
+        lookup_field = 'slug'
+        extra_kwargs = {
+            'url': {'lookup_field': 'slug'},
+            'slug': {'read_only': True},
+        }
 
 
 class PostDetailSerializer(PostSerializer):

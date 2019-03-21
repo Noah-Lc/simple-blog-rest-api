@@ -7,6 +7,8 @@ from rest_framework.test import APIClient
 
 from core.models import Post, Tag, Category
 
+from blog import utils
+
 from posts.serializers import PostSerializer
 
 import tempfile
@@ -40,7 +42,7 @@ def sample_category(user, name):
 def sample_post(user, **params):
     """Create and return a sample post"""
     category = sample_category(user=user, name='Category 1')
-    defaults = {'title': 'Sample post', 'content': 'Hello Wolrd again!', 'category': category, }
+    defaults = {'title': 'Sample post', 'content': 'Hello Wolrd again!', 'slug': utils.unique_slug_generator('Sample post'), 'category': category, }  # noqa: E501
     defaults.update(params)
 
     return Post.objects.create(user=user, **defaults)
@@ -138,7 +140,7 @@ class PrivatePostApiTests(TestCase):
         new_tag = sample_tag(user=self.user, name='Curry')
 
         payload = {'title': 'Test Title', 'tags': [new_tag.id]}
-        url = detail_url(post.id)
+        url = detail_url(post.slug)
         self.client.patch(url, payload)
 
         post.refresh_from_db()
@@ -154,7 +156,7 @@ class PrivatePostApiTests(TestCase):
         category = sample_category(user=self.user, name='Category 2')
 
         payload = {'title': 'Test full post', 'category': category, 'content': 'Hello wolrd!', }
-        url = detail_url(post.id)
+        url = detail_url(post.slug)
         self.client.put(url, payload)
 
         post.refresh_from_db()
@@ -163,6 +165,16 @@ class PrivatePostApiTests(TestCase):
         self.assertEqual(post.content, payload['content'])
         tags = post.tags.all()
         self.assertEqual(len(tags), 0)
+
+    def test_create_post_with_unique_slug(self):
+        """Test creating post with unique slug"""
+        post1 = sample_post(user=self.user, title='Post 01')
+        post2 = sample_post(user=self.user, title='Post 02')
+
+        serializer1 = PostSerializer(post1)
+        serializer2 = PostSerializer(post2)
+
+        self.assertNotEqual(serializer1.data['slug'], serializer2.data['slug'])
 
 
 class PostImageUploadTests(TestCase):
@@ -178,7 +190,8 @@ class PostImageUploadTests(TestCase):
 
     def test_upload_image_to_post(self):
         """Test uploading an image to post"""
-        url = image_upload_url(self.post.id)
+        url = image_upload_url(self.post.slug)
+
         with tempfile.NamedTemporaryFile(suffix='.jpg') as ntf:
             img = Image.new('RGB', (10, 10))
             img.save(ntf, format='JPEG')
@@ -192,7 +205,7 @@ class PostImageUploadTests(TestCase):
 
     def test_upload_image_bad_request(self):
         """Test uploading an invalid image"""
-        url = image_upload_url(self.post.id)
+        url = image_upload_url(self.post.slug)
         res = self.client.post(url, {'image': 'notimage'}, format='multipart')
 
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)

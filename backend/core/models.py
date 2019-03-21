@@ -86,17 +86,48 @@ class Category(models.Model):
         return self.name
 
 
+class PostQuerySet(models.query.QuerySet):
+    def active(self):
+        return self.filter(is_active=True)
+
+    def featured(self):
+        return self.filter(is_featured=True, is_active=True)
+
+
+class PostManager(models.Manager):
+    """ Manager class to return only those products where each instance is featured oe active """
+
+    def get_queryset(self):
+        return PostQuerySet(self.model, using=self._db)
+
+    def all(self):
+        return self.get_queryset().active()
+
+    def featured(self):
+        return self.get_queryset().featured()
+
+
 class Post(models.Model):
     """Post object"""
+
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     content = models.TextField()
     image = models.ImageField(null=True, default='', upload_to=post_image_file_path)
-    link = models.CharField(max_length=255, blank=True)
+    slug = models.SlugField(blank=True, max_length=255, unique=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     tags = models.ManyToManyField('Tag')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    is_active = models.BooleanField(default=True)
+    is_featured = models.BooleanField(default=False)
+
+    objects = PostManager()
+
+    @property
+    def get_absolute_url(self):
+        return "posts/{slug}/".format(slug=self.slug)
 
     def __str__(self):
         return self.title

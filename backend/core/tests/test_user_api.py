@@ -5,7 +5,7 @@ from django.urls import reverse
 from rest_framework.test import APIClient
 from rest_framework import status
 
-CREAT_USER_URL = reverse('profile:profile')
+CREAT_USER_URL = reverse('profile:register')
 UPDATE_USER_URL = reverse('profile:update')
 TOKEN_URL = reverse('profile:login')
 

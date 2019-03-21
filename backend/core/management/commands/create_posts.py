@@ -3,6 +3,8 @@ from core.models import Post, UserProfile, Category, Tag
 from django.core.files import File
 from django.core.management.base import BaseCommand
 
+from blog import utils
+
 import os
 
 import factory
@@ -15,6 +17,7 @@ class PostFactory(factory.django.DjangoModelFactory):
     title = factory.Faker('word')
     content = factory.Faker('text')
     category = Category.objects.order_by("?").first()
+    slug = utils.unique_slug_generator(title)
 
 
 class Command(BaseCommand):
