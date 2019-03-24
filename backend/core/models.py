@@ -1,19 +1,9 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import AbstractBaseUser
-from django.contrib.auth.models import PermissionsMixin
-from django.contrib.auth.models import BaseUserManager
+from django.urls import reverse
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
-import uuid
-import os
-
-
-def post_image_file_path(instance, filename):
-    """Generate file path for new post image"""
-    ext = filename.split('.')[-1]
-    filename = f'{uuid.uuid4()}.{ext}'
-
-    return os.path.join('uploads/post/', filename)
+from blog.utils import post_image_file_path
 
 
 class UserProfileManager(BaseUserManager):
@@ -127,7 +117,7 @@ class Post(models.Model):
 
     @property
     def get_absolute_url(self):
-        return "posts/{slug}/".format(slug=self.slug)
+        return reverse("posts:post-detail", kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.title

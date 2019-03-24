@@ -17,7 +17,6 @@ class PostFactory(factory.django.DjangoModelFactory):
     title = factory.Faker('word')
     content = factory.Faker('text')
     category = Category.objects.order_by("?").first()
-    slug = utils.unique_slug_generator(title)
 
 
 class Command(BaseCommand):
@@ -36,6 +35,7 @@ class Command(BaseCommand):
 
                 django_file = File(avatar)
 
+                post.slug = utils.unique_slug_generator(post.title)
                 post.image.save(images[i], django_file, save=True)
                 post.tags.set(Tag.objects.order_by("?")[:2])
                 post.save()

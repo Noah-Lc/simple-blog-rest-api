@@ -1,11 +1,11 @@
 from rest_framework import permissions
 
 
-class UpdateOwnPost(permissions.BasePermission):
-    """Allow users to edit their own post."""
+class UpdateOwnObjects(permissions.BasePermission):
+    """Allow users to edit their own object."""
 
     def has_object_permission(self, request, view, obj):
-        """Check user is trying to edit their own profile."""
+        """Check user is trying to edit their own objects."""
 
         if request.method in permissions.SAFE_METHODS:
             return True

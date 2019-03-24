@@ -5,6 +5,17 @@ from django.utils.text import slugify
 
 from core import models
 
+import uuid
+import os
+
+
+def post_image_file_path(instance, filename):
+    """Generate file path for new image"""
+    ext = filename.split('.')[-1]
+    filename = f'{uuid.uuid4()}.{ext}'
+
+    return os.path.join('uploads/post/', filename)
+
 
 def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))

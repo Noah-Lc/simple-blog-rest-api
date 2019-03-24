@@ -9,7 +9,7 @@ from core.models import Category, Post
 
 from posts.serializers import CategorySerializer
 
-CATEGORIES_URL = reverse('posts:category-list')
+CATEGORIES_URL = reverse('posts:categories-list')
 
 
 class PublicCategorysApiTests(TestCase):

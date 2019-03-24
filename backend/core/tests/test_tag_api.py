@@ -9,7 +9,7 @@ from core.models import Tag, Category, Post
 
 from posts.serializers import TagSerializer
 
-TAGS_URL = reverse('posts:tag-list')
+TAGS_URL = reverse('posts:tags-list')
 
 
 class PublicTagsApiTests(TestCase):

@@ -6,8 +6,8 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from core.models import Tag, Category, Post
+from core.permissions import PostOwnObjects, UpdateOwnObjects
 
-from posts import permissions
 from posts import serializers
 
 from blog import utils
@@ -16,7 +16,7 @@ from blog import utils
 class BasePostsAttrViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin):
     """Base viewset for user owned post attributes"""
     authentication_classes = (TokenAuthentication,)
-    permission_classes = (permissions.PostOwnObjects, IsAuthenticatedOrReadOnly)
+    permission_classes = (PostOwnObjects, IsAuthenticatedOrReadOnly)
 
     def get_queryset(self):
         """Return objects for current user"""
@@ -49,7 +49,7 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.PostSerializer
     lookup_field = 'slug'
     authentication_classes = (TokenAuthentication,)
-    permission_classes = (permissions.PostOwnObjects, permissions.UpdateOwnPost, IsAuthenticatedOrReadOnly,)
+    permission_classes = (PostOwnObjects, UpdateOwnObjects, IsAuthenticatedOrReadOnly,)
     queryset = Post.objects.all()
 
     filter_backends = (filters.SearchFilter,)
@@ -105,6 +105,6 @@ class PostFeaturedViewSet(viewsets.ModelViewSet):
 
     serializer_class = serializers.PostSerializer
     authentication_classes = (TokenAuthentication,)
-    permission_classes = (permissions.PostOwnObjects, permissions.UpdateOwnPost, IsAuthenticatedOrReadOnly,)
+    permission_classes = (PostOwnObjects, UpdateOwnObjects, IsAuthenticatedOrReadOnly,)
 
     queryset = Post.objects.featured()

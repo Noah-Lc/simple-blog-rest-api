@@ -9,6 +9,6 @@ before_script: pip install docker-compose
 
 script:
   - docker-compose run backend sh -c "flake8"
-  - docker-compose run backend sh -c "coverage run --source=. manage.py test"
+  - docker-compose run backend sh -c "pytest --cov"
 
 after_success: docker-compose run backend sh -c "coveralls"

@@ -2,4 +2,5 @@
 omit =
     blog/*
     */migrations/*
+    */apps.py
     manage.py

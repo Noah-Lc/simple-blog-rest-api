@@ -1,9 +1,10 @@
-from rest_framework import generics, permissions
+from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
 
-from . import serializers
+from profiles import serializers
 
 
 class UserProfileViewSet(generics.CreateAPIView):
@@ -23,7 +24,8 @@ class ManagerUserProfileViewSet(generics.RetrieveUpdateAPIView):
     """Handle Retrieve and updating profiles."""
 
     serializer_class = serializers.UserProfileSerializer
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
+
     authentication_classes = (TokenAuthentication,)
 
     def get_object(self):
