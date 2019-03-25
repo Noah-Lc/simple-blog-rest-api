@@ -23,8 +23,8 @@ export class PostService{
   }
 
   //Get a post by ID
-  getPost(id: string) {
-    const url = 'api/posts/post/' + id;
+  getPost(slug: string) {
+    const url = 'api/posts/post/' + slug;
     this.http.get<Post>(url)
     .subscribe((postData) => {
       this.post = postData;
@@ -33,9 +33,9 @@ export class PostService{
   }
 
   //Add a post
-  addPosts(title: string, content: string, image: string, link: string, category: string[], tags: string[]){
-    let url = 'posts/post/';
-    const post: Post = {title:title, content:content, image: image, link:link, category:category, tags:tags};
+  addPosts(title: string, content: string, image: string, category: string[], tags: string[]){
+    let url = 'api/posts/post/';
+    const post: Post = {title:title, content:content, image: image, category:category, tags:tags};
     this.http.post(url, post)
     .subscribe(responseData => {
       this.posts.push(post);

@@ -7,12 +7,12 @@
             <!-- the loop -->
             <article id="post-78" class="col-md-4 post-78 project type-project status-publish has-post-thumbnail hentry project_category-design project_category-website" *ngFor="let post of posts | paginate: { itemsPerPage: 6, currentPage: p }">
                <div class="post-thumbnail">
-                  <a [routerLink]="['/post/',post.id]" title="Ape">
+                  <a [routerLink]="['/post/',post.slug]" title="Ape">
                   <img width="400" height="300" [src]="post.image" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" [alt]="post.title" sizes="(max-width: 400px) 100vw, 400px">		    </a>
                </div>
                <!--  .post-thumbnail -->
                <header class="entry-header">
-                  <h2 class="entry-title"><a [routerLink]="['/post/',post.id]" [rel]="post.title">{{ post.title }}</a></h2>
+                  <h2 class="entry-title"><a [routerLink]="['/post/',post.slug]" [rel]="post.title">{{ post.title }}</a></h2>
                </header>
                <!-- .entry-header -->
             </article>

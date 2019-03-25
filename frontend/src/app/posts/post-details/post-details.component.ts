@@ -16,12 +16,11 @@ export class PostDetailsComponent implements OnInit, OnDestroy{
 
   ngOnInit(){
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
-      let postId = paramMap.get('id');
+      let postId = paramMap.get('slug');
 
       this.postService.getPost(postId);
       this.postSubscribe = this.postService.getPostsUpdateListener()
         .subscribe(post =>{
-          console.log(post[0].tags[0]);
           this.post = post[0];
         });
     });
