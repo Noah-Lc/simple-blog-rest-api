@@ -6,17 +6,21 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { AuthInterceptor } from './auth/helpers/auth.interceptor';
+import { AuthInterceptor } from './components/auth/helpers/auth.interceptor';
 
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
-import { PostListComponent } from './posts/posts-list/post-list.component';
-import { PostCreateComponent } from './posts/posts-create/post-create.component';
-import { PostDetailsComponent } from './posts/post-details/post-details.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
+import { PostListComponent } from './components/posts/posts-list/post-list.component';
+import { PostCreateComponent } from './components/posts/posts-create/post-create.component';
+import { PostDetailsComponent } from './components/posts/post-details/post-details.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HomeComponent } from './components/pages/home/home.component';
+import { PagesComponent } from './components/pages/pages.component';
+import { AboutComponent } from './components/pages/about/about.component';
+import { DocsComponent } from './components/pages/docs/docs.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,11 @@ import { FooterComponent } from './footer/footer.component';
     LoginComponent,
     RegisterComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    HomeComponent,
+    PagesComponent,
+    AboutComponent,
+    DocsComponent
   ],
   imports: [
     BrowserModule,

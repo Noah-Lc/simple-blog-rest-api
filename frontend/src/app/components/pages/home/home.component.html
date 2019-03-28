@@ -1,0 +1,20 @@
+<div id="slider">
+    <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 centered">
+        <h1>RECENT POSTS</h1>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting <br> industry. Lorem Ipsum has been the industry's standard.</p>
+        <img src="assets/img/Angular.png" alt="">
+      </div>
+    </div>
+    </div>
+</div>
+<div class="container pt" *ngIf="posts.length > 0">
+  <div class="row mt centered">
+    <div class="col-lg-4" *ngFor="let post of posts | slice: 6">
+      <a class="zoom green" [routerLink]="['/post/',post.slug]"><img class="img-responsive" [src]="post.image" [alt]="post.title"/></a>
+      <p>{{ post.title }}</p>
+    </div>
+    <a [routerLink]="['/posts']" class="action-button">More..</a>
+  </div>
+</div>

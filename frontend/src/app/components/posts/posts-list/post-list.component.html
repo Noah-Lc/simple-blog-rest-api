@@ -1,0 +1,10 @@
+<div class="container pt" *ngIf="posts.length > 0">
+  <div class="row mt centered">
+    <div class="col-lg-4" *ngFor="let post of posts | paginate: { itemsPerPage: 6, currentPage: p }">
+      <a class="zoom green" [routerLink]="['/post/',post.slug]"><img class="img-responsive" [src]="post.image" [alt]="post.title" /></a>
+      <p>{{ post.title }}</p>
+    </div>
+  </div><!-- /row -->
+</div>
+
+<pagination-controls class="my-pagination" (pageChange)="p = $event" directionLinks="false"></pagination-controls>

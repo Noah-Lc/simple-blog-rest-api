@@ -22,6 +22,16 @@ export class PostService{
     });
   }
 
+  //Get feature posts
+  getFeaturePosts(){
+    let url = 'api/posts/feature/';
+    this.http.get<Post[]>(url)
+    .subscribe((postData) => {
+      this.posts = postData;
+      this.postsUpdate.next([...this.posts]);
+    });
+  }
+
   //Get a post by ID
   getPost(slug: string) {
     const url = 'api/posts/post/' + slug;

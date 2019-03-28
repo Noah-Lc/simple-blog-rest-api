@@ -1,0 +1,36 @@
+<div class="container pt">
+  <div class="row mt">
+    <div class="col-lg-6 col-lg-offset-3 centered">
+      <h3>LOGIN PAGE</h3>
+    </div>
+  </div>
+  <div class="row mt">
+    <div class="col-lg-4 col-lg-offset-4">
+      <form class="login-form" (submit)="onLogin(postForm)" #postForm="ngForm">
+        <div class="form-group">
+          <input class="el-input" type="email" name="email" placeholder="E-Mail" ngModel required/>
+        </div>
+        <div class="form-group">
+          <input class="el-input" type="password" name="password" placeholder="Password" ngModel required/>
+        </div>
+        <button type="submit" class="action-button">LOGIN</button>
+      </form>
+    </div>
+  </div>
+  <div class="row mt">
+    <div class="col-lg-6 col-lg-offset-3 centered">
+      <h3>LOGIN WITH DEMO USERS</h3>
+      <p>An easy way to login without register.</p>
+    </div>
+  </div>
+  <div class="row mt">
+    <div class="col-lg-4 col-lg-offset-4">
+      <div class="el-card" *ngFor="let user of default_users">
+        <div class="el-card-body">
+          <img [src]="user.avatar" [alt]="user.name">
+          <button type="button" class="pull-right el-button">Log in as {{ user.name }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
