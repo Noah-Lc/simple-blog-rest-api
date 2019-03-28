@@ -25,10 +25,11 @@ class PostSerializer(serializers.ModelSerializer):
     """Serialize a post"""
     category = serializers.SlugRelatedField(queryset=Category.objects.all(), slug_field='name')
     tags = serializers.PrimaryKeyRelatedField(many=True, queryset=Tag.objects.all())
+    created_by = serializers.CharField(source='user.get_short_name', read_only=True)
 
     class Meta:
         model = Post
-        fields = ('id', 'title', 'content', 'image', 'tags', 'category', 'slug', 'created_at', 'updated_at',)
+        fields = ('id', 'created_by', 'title', 'content', 'image', 'tags', 'category', 'slug', 'created_at', 'updated_at',)
         lookup_field = 'slug'
         extra_kwargs = {
             'url': {'lookup_field': 'slug'},
