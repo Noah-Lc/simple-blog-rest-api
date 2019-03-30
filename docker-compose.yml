@@ -6,6 +6,8 @@ services:
    image: postgres:10-alpine
    networks:
      - main
+   volumes:
+     - pg-data:/var/lib/postgresql/data
    environment:
      - POSTGRES_DB=blog
      - POSTGRES_USER=postgres
@@ -18,6 +20,7 @@ services:
    user: root
    volumes:
      - ./backend:/backend
+     - django-static:/backend/static
    ports:
      - "8000:8000"
    networks:
@@ -30,20 +33,28 @@ services:
    depends_on:
      - db
 
- frontend:
-  container_name: frontend_dev_blog
-  build: ./frontend
-  command: "npm start"
-  volumes:
-    - ./frontend:/frontend/
-  ports:
-    - "4200:4200"
-  networks:
-    - main
-  depends_on:
-    - backend
-    - db
+ redis:
+   image: redis:alpine
+   container_name: redis_dev_blog
+   networks:
+     - main
 
+ celery:
+    build: ./backend
+    container_name: celery_dev_blog
+    command: sh -c 'celery -A blog.celery  worker -l info'
+    volumes:
+      - ./backend:/backend
+    depends_on:
+      - db
+      - redis
+    networks:
+      - main
+
+
+volumes:
+  django-static:
+  pg-data:
 
 networks:
   main:
