@@ -11,6 +11,11 @@ RUN npm cache verify
 # Install app dependencies.
 RUN npm install
 
+COPY ./start_dev.sh /
+RUN dos2unix /start_dev.sh
+
 # Copy app files.
 COPY .  /frontend
-RUN npm run build
+
+EXPOSE 4200
+CMD ["sh", "start_dev.sh"]
