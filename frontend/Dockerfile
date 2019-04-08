@@ -9,13 +9,10 @@ COPY ./package*.json ./
 
 RUN npm cache verify
 # Install app dependencies.
-RUN npm install
+RUN npm install -g @angular/cli
 
 COPY ./start_dev.sh /
 RUN dos2unix /start_dev.sh
 
 # Copy app files.
 COPY .  /frontend
-
-EXPOSE 4200
-CMD ["sh", "start_dev.sh"]

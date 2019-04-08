@@ -33,20 +33,6 @@ services:
    depends_on:
      - db
 
- frontend:
-   container_name: frontend_dev_blog
-   build: ./frontend
-   volumes:
-     - ./frontend:/frontend/
-     - '/frontend/node_modules'
-   ports:
-     - "4200:4200"
-   networks:
-     - main
-   depends_on:
-     - backend
-     - db
-
  nginx:
    container_name: nginx_dev_blog
    build:
@@ -54,9 +40,10 @@ services:
      dockerfile: nginx/Dockerfile
    depends_on:
      - backend
+   ports:
+     - "80:80"
    volumes:
      - ./nginx/default.conf:/etc/nginx/nginx.conf
-     - django-static:/usr/src/app/static
    networks:
      - main
 
