@@ -106,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 CORS_ORIGIN_WHITELIST = (
-    'http://localhost:4200/'
+    'http://localhost/'
 )
 
 REST_FRAMEWORK = {
