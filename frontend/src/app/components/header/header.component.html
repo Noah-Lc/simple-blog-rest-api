@@ -13,6 +13,7 @@
         <li><a [routerLink]="['']">Home</a></li>
         <li><a [routerLink]="['about']">About</a></li>
         <li><a [routerLink]="['docs']">docs</a></li>
+        <li *ngIf="userIsAuthenticated"><a [routerLink]="['dashboard']">docdddddds</a></li>
         <li><a [routerLink]="['login']">Login</a></li>
       </ul>
     </div>

@@ -28,7 +28,7 @@
       <div class="el-card" *ngFor="let user of default_users">
         <div class="el-card-body">
           <img [src]="user.avatar" [alt]="user.name">
-          <button type="button" class="pull-right el-button">Log in as {{ user.name }}</button>
+          <button type="button" class="pull-right el-button" (click)="onLoginWithDemoUser(user.email)">Log in as {{ user.name }}</button>
         </div>
       </div>
     </div>

@@ -1,28 +1,26 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { Category } from '../../models/category.model'
-import { CategoryService } from '../../services/category.service'
+import { AuthService } from '../../services/auth.service'
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit, OnDestroy{
-  categories: Category[] = [];
-  private categorySubscribe: Subscription;
+  userIsAuthenticated = false;
+  private authListenerSubs: Subscription;
 
-  constructor(public categoryService: CategoryService){}
+  constructor(public authService: AuthService){}
 
   ngOnInit(){
-    this.categoryService.getCategories();
-    this.categorySubscribe = this.categoryService.getCategoryUpdateListener()
-      .subscribe((categories: Category[]) =>{
-        this.categories = categories;
+    this.authListenerSubs = this.authService.getAuthStatusListener()
+      .subscribe(isAuthenticated =>{
+        this.userIsAuthenticated = isAuthenticated;
       });
   }
 
   ngOnDestroy(){
-    this.categorySubscribe.unsubscribe();
+    this.authListenerSubs.unsubscribe();
   }
 }

@@ -21,6 +21,7 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { PagesComponent } from './components/pages/pages.component';
 import { AboutComponent } from './components/pages/about/about.component';
 import { DocsComponent } from './components/pages/docs/docs.component';
+import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { DocsComponent } from './components/pages/docs/docs.component';
     HomeComponent,
     PagesComponent,
     AboutComponent,
-    DocsComponent
+    DocsComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,9 @@ import { DocsComponent } from './components/pages/docs/docs.component';
     FormsModule,
     NgxPaginationModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

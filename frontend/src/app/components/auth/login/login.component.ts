@@ -39,5 +39,9 @@ export class LoginComponent {
     this.authService.Login(loginForm.value.email, loginForm.value.password);
   }
 
+  onLoginWithDemoUser(email :string){
+    this.authService.Login(email, "demopwd123");
+  }
+
 
 }

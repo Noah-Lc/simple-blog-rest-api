@@ -381,3 +381,36 @@ a:after {
 .el-card button{
   width: 180px;
 }
+
+/*-------------------------------*/
+.pad-all {
+    padding: 15px;
+}
+.mar-btm {
+    margin-bottom: 15px;
+}
+.media-left {
+    padding-right: 10px;
+}
+.media-body {
+    vertical-align: top;
+}
+.mar-no {
+    margin: 0 !important;
+}
+.text-lg {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+.media-body p {
+    margin: 0 0 10px;
+}
+
+.img-md {
+    width: 64px;
+    height: 64px;
+}
+
+.bq-sm{
+  margin: 0 0 3px;
+}
