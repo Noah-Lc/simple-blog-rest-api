@@ -9,6 +9,7 @@ import { User } from '../models/user.model';
 export class AuthService{
   private isAuthenticated = false;
   private token: string;
+  private tokenTimer: any;
   private authStatusListener = new Subject<boolean>();
 
   constructor(private http: HttpClient, private router:Router) { }
@@ -45,6 +46,9 @@ export class AuthService{
           this.isAuthenticated = true;
           this.router.navigate(['/dashboard']);
           this.authStatusListener.next(true);
+          this.tokenTimer = setTimeout(() => {
+            this.Logout();
+          }, 3600);
         }
       });
   }
@@ -52,6 +56,7 @@ export class AuthService{
   Logout(){
     this.isAuthenticated = false;
     this.token = null;
+    clearTimeout(this.tokenTimer);
     this.router.navigate(['/']);
   }
 
