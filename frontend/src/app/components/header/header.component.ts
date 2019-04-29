@@ -14,10 +14,15 @@ export class HeaderComponent implements OnInit, OnDestroy{
   constructor(public authService: AuthService){}
 
   ngOnInit(){
+    this.userIsAuthenticated = this.authService.getIsAuth();
     this.authListenerSubs = this.authService.getAuthStatusListener()
       .subscribe(isAuthenticated =>{
         this.userIsAuthenticated = isAuthenticated;
       });
+  }
+
+  test(){
+    console.log(this.userIsAuthenticated);
   }
 
   ngOnDestroy(){
