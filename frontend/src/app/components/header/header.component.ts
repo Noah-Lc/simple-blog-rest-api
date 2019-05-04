@@ -21,8 +21,9 @@ export class HeaderComponent implements OnInit, OnDestroy{
       });
   }
 
-  test(){
-    console.log(this.userIsAuthenticated);
+  logout(){
+    this.authService.Logout();
+    this.userIsAuthenticated = false;
   }
 
   ngOnDestroy(){

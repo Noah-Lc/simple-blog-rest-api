@@ -90,12 +90,13 @@ a:after {
 	border-color: #16a085;
 }
 
-.navbar-inverse .navbar-nav > li > a {
-	color: white;
-}
 
 .navbar-inverse .navbar-nav > li > a:hover {
 	color: #222222;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+	color: white;
 }
 
 .navbar-brand {
@@ -413,4 +414,23 @@ a:after {
 
 .bq-sm{
   margin: 0 0 3px;
+}
+.tessst{
+  position: static;
+vertical-align: middle;
+margin-left: 8px;
+margin-top: -3px;
+font-family: "Glyphicons Halflings";
+font-size: 15px;
+  color: #fff;
+  speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: baseline;
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }

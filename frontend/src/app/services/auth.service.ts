@@ -31,7 +31,6 @@ export class AuthService{
     const user: User = {name: name, email: email, password: password};
     this.http.post(url, user)
       .subscribe(response => {
-        console.log(response);
       });
   }
 

@@ -1,5 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms'
+import { Router} from '@angular/router';
 
 import { User } from '../../../models/user.model'
 import { AuthService } from '../../../services/auth.service'
@@ -8,7 +9,7 @@ import { AuthService } from '../../../services/auth.service'
   selector: 'app-login',
   templateUrl: './login.component.html'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   public default_users = [
           {
             name: 'rebecca',
@@ -32,7 +33,13 @@ export class LoginComponent {
           },
         ];
 
-  constructor(public authService: AuthService){}
+  constructor(public authService: AuthService, public router: Router){}
+
+  ngOnInit(){
+    if (this.authService.getIsAuth()) {
+      this.router.navigate(['']);
+    }
+  }
 
   onLogin(loginForm: NgForm){
     if(loginForm.invalid) return;
@@ -42,6 +49,4 @@ export class LoginComponent {
   onLoginWithDemoUser(email :string){
     this.authService.Login(email, "demopwd123");
   }
-
-
 }
