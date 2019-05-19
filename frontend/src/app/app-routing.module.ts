@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { PostListComponent } from './components/posts/posts-list/post-list.component';
+import { PostCreateComponent } from './components/posts/posts-create/post-create.component';
 import { PostDetailsComponent } from './components/posts/post-details/post-details.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { AboutComponent } from './components/pages/about/about.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'docs', component: DocsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'create', component: PostCreateComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 @NgModule({

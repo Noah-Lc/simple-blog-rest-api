@@ -18,4 +18,10 @@ export class PostCreateComponent{
     this.postService.addPosts(postForm.value.title, postForm.value.content, postForm.value.image, postForm.value.category, postForm.value.tags);
     postForm.resetForm();
   }
+
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+  }
 }
