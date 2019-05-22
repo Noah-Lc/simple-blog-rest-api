@@ -418,6 +418,10 @@ a:after {
     padding: 20px;
 }
 
+.el-image-preview{
+  height: 145px
+}
+
 .el-card-body img{
   height: 50px;
 }
