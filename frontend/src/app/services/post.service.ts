@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http'
+import {RequestOptions } from '@angular/http';
 
 import { Post } from '../models/post.model';
 
@@ -43,10 +44,19 @@ export class PostService{
   }
 
   //Add a post
-  addPosts(title: string, content: string, image: string, category: string[], tags: string[]){
+  addPosts(title: string, content: string, image: File, category: string, tags: any){
     let url = 'api/posts/post/';
+    const formData = new FormData();
+
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("category", category);
+    formData.append("tags", tags);
+    formData.append("image", image);
+
     const post: Post = {title:title, content:content, image: image, category:category, tags:tags};
-    this.http.post(url, post)
+
+    this.http.post(url, formData)
     .subscribe(responseData => {
       this.posts.push(post);
       this.postsUpdate.next([...this.posts]);

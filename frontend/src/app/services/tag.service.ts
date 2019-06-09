@@ -13,7 +13,7 @@ export class TagService{
 
   //Get all categories
   getTags(){
-    let url = 'posts/tags/';
+    let url = 'api/posts/tags/';
     this.http.get<Tag[]>(url)
     .subscribe((tagData) => {
       this.tags = tagData;

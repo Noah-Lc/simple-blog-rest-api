@@ -11,9 +11,9 @@
           <input class="el-input" type="text" name="title" placeholder="Title" ngModel reauired/>
         </div>
         <div class="form-group">
-          <select class="el-input el-select" name="category" ngModel>
+          <select class="el-input el-select" name="category" ngModel >
             <option disabled selected value>Category</option>
-            <option value="1">Test</option>
+            <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
           </select>
         </div>
         <div class="form-group">
@@ -21,7 +21,7 @@
           <ng-container *ngIf="selectedFile; then fileChosen; else fileNoChosen"></ng-container>
             <ng-template #fileChosen>{{ selectedFile.name }}</ng-template>
             <ng-template #fileNoChosen>No Image chosen</ng-template>
-          <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" [hidden]="true"/>
+          <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" [hidden]="true" name="image"/>
         </div>
         <div class="form-group" *ngIf="selectedFile">
           <img class="el-image-preview" [src]="selectedFile.src" [alt]="selectedFile.name">
@@ -32,6 +32,7 @@
         <div class="form-group">
           <input class="el-input" type="text" name="tags" placeholder="Tags" ngModel/>
         </div>
+
         <button type="submit" class="action-button">CREATE</button>
       </form>
     </div>
