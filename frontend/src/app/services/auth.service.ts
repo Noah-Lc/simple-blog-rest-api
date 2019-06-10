@@ -26,9 +26,9 @@ export class AuthService{
     return this.authStatusListener.asObservable();
   }
 
-  createUser(name: string, email: string, password: string){
+  createUser(name: string, email: string, avatar: any, password: string){
     let url = 'api/profile/';
-    const user: User = {name: name, email: email, password: password};
+    const user: User = {name: name, email: email, avatar: avatar, password: password};
     this.http.post(url, user)
       .subscribe(response => {
       });
