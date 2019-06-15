@@ -24,7 +24,7 @@
             ],
             "styles": [
               "src/assets/styles/bootstrap.min.css",
-              "src/styles.css"
+              "src/styles.css",
             ],
             "scripts": [
             ]
@@ -82,7 +82,7 @@
             "karmaConfig": "src/karma.conf.js",
             "styles": [
               "src/assets/styles/bootstrap.min.css",
-              "src/styles.css"
+              "src/styles.css",
             ],
             "scripts": [
             ],

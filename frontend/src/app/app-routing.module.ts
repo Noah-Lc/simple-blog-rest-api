@@ -9,6 +9,7 @@ import { AboutComponent } from './components/pages/about/about.component';
 import { DocsComponent } from './components/pages/docs/docs.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
+import { ProfileComponent } from './components/dashboard/profile/profile.component';
 
 import { AuthGuard } from './components/auth/helpers/auth.guard';
 
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'docs', component: DocsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'create', component: PostCreateComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

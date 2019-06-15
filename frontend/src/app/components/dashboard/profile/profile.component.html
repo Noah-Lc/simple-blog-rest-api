@@ -1,0 +1,25 @@
+<div class="container pt">
+  <h1>User Profile</h1>
+  <div class="pad-all" *ngIf="profile != undefined">
+    <h3>Basic Information</h3>
+    <div class="media mar-btm">
+      <div class="media-left">
+        <img [src]="profile.avatar" class="img-md img-circle" alt="Avatar">
+      </div>
+      <div class="media-body">
+        <p class="text-lg text-main text-semibold mar-no">{{ profile.name | titlecase}}</p>
+        <p>{{ getRoleProfile() }}</p>
+      </div>
+    </div>
+    <div class="bq-sm"><b>ID :</b> {{ profile.pk }}</div>
+    <div class="bq-sm"><b>Email :</b> {{ profile.email }}</div>
+    <div class="bq-sm"><b>Role :</b> {{ getRoleProfile() }}</div>
+    <br>
+    <h3 class="">About Roles</h3>
+    <ul class="">
+      <li class=""><b class="">Super Users</b> have full permissions</li>
+      <li class=""><b class="">Staff Users</b> can access the admin interfaces and can be granted specific per model permissions</li>
+      <li class=""><b class="">Active Users</b> active users can authenticate, but do not have access to the Django Admin interface</li>
+    </ul>
+  </div>
+</div>

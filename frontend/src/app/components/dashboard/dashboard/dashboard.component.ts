@@ -2,34 +2,35 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms'
 import { Subscription } from 'rxjs';
 
-import { User } from '../../../models/user.model'
-import { ProfileService } from '../../../services/profile.service'
+import { Post } from '../../../models/post.model'
+import { PostService } from '../../../services/post.service'
+
+import { octicon } from 'octicons';
+
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
-  profile: User;
-  private profileSubscribe: Subscription;
+  posts: Post[] = [];
+  private postSubscribe: Subscription;
 
-  constructor(public profileService: ProfileService){}
+  constructor(public postService: PostService){}
 
   ngOnInit(){
-    this.profileService.getProfile();
-    this.profileSubscribe = this.profileService.getPostsUpdateListener()
-    .subscribe(profile =>{
-      this.profile = profile[0];
-    });
+    this.postService.getPosts();
+    this.postSubscribe = this.postService.getPostsUpdateListener()
+      .subscribe((posts: Post[]) =>{
+        this.posts = posts;
+      });
+  }
+
+  checked(){
+    console.log("test");
   }
 
   ngOnDestroy(){
-    this.profileSubscribe.unsubscribe();
-  }
-
-  getRoleProfile(){
-    if(this.profile.is_superuser) return "Super User";
-    else if(this.profile.is_superuser) return "Staff User";
-    else return "Active User";
+    this.postSubscribe.unsubscribe();
   }
 }
