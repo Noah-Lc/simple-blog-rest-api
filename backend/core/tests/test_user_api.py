@@ -102,7 +102,7 @@ class PrivateUserApiTests(TestCase):
         res = self.client.get(UPDATE_USER_URL)
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        self.assertEqual(res.data, {'email': self.user.email, 'name': self.user.name, 'avatar': None})
+        self.assertEqual(res.data, {'pk': self.user.pk, 'email': self.user.email, 'name': self.user.name, 'avatar': None, 'is_staff': self.user.is_staff, 'is_superuser': self.user.is_superuser, 'is_active': self.user.is_active})  # noqa: E501
 
     def test_post_me_not_allowed(self):
         """Test that POST is not allowed on the me URL"""

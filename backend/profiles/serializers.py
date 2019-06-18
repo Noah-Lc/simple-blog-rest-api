@@ -11,6 +11,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = get_user_model()
         fields = ('pk', 'email', 'avatar', 'name', 'password', 'is_staff', 'is_superuser', 'is_active')
         extra_kwargs = {'password': {'write_only': True, 'min_length': 6}}
+        read_only_fields = ('is_staff', 'is_superuser', 'is_active',)
 
     def create(self, validated_data):
         """Create and return new user."""
