@@ -5,8 +5,6 @@ import { Subscription } from 'rxjs';
 import { Post } from '../../../models/post.model'
 import { PostService } from '../../../services/post.service'
 
-import { octicon } from 'octicons';
-
 
 @Component({
   selector: 'app-dashboard',
@@ -15,6 +13,7 @@ import { octicon } from 'octicons';
 export class DashboardComponent implements OnInit {
   posts: Post[] = [];
   private postSubscribe: Subscription;
+  public editModel : boolean = false;
 
   constructor(public postService: PostService){}
 
@@ -26,8 +25,12 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  checked(){
-    console.log("test");
+  openModelEdit(){
+    this.editModel = true;
+  }
+
+  closeModelEdit(){
+    this.editModel = false;
   }
 
   ngOnDestroy(){
