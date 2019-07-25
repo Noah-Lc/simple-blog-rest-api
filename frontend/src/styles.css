@@ -537,6 +537,7 @@ font-size: 15px;
 }
 
 .el-table {
+    margin: 20px 0;
     border: 1px solid #ebeef5;
 }
 

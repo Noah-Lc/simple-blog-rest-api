@@ -25,7 +25,8 @@ class ImageSnippet {
   templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
-  public editModel : boolean = false;
+  editModel : boolean = false;
+  newModel : boolean = false;
   selectedFile: ImageSnippet;
   post: Post;
 
@@ -59,6 +60,13 @@ export class DashboardComponent implements OnInit {
       .subscribe((posts: Post[]) =>{
         this.posts = posts;
       });
+  }
+
+  onAddPost(postForm: NgForm){
+    if(postForm.invalid) return;
+
+    this.postService.addPosts(postForm.value.title, postForm.value.content, this.selectedFile.file, postForm.value.category, postForm.value.tags.split(','));
+    postForm.resetForm();
   }
 
   private onSuccess() {
@@ -96,13 +104,21 @@ export class DashboardComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  openModelEdit(id: string){
+  openEditModel(id: string){
     this.post = this.posts.find(x => x.id === id);
     this.editModel = true;
   }
 
-  closeModelEdit(){
+  openNewModel(){
+    this.newModel = true;
+  }
+
+  closeEditModel(){
     this.editModel = false;
+  }
+
+  closeNewModel(){
+    this.newModel = false;
   }
 
   ngOnDestroy(){
