@@ -48,7 +48,7 @@
               </th>
           </tr>
       </thead>
-      <tbody *ngFor="let post of posts | paginate: { itemsPerPage: 6, currentPage: 1 }; let i = index">
+      <tbody *ngFor="let post of posts ; let i = index">
         <tr class="el-table-row" *ngIf="i % 2 == 0; else trstriped">
           <td class="el-table_1_column_1 is-leaf">
             <div class="cell">
@@ -91,7 +91,7 @@
           <td rowspan="1" colspan="1" class="el-table_1_column_7">
               <div class="cell">
                   <div class="actions">
-                      <button type="button" class="el-button el-button-primary" (click)="openModelEdit()">
+                      <button type="button" class="el-button el-button-primary" (click)="openModelEdit(post.id)">
                         <span class="typcn icon-default typcn-edit"></span>
                       </button>
                       <button type="button" class="el-button el-button-danger">
@@ -144,7 +144,7 @@
             <td rowspan="1" colspan="1" class="el-table_1_column_7">
                 <div class="cell">
                   <div class="actions">
-                      <button type="button" class="el-button el-button-primary" (click)="openModelEdit()">
+                      <button type="button" class="el-button el-button-primary" (click)="openModelEdit(post.id)">
                         <i class="icon-paperplane"></i>
                       </button>
                       <button type="button" class="el-button el-button-danger">
@@ -173,16 +173,16 @@
         <div class="col-lg-10 col-lg-offset-1">
           <form class="login-form" (submit)="onAddPost(postForm)" #postForm="ngForm">
             <div class="form-group">
-              <input class="el-input" type="text" name="title" placeholder="Title" ngModel reauired/>
+              <input class="el-input" type="text" name="title" [(ngModel)]="post.title" placeholder="Title" ngModel reauired/>
             </div>
             <div class="form-group">
-              <select class="el-input el-select" name="category" ngModel >
-                <option disabled selected value>Category</option>
-                <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
+              <select class="el-input el-select" name="category" [(ngModel)]="post.category">
+                <option disabled value>Category</option>
+                <option *ngFor="let category of categories" [ngValue]="category.name">{{ category.name }}</option>
               </select>
             </div>
             <div class="form-group">
-              <button class="el-button" id="avatar" (click)="imageInput.click()">Chose Image</button>	&nbsp;&nbsp;
+              <button type="button" class="el-button" id="avatar" (click)="imageInput.click()">Chose Image</button>	&nbsp;&nbsp;
               <ng-container *ngIf="selectedFile; then fileChosen; else fileNoChosen"></ng-container>
                 <ng-template #fileChosen>{{ selectedFile.name }}</ng-template>
                 <ng-template #fileNoChosen>No Image chosen</ng-template>
@@ -192,10 +192,10 @@
               <img class="el-image-preview" [src]="selectedFile.src" [alt]="selectedFile.name">
             </div>
             <div class="form-group">
-              <textarea rows=8 class="el-input el-textarea" name="content" placeholder="Content" ngModel required></textarea>
+              <textarea rows=8 class="el-input el-textarea" name="content" [(ngModel)]="post.content" placeholder="Content" ngModel required></textarea>
             </div>
             <div class="form-group">
-              <input class="el-input" type="text" name="tags" placeholder="Tags" ngModel/>
+              <input class="el-input" type="text" name="tags" [(ngModel)]="post.tags" placeholder="Tags" ngModel/>
             </div>
 
             <button type="submit" class="action-button">EDIT</button>
