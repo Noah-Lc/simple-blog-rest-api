@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NgForm } from '@angular/forms'
+import { Component, OnInit, OnDestroy ,ViewChild, ElementRef } from '@angular/core';
+import { FormGroup, FormBuilder, NgForm } from '@angular/forms'
 import { Subscription } from 'rxjs';
 
 import { Post } from '../../../models/post.model'
@@ -10,6 +10,8 @@ import { TagService } from '../../../services/tag.service'
 
 import { Category } from '../../../models/category.model'
 import { CategoryService } from '../../../services/category.service'
+
+import { find, get, pull } from 'lodash';
 
 
 class ImageSnippet {
@@ -39,10 +41,50 @@ export class DashboardComponent implements OnInit {
   categories: Category[] = [];
   private categorySubscribe: Subscription;
 
+  @ViewChild('tagInput',{static: false} ) tagInputRef: ElementRef;
+  form: FormGroup;
 
-  constructor(public postService: PostService, public tagService: TagService, public categoryService: CategoryService){}
+  focusTagInput(): void {
+    this.tagInputRef.nativeElement.focus();
+  }
+
+  onKeyUp(event: KeyboardEvent): void {
+    const inputValue: string = this.form.controls.tag.value;
+    if (event.code === 'Backspace' && !inputValue) {
+      this.removeTag();
+      return;
+    } else {
+      if (event.code === 'Comma' || event.code === 'Space') {
+        this.addTag(inputValue);
+        this.form.controls.tag.setValue('');
+      }
+    }
+  }
+
+  addTag(tag: string): void {
+    if (tag[tag.length - 1] === ',' || tag[tag.length - 1] === ' ') {
+      tag = tag.slice(0, -1);
+    }
+    /*if (tag > 0 && !find(this.post.tags, tag)) {
+      this.post.tags.push(tag);
+    }*/
+  }
+
+  removeTag(tag?: string): void {
+    if (!!tag) {
+      pull(this.post.tags, tag);
+    } else {
+      this.post.tags.splice(-1);
+    }
+  }
+
+
+  constructor(private fb: FormBuilder, public postService: PostService, public tagService: TagService, public categoryService: CategoryService){}
 
   ngOnInit(){
+    this.form = this.fb.group({
+      tag: [undefined],
+    });
     this.tagService.getTags();
     this.tagSubscribe = this.tagService.getTagUpdateListener()
       .subscribe((tags: Tag[]) =>{
@@ -66,7 +108,14 @@ export class DashboardComponent implements OnInit {
     if(postForm.invalid) return;
 
     this.postService.addPosts(postForm.value.title, postForm.value.content, this.selectedFile.file, postForm.value.category, postForm.value.tags.split(','));
-    postForm.resetForm();
+    this.closeNewModel();
+  }
+
+  onUpdatePost(postForm: NgForm){
+    if(postForm.invalid) return;
+
+    this.postService.updatePost(postForm.value.title, postForm.value.content, this.selectedFile.file, postForm.value.category, postForm.value.tags, postForm.value.slug);
+    this.closeEditModel();
   }
 
   private onSuccess() {
@@ -104,8 +153,11 @@ export class DashboardComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  openEditModel(id: string){
-    this.post = this.posts.find(x => x.id === id);
+  openEditModel(slug: string){
+    this.postService.getPost(slug)
+    .subscribe((postData) => {
+      this.post = postData;
+    });
     this.editModel = true;
   }
 

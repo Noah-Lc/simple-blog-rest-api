@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ng-tags-input": [
+        "dist/ng-tags-input"
+      ],
+      "ng-tags-input/*": [
+        "dist/ng-tags-input/*"
+      ]
+    }
   }
 }

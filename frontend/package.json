@@ -24,7 +24,16 @@
     "@angular/platform-browser-dynamic": "^8.0.0",
     "@angular/router": "^8.0.0",
     "ngx-pagination": "^4.0.0",
+    "tslib": "^1.9.0",
+    "typicons.font": "^2.0.9",
     "zone.js": "^0.9.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.800.0",
+    "@angular-devkit/build-ng-packagr": "~0.800.0",
+    "@angular/compiler-cli": "~8.0.1",
+    "ng-packagr": "^5.1.0",
+    "tsickle": "^0.35.0",
+    "typescript": "~3.4.3"
+  }
 }

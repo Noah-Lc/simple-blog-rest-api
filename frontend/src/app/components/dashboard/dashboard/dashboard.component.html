@@ -98,7 +98,7 @@
           <td rowspan="1" colspan="1" class="el-table_1_column_7">
               <div class="cell">
                   <div class="actions">
-                      <button type="button" class="el-button el-button-primary" (click)="openEditModel(post.id)">
+                      <button type="button" class="el-button el-button-primary" (click)="openEditModel(post.slug)">
                         <span class="typcn icon-default typcn-edit"></span>
                       </button>
                       <button type="button" class="el-button el-button-danger">
@@ -151,8 +151,8 @@
             <td rowspan="1" colspan="1" class="el-table_1_column_7">
                 <div class="cell">
                   <div class="actions">
-                      <button type="button" class="el-button el-button-primary" (click)="openEditModel(post.id)">
-                        <i class="icon-paperplane"></i>
+                      <button type="button" class="el-button el-button-primary" (click)="openEditModel(post.slug)">
+                        <span class="typcn icon-default typcn-edit"></span>
                       </button>
                       <button type="button" class="el-button el-button-danger">
                         <span class="typcn icon-default typcn-trash"></span>
@@ -175,16 +175,17 @@
         <div class="col-lg-6 col-lg-offset-3 centered">
           <h3>EDIT POST</h3>
         </div>
-        <button type="button" aria-label="Close" class="el-dialog-headerbtn" (click)="closeEditModel()">close</button>
+        <button type="button" aria-label="Close" class="el-dialog-headerbtn" (click)="closeEditModel()"><span class="typcn icon-default typcn-delete"></span></button>
       </div>
       <div class="row mt">
         <div class="col-lg-10 col-lg-offset-1">
-          <form class="login-form" (submit)="onAddPost(postForm)" #postForm="ngForm">
+          <form class="login-form" #updatePostForm="ngForm" *ngIf="post != undefined">
+            <input type="hidden" name="slug" [(ngModel)]="post.slug" ngModel reauired/>
             <div class="form-group">
               <input class="el-input" type="text" name="title" [(ngModel)]="post.title" placeholder="Title" ngModel reauired/>
             </div>
             <div class="form-group">
-              <select class="el-input el-select" name="category" [(ngModel)]="post.category">
+              <select class="el-input el-select" name="category" [(ngModel)]="post.category.name">
                 <option disabled value>Category</option>
                 <option *ngFor="let category of categories" [ngValue]="category.name">{{ category.name }}</option>
               </select>
@@ -203,10 +204,17 @@
               <textarea rows=8 class="el-input el-textarea" name="content" [(ngModel)]="post.content" placeholder="Content" ngModel required></textarea>
             </div>
             <div class="form-group">
-              <input class="el-input" type="text" name="tags" [(ngModel)]="post.tags" placeholder="Tags" ngModel/>
+              <div [formGroup]="form">
+                <div class="el-input-tag " (click)="focusTagInput()">
+                  <span class="tag-item" *ngFor="let tag of post.tags">
+                    {{ tag.name }}
+                    <span type="button" class="remove-tag" (click)="removeTag(tag.id)">×</span>
+                  </span>
+                  <input placeholder="Tags" #tagInput type="text" (keyup)="onKeyUp($event)" formControlName="tag">
+                </div>
+              </div>
             </div>
-
-            <button type="submit" class="action-button">EDIT</button>
+            <button type="button" class="action-button" (click)="onUpdatePost(updatePostForm)">UPDATE</button>
           </form>
         </div>
       </div>

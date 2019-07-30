@@ -33,14 +33,10 @@ export class PostService{
     });
   }
 
-  //Get a post by ID
+  //Get a post by Slug
   getPost(slug: string) {
     const url = 'api/posts/post/' + slug;
-    this.http.get<Post>(url)
-    .subscribe((postData) => {
-      this.post = postData;
-      this.postsUpdate.next([this.post]);
-    });
+    return this.http.get<Post>(url);
   }
 
   //Add a post
@@ -59,6 +55,29 @@ export class PostService{
     this.http.post(url, formData)
     .subscribe(responseData => {
       this.posts.push(post);
+      this.postsUpdate.next([...this.posts]);
+    });
+  }
+
+  //Add a post
+  updatePost(title: string, content: string, image: File, category: string, tags: any, slug: string){
+    let url = 'api/posts/post/' + slug;
+    const formData = new FormData();
+
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("category", category);
+    formData.append("tags", tags);
+    formData.append("image", image);
+
+    const post: Post = {title:title, content:content, image: image, category:category, tags:tags};
+
+    this.http.put(url, formData)
+    .subscribe(responseData => {
+      const updatedPosts = [...this.posts];
+      const oldPostIndex = updatedPosts.findIndex(p => p.slug === post.slug);
+      updatedPosts[oldPostIndex] = post;
+      this.posts = updatedPosts;
       this.postsUpdate.next([...this.posts]);
     });
   }
