@@ -6,13 +6,12 @@
  					<p class="bd">{{ post.created_at | date : 'MMMM dd, yyyy' }}</p>
  					<h4>{{ post.title }}</h4>
  					<p><img class="img-responsive" [src]="post.image" [alt]="post.title"></p>
-          <p>{{ post.content }}</p>
+          			<p>{{ post.content }}</p>
  					<br>
  					<p class="bt">TAGS: <span *ngFor="let tag of post.tags"><a href="#" [rel]="tag.name">{{ tag.name }}</a>, </span></p>
  					<hr>
  					<p><a [routerLink]="['']"># Back</a></p>
  				</div>
-
  			</div>
  	    </div>
  </div>

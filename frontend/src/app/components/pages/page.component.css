@@ -1,0 +1,16 @@
+#wrap {
+	padding-top: 70px;
+	padding-bottom: 70px;
+	background-color: #f2f2f2;
+}
+
+#slider {
+	padding-top: 70px;
+	padding-bottom: 70px;
+	background-color: #1abc9c;
+}
+
+#slider p, #slider H1 {
+  color: #fff;
+}
+

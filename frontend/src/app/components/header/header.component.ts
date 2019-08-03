@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnChanges, OnDestroy, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { User } from '../../models/user.model'
@@ -7,9 +7,10 @@ import { AuthService } from '../../services/auth.service'
 
 @Component({
   selector: 'app-header',
-  templateUrl: './header.component.html'
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit, OnDestroy{
+export class HeaderComponent implements OnInit, OnChanges, OnDestroy{
   userIsAuthenticated = false;
   private authListenerSubs: Subscription;
   profile: User;
@@ -30,19 +31,9 @@ export class HeaderComponent implements OnInit, OnDestroy{
     });
   }
 
-   @HostListener('document:click', ['$event'])
-   onDocumentClick(event: MouseEvent) {
-/*     if (!event.target.matches('.dropbtn')) {
-       var dropdowns = document.getElementsByClassName("dropdown-content");
-       var i;
-       for (i = 0; i < dropdowns.length; i++) {
-         var openDropdown = dropdowns[i];
-         if (openDropdown.classList.contains('show')) {
-           openDropdown.classList.remove('show');
-         }
-       }
-     }*/
-   }
+  ngOnChanges(){
+    console.log("test");
+  }
 
    dropDown(){
      document.getElementById('myDropdown').classList.toggle('show');
