@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { AuthInterceptor } from './components/auth/helpers/auth.interceptor';
+import { ErrorInterceptor } from './components/auth/helpers/error.interceptor';
 
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
@@ -51,6 +52,7 @@ import { ProfileComponent } from './components/dashboard/profile/profile.compone
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

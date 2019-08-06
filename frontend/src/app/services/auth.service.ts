@@ -31,26 +31,31 @@ export class AuthService{
     const user: User = {name: name, email: email, avatar: avatar, password: password};
     this.http.post(url, user)
       .subscribe(response => {
-      });
+        
+    });
   }
 
   Login(email: string, password: string){
     let url = 'api/login/';
     const user = {email: email, password: password};
+
     this.http.post<{token: string}>(url, user)
       .subscribe(response => {
         const token = response.token;
         this.token = token;
         if(token){
           this.setAuthTimer(3600);
-          this.isAuthenticated = true;
+          this.saveAuthData(token);
+
           this.authStatusListener.next(true);
-          const now = new Date();
-          const expirationDate = new Date(now.getTime() + 3600 * 1000);
-          this.saveAuthData(token, expirationDate);
+          this.isAuthenticated = true;
+
           this.router.navigate(['/dashboard']);
         }
-      });
+      }, (error: any) => {
+        return error.error.non_field_errors[0];
+      }
+    );
   }
 
   Logout(){
@@ -84,7 +89,10 @@ export class AuthService{
     }, duration * 1000);
   }
 
-  private saveAuthData(token: string, expirationDate: Date) {
+  private saveAuthData(token: string) {
+    const now = new Date();
+    const expirationDate = new Date(now.getTime() + 3600 * 1000);
+
     localStorage.setItem("token", token);
     localStorage.setItem("expiration", expirationDate.toISOString());
   }

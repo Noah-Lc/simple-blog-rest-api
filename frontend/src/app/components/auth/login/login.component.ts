@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms'
 import { Router} from '@angular/router';
 
-import { User } from '../../../models/user.model'
 import { AuthService } from '../../../services/auth.service'
 
 @Component({
@@ -44,7 +43,7 @@ export class LoginComponent implements OnInit {
 
   onLogin(loginForm: NgForm){
     if(loginForm.invalid) return;
-    this.authService.Login(loginForm.value.email, loginForm.value.password);
+    console.log(this.authService.Login(loginForm.value.email, loginForm.value.password));
   }
 
   onLoginWithDemoUser(email :string){
