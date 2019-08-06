@@ -1,0 +1,21 @@
+.el-card {
+    border: 1px solid #ebeef5;
+    background-color: #fff;
+    overflow: hidden;
+    color: #303133;
+    -webkit-transition: .3s;
+    transition: .3s;
+    margin-bottom: 25px;
+}
+
+.el-card-body {
+    padding: 20px;
+}
+
+.el-card-body img{
+  height: 50px;
+}
+
+.el-card button{
+  width: 180px;
+}
