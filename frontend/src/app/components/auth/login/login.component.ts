@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms'
 import { Router} from '@angular/router';
 
 import { AuthService } from '../../../services/auth.service'
+import { AlertService } from './../../../services/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +34,7 @@ export class LoginComponent implements OnInit {
           },
         ];
 
-  constructor(public authService: AuthService, public router: Router){}
+  constructor(public authService: AuthService, public router: Router, private alertService: AlertService){}
 
   ngOnInit(){
     if (this.authService.getIsAuth()) {
@@ -43,7 +44,8 @@ export class LoginComponent implements OnInit {
 
   onLogin(loginForm: NgForm){
     if(loginForm.invalid) return;
-    console.log(this.authService.Login(loginForm.value.email, loginForm.value.password));
+    
+    this.authService.Login(loginForm.value.email, loginForm.value.password);
   }
 
   onLoginWithDemoUser(email :string){

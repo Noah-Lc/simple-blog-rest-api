@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http'
 
 import { User } from '../models/user.model';
 
+import { AlertService } from './../services/alert.service';
+
 @Injectable({providedIn: 'root'})
 export class AuthService{
   private isAuthenticated = false;
@@ -12,7 +14,7 @@ export class AuthService{
   private tokenTimer: any;
   private authStatusListener = new Subject<boolean>();
 
-  constructor(private http: HttpClient, private router:Router) { }
+  constructor(private http: HttpClient, private router:Router, private alertService: AlertService) { }
 
   getToken(){
     return this.token;
@@ -53,7 +55,7 @@ export class AuthService{
           this.router.navigate(['/dashboard']);
         }
       }, (error: any) => {
-        return error.error.non_field_errors[0];
+        this.alertService.error(error);
       }
     );
   }

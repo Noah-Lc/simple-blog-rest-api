@@ -24,6 +24,7 @@ import { AboutComponent } from './components/pages/about/about.component';
 import { DocsComponent } from './components/pages/docs/docs.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 import { ProfileComponent } from './components/dashboard/profile/profile.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ProfileComponent } from './components/dashboard/profile/profile.compone
     AboutComponent,
     DocsComponent,
     DashboardComponent,
-    ProfileComponent
+    ProfileComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
