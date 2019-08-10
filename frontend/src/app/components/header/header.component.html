@@ -15,7 +15,7 @@
         <li><a [routerLink]="['docs']">docs</a></li>
         <li *ngIf="!userIsAuthenticated"><a [routerLink]="['login']">Login</a></li>
         <li *ngIf="userIsAuthenticated">
-          <div class="dropdown" *ngIf="profile != null">
+          <div id="main-dropdown" class="dropdown" *ngIf="profile != null" tabindex="0">
             <img class="dropbtn" [alt]="profile.name" [src]="profile.avatar" (click)="dropDown()"/>
             <div id="myDropdown" class="dropdown-content">
             <a [routerLink]="['profile']">Porfile</a>

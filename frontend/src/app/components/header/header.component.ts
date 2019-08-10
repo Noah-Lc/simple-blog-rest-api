@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { User } from '../../models/user.model'
@@ -10,8 +10,8 @@ import { AuthService } from '../../services/auth.service'
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit, OnChanges, OnDestroy{
-  userIsAuthenticated = false;
+export class HeaderComponent implements OnInit, OnDestroy{
+  @Input() userIsAuthenticated = false;
   private authListenerSubs: Subscription;
   profile: User;
   private profileSubscribe: Subscription;
@@ -31,12 +31,8 @@ export class HeaderComponent implements OnInit, OnChanges, OnDestroy{
     });
   }
 
-  ngOnChanges(){
-    console.log("test");
-  }
-
    dropDown(){
-     document.getElementById('myDropdown').classList.toggle('show');
+     document.getElementById('main-dropdown').focus();
    }
 
   logout(){

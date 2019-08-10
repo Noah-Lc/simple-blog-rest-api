@@ -89,3 +89,7 @@
   .dropdown:hover .dropbtn {
 	color: #222;
   }
+
+  .dropdown:focus > .dropdown-content{
+	  display: block !important;
+  }
