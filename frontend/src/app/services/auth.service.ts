@@ -55,7 +55,8 @@ export class AuthService{
           this.router.navigate(['/dashboard']);
         }
       }, (error: any) => {
-        this.alertService.error(error);
+        this.authStatusListener.next(false);
+        this.alertService.error('Username or password is incorrect');
       }
     );
   }

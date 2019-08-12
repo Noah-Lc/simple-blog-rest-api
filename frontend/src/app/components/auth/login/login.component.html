@@ -14,7 +14,7 @@
         <div class="form-group">
           <input class="el-input" type="password" name="password" placeholder="Password" ngModel required/>
         </div>
-        <button type="submit" class="action-button">LOGIN</button>
+        <button [disabled]="loading" type="submit" class="action-button"><div *ngIf="loading" class="loader"></div>LOGIN</button>
       </form>
     </div>
   </div>

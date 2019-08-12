@@ -12,8 +12,8 @@ import { AuthService } from '../../services/auth.service'
 })
 export class HeaderComponent implements OnInit, OnDestroy{
   @Input() userIsAuthenticated = false;
-  private authListenerSubs: Subscription;
   profile: User;
+  private authListenerSubs: Subscription;
   private profileSubscribe: Subscription;
 
   constructor(public authService: AuthService, public profileService: ProfileService){}

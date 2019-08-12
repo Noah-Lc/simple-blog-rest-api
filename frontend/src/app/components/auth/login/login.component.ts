@@ -1,16 +1,18 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms'
 import { Router} from '@angular/router';
 
 import { AuthService } from '../../../services/auth.service'
-import { AlertService } from './../../../services/alert.service';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+  public loading: Boolean;
+  private authListenerSubs: Subscription;
   public default_users = [
           {
             name: 'rebecca',
@@ -34,21 +36,31 @@ export class LoginComponent implements OnInit {
           },
         ];
 
-  constructor(public authService: AuthService, public router: Router, private alertService: AlertService){}
+  constructor(public authService: AuthService, public router: Router){}
 
   ngOnInit(){
     if (this.authService.getIsAuth()) {
       this.router.navigate(['']);
     }
+    this.authListenerSubs = this.authService.getAuthStatusListener()
+      .subscribe(isAuthenticated =>{
+        this.loading = isAuthenticated;
+    });
   }
 
   onLogin(loginForm: NgForm){
-    if(loginForm.invalid) return;
-    
-    this.authService.Login(loginForm.value.email, loginForm.value.password);
+    this.loading = true;
+    if(!loginForm.invalid) {
+      this.authService.Login(loginForm.value.email, loginForm.value.password);
+    }
+    return;
   }
 
   onLoginWithDemoUser(email :string){
     this.authService.Login(email, "demopwd123");
+  }
+
+  ngOnDestroy(){
+    this.authListenerSubs.unsubscribe();
   }
 }

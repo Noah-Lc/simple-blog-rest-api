@@ -1,4 +1,4 @@
 <div *ngIf="message" [ngClass]="message.cssClass">
     <button class="close" (click)="closeAlert()">×</button>
-    <strong>Error: </strong> {{message.text}}
+    {{message.text}}
 </div>
