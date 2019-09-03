@@ -25,6 +25,7 @@ import { DocsComponent } from './components/pages/docs/docs.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 import { ProfileComponent } from './components/dashboard/profile/profile.component';
 import { AlertComponent } from './components/alert/alert.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { AlertComponent } from './components/alert/alert.component';
     DocsComponent,
     DashboardComponent,
     ProfileComponent,
-    AlertComponent
+    AlertComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

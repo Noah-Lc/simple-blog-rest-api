@@ -12,6 +12,7 @@ import { Category } from '../../../models/category.model'
 import { CategoryService } from '../../../services/category.service'
 
 import { find, get, pull } from 'lodash';
+import { ModalService } from 'src/app/services/model.service';
 
 
 class ImageSnippet {
@@ -80,7 +81,7 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  constructor(private fb: FormBuilder, public postService: PostService, public tagService: TagService, public categoryService: CategoryService){}
+  constructor(private fb: FormBuilder, public postService: PostService, public tagService: TagService, public categoryService: CategoryService, private modalService: ModalService){}
 
   ngOnInit(){
     this.form = this.fb.group({
@@ -109,14 +110,14 @@ export class DashboardComponent implements OnInit {
     if(postForm.invalid) return;
 
     this.postService.addPosts(postForm.value.title, postForm.value.content, this.selectedFile.file, postForm.value.category, postForm.value.tags.split(','));
-    this.closeNewModel();
+    this.closeModal('editPost');
   }
 
   onUpdatePost(postForm: NgForm){
     if(postForm.invalid) return;
 
     this.postService.updatePost(postForm.value.title, postForm.value.content, this.selectedFile.file, postForm.value.category, postForm.value.tags, postForm.value.slug);
-    this.closeEditModel();
+    this.closeModal('newPost');
   }
 
   private onSuccess() {
@@ -158,20 +159,16 @@ export class DashboardComponent implements OnInit {
     this.postService.getPost(slug)
     .subscribe((postData) => {
       this.post = postData;
+      this.modalService.open('editPost');
     });
-    this.editModel = true;
   }
 
   openNewModel(){
-    this.newModel = true;
+    this.modalService.open('newPost');
   }
 
-  closeEditModel(){
-    this.editModel = false;
-  }
-
-  closeNewModel(){
-    this.newModel = false;
+  closeModal(modal :string){
+    this.modalService.close(modal);
   }
 
   ngOnDestroy(){
