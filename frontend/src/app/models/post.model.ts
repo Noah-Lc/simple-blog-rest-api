@@ -3,7 +3,7 @@ export interface Post{
   created_by? : string;
   title : string;
   content : string;
-  image : File;
+  image : any[];
   slug? : string;
   category : string;
   tags : string[];

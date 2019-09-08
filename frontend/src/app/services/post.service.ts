@@ -40,19 +40,12 @@ export class PostService{
   }
 
   //Add a post
-  addPosts(title: string, content: string, image: File, category: string, tags: any){
+  addPosts(title: string, content: string, image: any[], category: string, tags: string[]){
     let url = 'api/posts/post/';
-    const formData = new FormData();
 
-    formData.append("title", title);
-    formData.append("content", content);
-    formData.append("category", category);
-    formData.append("tags", tags);
-    formData.append("image", image);
+    const post: Post = {title: title, content: content, image: image, category: category, tags: tags};
 
-    const post: Post = {title:title, content:content, image: image, category:category, tags:tags};
-
-    this.http.post(url, formData)
+    this.http.post(url, post)
     .subscribe(responseData => {
       this.posts.push(post);
       this.postsUpdate.next([...this.posts]);
@@ -60,26 +53,22 @@ export class PostService{
   }
 
   //Add a post
-  updatePost(title: string, content: string, image: File, category: string, tags: any, slug: string){
-    let url = 'api/posts/post/' + slug;
-    const formData = new FormData();
+  updatePost(title: string, content: string, image: any[], category: string, tags: string[], slug: string){
+    let url = `api/posts/post/${slug}/`
 
-    formData.append("title", title);
-    formData.append("content", content);
-    formData.append("category", category);
-    formData.append("tags", tags);
-    formData.append("image", image);
+    const post: Post = {'title': title, 'content': content, 'image': image, 'category': category, 'tags': tags};
 
-    const post: Post = {title:title, content:content, image: image, category:category, tags:tags};
-
-    this.http.put(url, formData)
+    console.log(post);
+    this.http.put(url, post)
     .subscribe(responseData => {
       const updatedPosts = [...this.posts];
       const oldPostIndex = updatedPosts.findIndex(p => p.slug === post.slug);
       updatedPosts[oldPostIndex] = post;
       this.posts = updatedPosts;
       this.postsUpdate.next([...this.posts]);
-    });
+    }, error => {
+      console.log(error);
+    },);
   }
 
   getPostsUpdateListener(){

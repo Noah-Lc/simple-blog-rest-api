@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy ,ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, NgForm } from '@angular/forms'
 import { Subscription } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { TagService } from '../../../services/tag.service'
 import { Category } from '../../../models/category.model'
 import { CategoryService } from '../../../services/category.service'
 
-import { find, get, pull } from 'lodash';
+import { pull } from 'lodash';
 import { ModalService } from 'src/app/services/model.service';
 
 
@@ -80,7 +80,6 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-
   constructor(private fb: FormBuilder, public postService: PostService, public tagService: TagService, public categoryService: CategoryService, private modalService: ModalService){}
 
   ngOnInit(){
@@ -109,14 +108,15 @@ export class DashboardComponent implements OnInit {
   onAddPost(postForm: NgForm){
     if(postForm.invalid) return;
 
-    this.postService.addPosts(postForm.value.title, postForm.value.content, this.selectedFile.file, postForm.value.category, postForm.value.tags.split(','));
+    console.log(postForm.value);
+    this.postService.addPosts(postForm.value.title, postForm.value.content, this.base64textString, postForm.value.category.name, postForm.value.tags.split(','));
     this.closeModal('editPost');
   }
 
   onUpdatePost(postForm: NgForm){
     if(postForm.invalid) return;
 
-    this.postService.updatePost(postForm.value.title, postForm.value.content, this.selectedFile.file, postForm.value.category, postForm.value.tags, postForm.value.slug);
+    this.postService.updatePost(this.post.title, this.post.content, this.base64textString, postForm.value.category.name, ['1'], this.post.slug);
     this.closeModal('newPost');
   }
 
@@ -143,17 +143,23 @@ export class DashboardComponent implements OnInit {
       return;
     }
 
+    reader.onload = this.handleReaderLoaded.bind(this);
     reader.addEventListener('load', (event: any) => {
 
       this.selectedFile = new ImageSnippet(event.target.result, file);
 
       this.selectedFile.pending = true;
       this.selectedFile.name = file.name;
-
     });
 
-    reader.readAsDataURL(file);
+    reader.readAsBinaryString(file);
   }
+
+  handleReaderLoaded(e) {
+    this.base64textString.push('data:image/png;base64,' + btoa(e.target.result));
+  }
+
+  base64textString = [];
 
   openEditModel(slug: string){
     this.postService.getPost(slug)
