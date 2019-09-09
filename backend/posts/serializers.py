@@ -47,7 +47,7 @@ class Base64ImageField(serializers.ImageField):
                 self.fail('invalid_image')
 
             # Generate file name:
-            file_name = str(uuid.uuid4())[:12] # 12 characters are more than enough.
+            file_name = str(uuid.uuid4())[:12]
             # Get the file name extension:
             file_extension = self.get_file_extension(file_name, decoded_file)
 
@@ -66,10 +66,9 @@ class Base64ImageField(serializers.ImageField):
         return extension
 
 
-
 class PostSerializer(serializers.ModelSerializer):
     """Serialize a post"""
-    image = Base64ImageField(max_length=None, use_url=True,)
+    image = Base64ImageField(max_length=None, use_url=True, required=False)
     category = serializers.SlugRelatedField(queryset=Category.objects.all(), slug_field='name')
     tags = serializers.PrimaryKeyRelatedField(many=True, queryset=Tag.objects.all())
     created_by = serializers.CharField(source='user.get_short_name', read_only=True)

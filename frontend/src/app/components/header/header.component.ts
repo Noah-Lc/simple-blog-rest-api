@@ -31,10 +31,6 @@ export class HeaderComponent implements OnInit, OnDestroy{
     });
   }
 
-   dropDown(){
-     document.getElementById('main-dropdown').focus();
-   }
-
   logout(){
     this.authService.Logout();
     this.userIsAuthenticated = false;

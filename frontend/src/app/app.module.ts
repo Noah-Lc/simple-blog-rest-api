@@ -12,7 +12,6 @@ import { ErrorInterceptor } from './components/auth/helpers/error.interceptor';
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 import { PostListComponent } from './components/posts/posts-list/post-list.component';
-import { PostCreateComponent } from './components/posts/posts-create/post-create.component';
 import { PostDetailsComponent } from './components/posts/post-details/post-details.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
@@ -25,13 +24,12 @@ import { DocsComponent } from './components/pages/docs/docs.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 import { ProfileComponent } from './components/dashboard/profile/profile.component';
 import { AlertComponent } from './components/alert/alert.component';
-import { ModalComponent } from './modal/modal.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostListComponent,
-    PostCreateComponent,
     PostDetailsComponent,
     LoginComponent,
     RegisterComponent,
