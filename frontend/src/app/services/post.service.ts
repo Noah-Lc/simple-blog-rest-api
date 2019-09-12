@@ -47,6 +47,7 @@ export class PostService{
 
     const post: Post = {title: title, content: content, image: image, category: category, tags: tags};
 
+    console.log(post);
     this.http.post(url, post)
     .subscribe(responseData => {
       this.posts.push(post);
@@ -54,15 +55,14 @@ export class PostService{
     });
   }
 
-  //Add a post
+  //Update a post
   updatePost(title: string, content: string, image: string, category: string, tags: number[], slug: string){
     let url = `api/posts/post/${slug}/`
 
     const post: Post = {title: title, content: content, image: image, category: category, tags: tags};
 
-    console.log(post);
-    this.http.put(url, post)
-    .subscribe(responseData => {
+    this.http.patch(url, post)
+    .subscribe(res => {
       const updatedPosts = [...this.posts];
       const oldPostIndex = updatedPosts.findIndex(p => p.slug === post.slug);
       updatedPosts[oldPostIndex] = post;

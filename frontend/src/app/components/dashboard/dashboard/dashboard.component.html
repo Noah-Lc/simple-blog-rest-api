@@ -8,9 +8,9 @@
   </div>
 
   <div class="el-table">
-  <div class="el-table__body-wrapper is-scrolling-none">
-    <table class="el-table__body">
-      <colgroup>
+    <div class="el-table__body-wrapper is-scrolling-none">
+      <table class="el-table__body">
+        <colgroup>
           <col name="el-table_1_column_1" width="48">
           <col name="el-table_1_column_2" width="100">
           <col name="el-table_1_column_3" width="250">
@@ -18,102 +18,50 @@
           <col name="el-table_1_column_5" width="250">
           <col name="el-table_1_column_6" width="250">
           <col name="el-table_1_column_6" width="250">
-      </colgroup>
-      <thead class="has-gutter">
+        </colgroup>
+        <thead class="has-gutter">
           <tr class="el-header-table">
-              <th class="el-table_1_column_1 is-leaf">
-                  <div class="cell">
-                    <label role="checkbox" class="el-checkbox">
-                      <input type="checkbox" aria-hidden="true" class="el-checkbox-original"/>
-                      <span aria-checked="mixed" class="el-checkbox-input">
-                        <span class="el-checkbox-inner">
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-              </th>
-              <th class="el-table_1_column_2 is-leaf">
-                  <div class="cell">
-                    ID
-                    <span class="caret-wrapper"><i class="sort-caret ascending"></i><i class="sort-caret descending"></i></span>
-                  </div>
-              </th>
-              <th class="el-table_1_column_3 is-leaf">
-                  <div class="cell">Title</div>
-              </th>
-              <th class="el-table_1_column_4 is-leaf">
-                  <div class="cell">Created On</div>
-              </th>
-              <th class="el-table_1_column_5 is-leaf">
-                  <div class="cell">Slug</div>
-              </th>
-              <th class="el-table_1_column_6 is-leaf">
-                  <div class="cell">Category</div>
-              </th>
-              <th class="el-table_1_column_7 is-leaf">
-                  <div class="cell">Actions</div>
-              </th>
-          </tr>
-      </thead>
-      <tbody *ngFor="let post of posts ; let i = index">
-        <tr class="el-table-row" *ngIf="i % 2 == 0; else trstriped">
-          <td class="el-table_1_column_1 is-leaf">
-            <div class="cell">
-              <label role="checkbox" class="el-checkbox">
-                <input type="checkbox" aria-hidden="true" class="el-checkbox-original"/>
-                <span aria-checked="mixed" class="el-checkbox-input">
-                  <span class="el-checkbox-inner">
-                  </span>
-                </span>
-              </label>
-            </div>
-          </td>
-          <td class="el-table_1_column_2 is-hidden">
+            <th class="el-table_1_column_1 is-leaf">
               <div class="cell">
-                  <button type="button" class="el-button el-button--default">
-                    <span>
-                      {{ post.id }}
+                <label role="checkbox" class="el-checkbox">
+                  <input type="checkbox" aria-hidden="true" class="el-checkbox-original" />
+                  <span aria-checked="mixed" class="el-checkbox-input">
+                    <span class="el-checkbox-inner">
                     </span>
-                  </button>
+                  </span>
+                </label>
               </div>
-          </td>
-          <td rowspan="1" colspan="1" class="el-table_1_column_3">
-              <div class="cell">{{ post.title }}</div>
-          </td>
-          <td rowspan="1" colspan="1" class="el-table_1_column_4">
+            </th>
+            <th class="el-table_1_column_2 is-leaf">
               <div class="cell">
-                  {{ post.created_at | date:'dd-MM-yyyy hh:mm:ss' }}
+                ID
+                <span class="caret-wrapper"><i class="sort-caret ascending"></i><i
+                    class="sort-caret descending"></i></span>
               </div>
-          </td>
-          <td rowspan="1" colspan="1" class="el-table_1_column_5">
-              <div class="cell">
-                  {{ post.slug }}
-              </div>
-          </td>
-          <td rowspan="1" colspan="1" class="el-table_1_column_6">
-              <div class="cell">
-                  {{ post.category }}
-              </div>
-          </td>
-          <td rowspan="1" colspan="1" class="el-table_1_column_7">
-              <div class="cell">
-                  <div class="actions">
-                      <button type="button" class="el-button el-button-primary" (click)="openEditModel(post.slug)">
-                        <span class="typcn icon-default typcn-edit"></span>
-                      </button>
-                      <button type="button" class="el-button el-button-danger">
-                        <span class="typcn icon-default typcn-trash"></span>
-                      </button>
-                  </div>
-              </div>
-          </td>
-        </tr>
-        <ng-template #trstriped>
-          <tr class="el-table-row el-table-row-striped">
+            </th>
+            <th class="el-table_1_column_3 is-leaf">
+              <div class="cell">Title</div>
+            </th>
+            <th class="el-table_1_column_4 is-leaf">
+              <div class="cell">Created On</div>
+            </th>
+            <th class="el-table_1_column_5 is-leaf">
+              <div class="cell">Slug</div>
+            </th>
+            <th class="el-table_1_column_6 is-leaf">
+              <div class="cell">Category</div>
+            </th>
+            <th class="el-table_1_column_7 is-leaf">
+              <div class="cell">Actions</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let post of posts ; let i = index">
+          <tr class="el-table-row" *ngIf="i % 2 == 0; else trstriped">
             <td class="el-table_1_column_1 is-leaf">
               <div class="cell">
                 <label role="checkbox" class="el-checkbox">
-                  <input type="checkbox" aria-hidden="true" class="el-checkbox-original"/>
+                  <input type="checkbox" aria-hidden="true" class="el-checkbox-original" />
                   <span aria-checked="mixed" class="el-checkbox-input">
                     <span class="el-checkbox-inner">
                     </span>
@@ -122,102 +70,163 @@
               </div>
             </td>
             <td class="el-table_1_column_2 is-hidden">
-                <div class="cell">
-                    <button type="button" class="el-button el-button--default">
-                      <span>
-                        {{ post.id }}
-                      </span>
-                    </button>
-                </div>
+              <div class="cell">
+                <button type="button" class="el-button el-button--default">
+                  <span>
+                    {{ post.id }}
+                  </span>
+                </button>
+              </div>
             </td>
             <td rowspan="1" colspan="1" class="el-table_1_column_3">
-                <div class="cell">{{ post.title }}</div>
+              <div class="cell">{{ post.title }}</div>
             </td>
             <td rowspan="1" colspan="1" class="el-table_1_column_4">
-                <div class="cell">
-                    {{ post.created_at | date:'dd-MM-yyyy hh:mm:ss' }}
-                </div>
+              <div class="cell">
+                {{ post.created_at | date:'dd-MM-yyyy hh:mm:ss' }}
+              </div>
             </td>
             <td rowspan="1" colspan="1" class="el-table_1_column_5">
-                <div class="cell">
-                    {{ post.slug }}
-                </div>
+              <div class="cell">
+                {{ post.slug }}
+              </div>
             </td>
             <td rowspan="1" colspan="1" class="el-table_1_column_6">
-                <div class="cell">
-                    {{ post.category }}
-                </div>
+              <div class="cell">
+                {{ post.category }}
+              </div>
             </td>
             <td rowspan="1" colspan="1" class="el-table_1_column_7">
-                <div class="cell">
-                  <div class="actions">
-                      <button type="button" class="el-button el-button-primary" (click)="openEditModel(post.slug)">
-                        <span class="typcn icon-default typcn-edit"></span>
-                      </button>
-                      <button type="button" class="el-button el-button-danger">
-                        <span class="typcn icon-default typcn-trash"></span>
-                      </button>
-                  </div>
+              <div class="cell">
+                <div class="actions">
+                  <button type="button" class="el-button el-button-primary" (click)="openEditModel(post.slug)">
+                    <span class="typcn icon-default typcn-edit"></span>
+                  </button>
+                  <button type="button" class="el-button el-button-danger">
+                    <span class="typcn icon-default typcn-trash"></span>
+                  </button>
                 </div>
+              </div>
             </td>
           </tr>
-        </ng-template>
-      </tbody>
-    </table>
-  </div>
+          <ng-template #trstriped>
+            <tr class="el-table-row el-table-row-striped">
+              <td class="el-table_1_column_1 is-leaf">
+                <div class="cell">
+                  <label role="checkbox" class="el-checkbox">
+                    <input type="checkbox" aria-hidden="true" class="el-checkbox-original" />
+                    <span aria-checked="mixed" class="el-checkbox-input">
+                      <span class="el-checkbox-inner">
+                      </span>
+                    </span>
+                  </label>
+                </div>
+              </td>
+              <td class="el-table_1_column_2 is-hidden">
+                <div class="cell">
+                  <button type="button" class="el-button el-button--default">
+                    <span>
+                      {{ post.id }}
+                    </span>
+                  </button>
+                </div>
+              </td>
+              <td rowspan="1" colspan="1" class="el-table_1_column_3">
+                <div class="cell">{{ post.title }}</div>
+              </td>
+              <td rowspan="1" colspan="1" class="el-table_1_column_4">
+                <div class="cell">
+                  {{ post.created_at | date:'dd-MM-yyyy hh:mm:ss' }}
+                </div>
+              </td>
+              <td rowspan="1" colspan="1" class="el-table_1_column_5">
+                <div class="cell">
+                  {{ post.slug }}
+                </div>
+              </td>
+              <td rowspan="1" colspan="1" class="el-table_1_column_6">
+                <div class="cell">
+                  {{ post.category }}
+                </div>
+              </td>
+              <td rowspan="1" colspan="1" class="el-table_1_column_7">
+                <div class="cell">
+                  <div class="actions">
+                    <button type="button" class="el-button el-button-primary" (click)="openEditModel(post.slug)">
+                      <span class="typcn icon-default typcn-edit"></span>
+                    </button>
+                    <button type="button" class="el-button el-button-danger">
+                      <span class="typcn icon-default typcn-trash"></span>
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+        </tbody>
+      </table>
+    </div>
   </div>
   <pagination-controls class="my-pagination" (pageChange)="$event" directionLinks="false"></pagination-controls>
 </div>
 
 
 <jw-modal id="newPost">
-    <div class="el-dialog-wrapper" >
-        <div role="dialog" aria-modal="true" aria-label="New Post" class="el-dialog">
-          <div class="row mt">
-            <div class="col-lg-6 col-lg-offset-3 centered">
-              <h3>NEW POST</h3>
-            </div>
-            <button type="button" aria-label="Close" class="el-dialog-headerbtn" (click)="closeModal('newPost')">close</button>
-          </div>
-          <div class="row mt">
-            <div class="col-lg-10 col-lg-offset-1">
-              <form class="login-form" #postForm="ngForm">
-                <div class="form-group">
-                  <input class="el-input" type="text" name="title" placeholder="Title" ngModel reauired/>
-                </div>
-                <div class="form-group">
-                  <select class="el-input el-select" name="category" ngModel reauired>
-                    <option disabled value>Category</option>
-                    <option *ngFor="let category of categories" [ngValue]="category">{{ category.name }}</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <button type="button" class="el-button" id="avatar" (click)="imageInput.click()">Chose Image</button>	&nbsp;&nbsp;
-                  <ng-container *ngIf="selectedFile; then fileChosen; else fileNoChosen"></ng-container>
-                    <ng-template #fileChosen>{{ selectedFile.name }}</ng-template>
-                    <ng-template #fileNoChosen>No Image chosen</ng-template>
-                  <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" [hidden]="true" name="image"/>
-                </div>
-                <div class="form-group" *ngIf="selectedFile">
-                  <img class="el-image-preview" [src]="selectedFile.src" [alt]="selectedFile.name">
-                </div>
-                <div class="form-group">
-                  <textarea rows=8 class="el-input el-textarea" name="content" placeholder="Content" ngModel required></textarea>
-                </div>
-                <div class="form-group">
-                  <div [formGroup]="form">
-                    <div class="el-input-tag " (click)="focusTagInput()">
-                      <input placeholder="Tags" #tagInput type="text" (keyup)="onKeyUp($event)" formControlName="tag">
-                    </div>
-                  </div>
-                </div>
-                <button type="button" (click)="onAddPost(postForm)" class="action-button">CREATE</button>
-              </form>
-            </div>
-          </div>
+  <div class="el-dialog-wrapper">
+    <div role="dialog" aria-modal="true" aria-label="New Post" class="el-dialog">
+      <div class="row mt">
+        <div class="col-lg-6 col-lg-offset-3 centered">
+          <h3>NEW POST</h3>
         </div>
+        <button type="button" aria-label="Close" class="el-dialog-headerbtn"
+          (click)="closeModal('newPost')">close</button>
+      </div>
+      <div class="row mt">
+        <div class="col-lg-10 col-lg-offset-1">
+          <form class="login-form" #postForm="ngForm">
+            <div class="form-group">
+              <input class="el-input" type="text" name="title" placeholder="Title" ngModel reauired />
+            </div>
+            <div class="form-group">
+              <select class="el-input el-select" name="category" ngModel reauired>
+                <option disabled value>Category</option>
+                <option *ngFor="let category of categories" [ngValue]="category.name">{{ category.name }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <button type="button" class="el-button" id="avatar" (click)="imageInput.click()">Chose Image</button>
+              &nbsp;&nbsp;
+              <ng-container *ngIf="selectedFile; then fileChosen; else fileNoChosen"></ng-container>
+              <ng-template #fileChosen>{{ selectedFile.name }}</ng-template>
+              <ng-template #fileNoChosen>No Image chosen</ng-template>
+              <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" [hidden]="true"
+                name="image" />
+            </div>
+            <div class="form-group" *ngIf="selectedFile">
+              <img class="el-image-preview" [src]="selectedFile.src" [alt]="selectedFile.name">
+            </div>
+            <div class="form-group">
+              <textarea rows=8 class="el-input el-textarea" name="content" placeholder="Content" ngModel
+                required></textarea>
+            </div>
+            <div class="form-group">
+              <div [formGroup]="form">
+                <div class="el-input-tag " (click)="focusTagInput()">
+                  <span class="tag-item" *ngFor="let tag of newTags">
+                    {{ tag.name }}
+                    <span type="button" class="remove-tag" (click)="removeTag(tag)">×</span>
+                  </span>
+                  <input placeholder="Tags" #tagInput type="text" (keyup)="onKeyUp($event)" formControlName="tag">
+                </div>
+              </div>
+            </div>
+            <button type="button" (click)="onAddPost(postForm)" class="action-button">CREATE</button>
+          </form>
+        </div>
+      </div>
     </div>
-  </jw-modal>
+  </div>
+</jw-modal>
 
 <jw-modal id="editPost">
   <div class="el-dialog-wrapper">
@@ -239,8 +248,8 @@
             </div>
             <div class="form-group">
               <select class="el-input el-select" name="category" [(ngModel)]="post.category" reauired>
-                  <option disabled value>Category</option>
-                  <option *ngFor="let category of categories" [ngValue]="category.name">{{ category.name }}</option>
+                <option disabled value>Category</option>
+                <option *ngFor="let category of categories" [ngValue]="category.name">{{ category.name }}</option>
               </select>
             </div>
             <div class="form-group">
@@ -249,7 +258,8 @@
               <ng-container *ngIf="selectedFile; then fileChosen; else fileNoChosen"></ng-container>
               <ng-template #fileChosen>{{ selectedFile.name }}</ng-template>
               <ng-template #fileNoChosen>No Image chosen</ng-template>
-              <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" [hidden]="true" name="image" />
+              <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" [hidden]="true"
+                name="image" />
             </div>
             <div class="form-group" *ngIf="selectedFile">
               <img class="el-image-preview" [src]="selectedFile.src" [alt]="selectedFile.name">
@@ -258,7 +268,8 @@
               <img class="el-image-preview" [src]="post.image" [alt]="post.title">
             </div>
             <div class="form-group">
-              <textarea rows=8 class="el-input el-textarea" name="content" [(ngModel)]="post.content"placeholder="Content" required></textarea>
+              <textarea rows=8 class="el-input el-textarea" name="content" [(ngModel)]="post.content"
+                placeholder="Content" required></textarea>
             </div>
             <div class="form-group">
               <div [formGroup]="form">

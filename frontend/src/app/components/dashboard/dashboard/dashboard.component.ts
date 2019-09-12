@@ -109,7 +109,7 @@ export class DashboardComponent implements OnInit {
     if(postForm.invalid) return;
 
     console.log(postForm.value);
-    this.postService.addPosts(postForm.value.title, postForm.value.content, this.selectedFile.src, postForm.value.category, postForm.value.tags.split(','));
+    this.postService.addPosts(postForm.value.title, postForm.value.content, this.selectedFile.src, postForm.value.category, this.newTags.map(t => t.id));
     this.closeModal('editPost');
   }
 
