@@ -83,11 +83,6 @@ class PostSerializer(serializers.ModelSerializer):
         }
 
 
-class PostDetailSerializer(PostSerializer):
-    category = CategorySerializer(read_only=True)
-    tags = TagSerializer(many=True, read_only=True)
-
-
 class PostImageSerializer(serializers.ModelSerializer):
     """Serializer for uploading images to post"""
 

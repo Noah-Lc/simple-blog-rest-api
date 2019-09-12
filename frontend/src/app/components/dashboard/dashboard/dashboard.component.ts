@@ -29,10 +29,9 @@ class ImageSnippet {
   styleUrls: ['./dashboard.component.css', './../dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  editModel : boolean = false;
-  newModel : boolean = false;
   selectedFile: ImageSnippet;
   post: Post;
+  newTags: Tag[] = [];
 
   posts: Post[] = [];
   private postSubscribe: Subscription;
@@ -67,16 +66,17 @@ export class DashboardComponent implements OnInit {
     if (tag[tag.length - 1] === ',' || tag[tag.length - 1] === ' ') {
       tag = tag.slice(0, -1);
     }
-    /*if (tag > 0 && !find(this.post.tags, tag)) {
-      this.post.tags.push(tag);
-    }*/
+    let newTag = this.tags.find(t => t.name == tag);
+    if(newTag){
+      this.newTags.push(newTag)
+    }
   }
 
   removeTag(tag?: string): void {
     if (!!tag) {
-      pull(this.post.tags, tag);
+      pull(this.newTags, tag);
     } else {
-      this.post.tags.splice(-1);
+      this.newTags.splice(-1);
     }
   }
 
@@ -109,14 +109,17 @@ export class DashboardComponent implements OnInit {
     if(postForm.invalid) return;
 
     console.log(postForm.value);
-    this.postService.addPosts(postForm.value.title, postForm.value.content, this.base64textString, postForm.value.category.name, postForm.value.tags.split(','));
+    this.postService.addPosts(postForm.value.title, postForm.value.content, this.selectedFile.src, postForm.value.category, postForm.value.tags.split(','));
     this.closeModal('editPost');
   }
 
   onUpdatePost(postForm: NgForm){
     if(postForm.invalid) return;
 
-    this.postService.updatePost(this.post.title, this.post.content, this.base64textString, postForm.value.category.name, ['1'], this.post.slug);
+    var image;
+    if(this.selectedFile)
+       image = this.selectedFile.src;
+    this.postService.updatePost(postForm.value.title, postForm.value.content, image, postForm.value.category, this.newTags.map(t => t.id), this.post.slug);
     this.closeModal('newPost');
   }
 
@@ -143,7 +146,6 @@ export class DashboardComponent implements OnInit {
       return;
     }
 
-    reader.onload = this.handleReaderLoaded.bind(this);
     reader.addEventListener('load', (event: any) => {
 
       this.selectedFile = new ImageSnippet(event.target.result, file);
@@ -152,19 +154,16 @@ export class DashboardComponent implements OnInit {
       this.selectedFile.name = file.name;
     });
 
-    reader.readAsBinaryString(file);
+    reader.readAsDataURL(file);
   }
-
-  handleReaderLoaded(e) {
-    this.base64textString.push('data:image/png;base64,' + btoa(e.target.result));
-  }
-
-  base64textString = [];
 
   openEditModel(slug: string){
     this.postService.getPost(slug)
     .subscribe((postData) => {
-      this.post = postData;
+      this.post = postData;   
+      this.newTags = this.tags.filter(function (item) {
+        return postData.tags.indexOf(item.id) !== -1;
+      });;
       this.modalService.open('editPost');
     });
   }

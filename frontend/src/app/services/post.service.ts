@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http'
 import {RequestOptions } from '@angular/http';
 
 import { Post } from '../models/post.model';
+import { Tag } from '../models/tag.model';
+import { Category } from '../models/category.model';
 
 @Injectable({providedIn: 'root'})
 export class PostService{
@@ -40,7 +42,7 @@ export class PostService{
   }
 
   //Add a post
-  addPosts(title: string, content: string, image: any[], category: string, tags: string[]){
+  addPosts(title: string, content: string, image: string, category: string, tags: number[]){
     let url = 'api/posts/post/';
 
     const post: Post = {title: title, content: content, image: image, category: category, tags: tags};
@@ -53,10 +55,10 @@ export class PostService{
   }
 
   //Add a post
-  updatePost(title: string, content: string, image: any[], category: string, tags: string[], slug: string){
+  updatePost(title: string, content: string, image: string, category: string, tags: number[], slug: string){
     let url = `api/posts/post/${slug}/`
 
-    const post: Post = {'title': title, 'content': content, 'image': image, 'category': category, 'tags': tags};
+    const post: Post = {title: title, content: content, image: image, category: category, tags: tags};
 
     console.log(post);
     this.http.put(url, post)

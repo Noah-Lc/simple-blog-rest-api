@@ -77,9 +77,7 @@ class PostViewSet(viewsets.ModelViewSet):
         return queryset.all()
 
     def get_serializer_class(self):
-        if self.action == 'retrieve':
-            return serializers.PostDetailSerializer
-        elif self.action == 'upload_image':
+        if self.action == 'upload_image':
             return serializers.PostImageSerializer
         return self.serializer_class
 
