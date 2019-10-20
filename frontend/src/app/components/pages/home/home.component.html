@@ -1,20 +1,171 @@
-<div id="slider">
-    <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 centered">
-        <h1>RECENT POSTS</h1>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting <br> industry. Lorem Ipsum has been the industry's standard.</p>
-        <img src="assets/img/Angular.png" alt="">
+<div id="login" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade bd-example-modal-lg">
+    <div role="document" class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header border-bottom-0">
+          <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body p-4 p-lg-5">
+          <form action="#" class="login-form text-left">
+            <div class="form-group mb-4">
+              <label>Email address</label>
+              <input type="email" name="email" placeholder="name@company.com" class="form-control">
+            </div>
+            <div class="form-group mb-4">
+              <label>Password</label>
+              <input type="password" name="password" placeholder="Min 8 characters" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="submit" value="Login" class="btn btn-primary">
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-    </div>
-</div>
-<div class="container pt" *ngIf="posts.length > 0">
-  <div class="row mt centered">
-    <div class="col-lg-4" *ngFor="let post of posts | slice: 6">
-      <a class="zoom green" [routerLink]="['/post/',post.slug]"><img class="img-responsive" [src]="post.image" [alt]="post.title"/></a>
-      <p>{{ post.title }}</p>
-    </div>
-    <a [routerLink]="['/posts']" class="action-button">More..</a>
   </div>
-</div>
+  <!-- Intro Section-->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <div class="text-center">
+            <h2>Simple Blog</h2>
+            <p class="lead text-muted mt-2">Hello everybody. I'm a Simple Blog, a free source coded by Noah Lc. A really
+              simple blog with ship high quality code && clean code for people with all levels of skill.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-7 mx-auto mt-5"><img src="../../../../assets/../../../../assets/img/illustration-1.svg" alt="..." class="intro-image img-fluid"></div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-lg-8 mx-auto">
+          <div class="text-center">
+            <a href="#" class="btn btn-primary">Learn More</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- Integrations Section-->
+  <section>
+    <div class="container">
+      <div class="text-center">
+        <h2>Integrations</h2>
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <p class="lead text-muted mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod. eiusmod tempor incididunt ut labore.</p>
+          </div>
+        </div>
+      </div>
+      <div class="integrations mt-5">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="box text-center">
+              <div class="icon d-flex align-items-end"><img src="../../../../assets/img/monitor.svg" alt="..." class="img-fluid"></div>
+              <h3 class="h4">Web desgin</h3>
+              <p class="text-small font-weight-light">Lorem Ipsum has been the industry's standard dummy text ever.</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="box text-center">
+              <div class="icon d-flex align-items-end"><img src="../../../../assets/img/target.svg" alt="..." class="img-fluid"></div>
+              <h3 class="h4">Beginner Friendly</h3>
+              <p class="text-small font-weight-light">Lorem Ipsum has been the industry's standard dummy text ever.</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="box text-center">
+              <div class="icon d-flex align-items-end"><img src="../../../../assets/img/chat.svg" alt="..." class="img-fluid"></div>
+              <h3 class="h4">SEO and SEM</h3>
+              <p class="text-small font-weight-light">Lorem Ipsum has been the industry's standard dummy text ever.</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="box text-center">
+              <div class="icon d-flex align-items-end"><img src="../../../../assets/img/idea.svg" alt="..." class="img-fluid"></div>
+              <h3 class="h4">Best Practice</h3>
+              <p class="text-small font-weight-light">Lorem Ipsum has been the industry's standard dummy text ever.</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="box text-center">
+              <div class="icon d-flex align-items-end"><img src="../../../../assets/img/coffee-cup.svg" alt="..." class="img-fluid"></div>
+              <h3 class="h4">Open Source</h3>
+              <p class="text-small font-weight-light">Lorem Ipsum has been the industry's standard dummy text ever.</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="box text-center">
+              <div class="icon d-flex align-items-end"><img src="../../../../assets/img/pen.svg" alt="..." class="img-fluid"></div>
+              <h3 class="h4">Quality Code</h3>
+              <p class="text-small font-weight-light">Lorem Ipsum has been the industry's standard dummy text ever.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- CLients Section-->
+  <section class="bg-gray">
+    <div class="container">
+      <div class="text-center">
+        <h2>Technologies Used</h2>
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <p class="lead text-muted mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. sed do eiusmod tempor incididunt..</p>
+          </div>
+        </div>
+      </div>
+      <div class="clients mt-5">
+        <div class="row">
+          <div class="col-lg-2"><img src="../../../../assets/img/technologies/python.svg" alt="" class="client-image img-fluid"></div>
+          <div class="col-lg-2"><img src="../../../../assets/img/technologies/postgresql.svg" alt="" class="client-image img-fluid"></div>
+          <div class="col-lg-2"><img src="../../../../assets/img/technologies/nodejs.svg" alt="" class="client-image img-fluid"></div>
+          <div class="col-lg-2"><img src="../../../../assets/img/technologies/django.svg" alt="" class="client-image img-fluid"></div>
+          <div class="col-lg-2"><img src="../../../../assets/img/technologies/angular.svg" alt="" class="client-image img-fluid"></div>
+          <div class="col-lg-2"><img src="../../../../assets/img/technologies/docker.svg" alt="" class="client-image img-fluid"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- How it works section-->
+  <section id="about">
+    <div class="container">
+      <div class="text-center">
+        <h2>About This Project</h2>
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+              <p class="lead text-muted mt-2">Simple Blog is an open-source project that demonstrates how to use of several popular web technologies.</p>
+              <p class="lead text-muted mt-2">I have been using this website to document and share my progress in three areas of software development: frontend engineering, backend engineering and DevOps. Although there are a lot of guides on the technologies I use here, but there are fewer guides for how to use those technologies together.</p>
+              <p class="lead text-muted mt-2">For a deep description of this project, see the documentation:</p>
+          </div>
+        </div><a href="#" class="btn btn-primary mt-4">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="blog">
+    <div class="container">
+      <div class="text-center">
+        <h2>Latest posts</h2>
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <p class="lead text-muted mt-2">Lorem ipsum dolor sit amet.</p>
+          </div>
+        </div>
+        <div class="row mt-4" *ngIf="posts.length > 0">
+          <div class="col-md-6 col-lg-4" *ngFor="let post of posts | slice:0:3">
+            <div class="block-blog text-left">
+              <a [routerLink]="['/post/', post.slug]"><img [src]="post.image" [alt]="post.title"></a>
+              <div class="content-blog">
+                <h4><a [routerLink]="['/post/', post.slug]">{{ post.title }}</a></h4>
+                <span>{{ post.created_at | date: 'dd, MMM yyyy' }}</span>
+                <a class="float-right readmore" [routerLink]="['/post/', post.slug]">read more</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

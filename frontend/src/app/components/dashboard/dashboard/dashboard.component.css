@@ -45,6 +45,10 @@
     border-right: 1px solid #ebeef5;
 }
 
+.el-table td.is-last, .el-table th.is-last {
+  border-right: 0;
+}
+
 .el-table .el-table-row-striped td  {
     background: #fafafa;
 }
@@ -174,4 +178,8 @@
   .remove-tag {
     padding: 0 5px;
     cursor: pointer;
+  }
+
+  .is-invalid{
+    border-color: red;
   }

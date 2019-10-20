@@ -122,18 +122,7 @@ export class DashboardComponent implements OnInit {
     this.postService.updatePost(postForm.value.title, postForm.value.content, image, postForm.value.category, this.newTags.map(t => t.id), this.post.slug);
     this.closeModal('newPost');
   }
-
-  private onSuccess() {
-    this.selectedFile.pending = false;
-    this.selectedFile.status = 'fail';
-  }
-
-  private onError() {
-    this.selectedFile.pending = false;
-    this.selectedFile.status = 'ok';
-    this.selectedFile.src = '';
-  }
-
+  
   processFile(imageInput: any) {
     const file: File = imageInput.files[0];
     const reader = new FileReader();
@@ -169,6 +158,7 @@ export class DashboardComponent implements OnInit {
   }
 
   openNewModel(){
+    this.newTags = [];
     this.modalService.open('newPost');
   }
 

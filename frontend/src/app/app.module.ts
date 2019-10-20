@@ -19,7 +19,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { PagesComponent } from './components/pages/pages.component';
-import { AboutComponent } from './components/pages/about/about.component';
 import { DocsComponent } from './components/pages/docs/docs.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 import { ProfileComponent } from './components/dashboard/profile/profile.component';
@@ -37,7 +36,6 @@ import { ModalComponent } from './components/modal/modal.component';
     FooterComponent,
     HomeComponent,
     PagesComponent,
-    AboutComponent,
     DocsComponent,
     DashboardComponent,
     ProfileComponent,

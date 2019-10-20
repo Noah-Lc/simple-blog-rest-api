@@ -1,34 +1,18 @@
-<div class="navbar navbar-inverse navbar-static-top">
+<!-- navbar-->
+<header id="header" class="shadow-sm">
   <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">SIMPLE BLOG</a>
+    <div class="logo float-left">
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <h1 class="text-light"><a href="#intro" class="scrollto"><span>Simple Blog</span></a></h1>
     </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
+
+    <nav class="main-nav float-right d-none d-lg-block">
+      <ul>
         <li><a [routerLink]="['']">Home</a></li>
-        <li><a [routerLink]="['about']">About</a></li>
+        <li><a href="#about">About</a></li>
         <li><a [routerLink]="['docs']">docs</a></li>
         <li *ngIf="!userIsAuthenticated"><a [routerLink]="['login']">Login</a></li>
-        <li *ngIf="userIsAuthenticated">
-          <div id="main-dropdown" class="dropdown" *ngIf="profile != null" tabindex="0">
-            <button class="dropbtn" data-toggle="dropdown" data-target=".dropdown-content">
-              <img [alt]="profile.name" [src]="profile.avatar" />
-            </button>
-            <div id="myDropdown" class="dropdown-content">
-              <a [routerLink]="['profile']">Porfile</a>
-              <a [routerLink]="['profile']">Favorite</a>
-              <a [routerLink]="['profile']">Settings</a>
-              <a class="dropdown-content-divider" [routerLink]="['dashboard']">Dashboard</a>
-              <button class="dropdown-content-divider" (click)="logout()">Logout</button>
-            </div>
-          </div>
-        </li>
       </ul>
-    </div>
+    </nav>
   </div>
-</div>
+</header>

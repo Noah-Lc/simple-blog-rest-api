@@ -11,17 +11,17 @@
     <div class="el-table__body-wrapper is-scrolling-none">
       <table class="el-table__body">
         <colgroup>
-          <col name="el-table_1_column_1" width="48">
-          <col name="el-table_1_column_2" width="100">
-          <col name="el-table_1_column_3" width="250">
-          <col name="el-table_1_column_4" width="300">
-          <col name="el-table_1_column_5" width="250">
-          <col name="el-table_1_column_6" width="250">
-          <col name="el-table_1_column_6" width="250">
+          <col width="48">
+          <col width="100">
+          <col width="250">
+          <col width="300">
+          <col width="250">
+          <col width="250">
+          <col width="250">
         </colgroup>
         <thead class="has-gutter">
           <tr class="el-header-table">
-            <th class="el-table_1_column_1 is-leaf">
+            <th class="is-leaf">
               <div class="cell">
                 <label role="checkbox" class="el-checkbox">
                   <input type="checkbox" aria-hidden="true" class="el-checkbox-original" />
@@ -32,33 +32,33 @@
                 </label>
               </div>
             </th>
-            <th class="el-table_1_column_2 is-leaf">
+            <th class="is-leaf">
               <div class="cell">
                 ID
                 <span class="caret-wrapper"><i class="sort-caret ascending"></i><i
                     class="sort-caret descending"></i></span>
               </div>
             </th>
-            <th class="el-table_1_column_3 is-leaf">
+            <th class="is-leaf">
               <div class="cell">Title</div>
             </th>
-            <th class="el-table_1_column_4 is-leaf">
+            <th class="is-leaf">
               <div class="cell">Created On</div>
             </th>
-            <th class="el-table_1_column_5 is-leaf">
+            <th class="is-leaf">
               <div class="cell">Slug</div>
             </th>
-            <th class="el-table_1_column_6 is-leaf">
+            <th class="is-leaf">
               <div class="cell">Category</div>
             </th>
-            <th class="el-table_1_column_7 is-leaf">
+            <th class="is-leaf is-last">
               <div class="cell">Actions</div>
             </th>
           </tr>
         </thead>
         <tbody *ngFor="let post of posts ; let i = index">
           <tr class="el-table-row" *ngIf="i % 2 == 0; else trstriped">
-            <td class="el-table_1_column_1 is-leaf">
+            <td class="is-leaf">
               <div class="cell">
                 <label role="checkbox" class="el-checkbox">
                   <input type="checkbox" aria-hidden="true" class="el-checkbox-original" />
@@ -69,7 +69,7 @@
                 </label>
               </div>
             </td>
-            <td class="el-table_1_column_2 is-hidden">
+            <td class="is-hidden">
               <div class="cell">
                 <button type="button" class="el-button el-button--default">
                   <span>
@@ -78,25 +78,25 @@
                 </button>
               </div>
             </td>
-            <td rowspan="1" colspan="1" class="el-table_1_column_3">
+            <td rowspan="1" colspan="1">
               <div class="cell">{{ post.title }}</div>
             </td>
-            <td rowspan="1" colspan="1" class="el-table_1_column_4">
+            <td rowspan="1" colspan="1">
               <div class="cell">
                 {{ post.created_at | date:'dd-MM-yyyy hh:mm:ss' }}
               </div>
             </td>
-            <td rowspan="1" colspan="1" class="el-table_1_column_5">
+            <td rowspan="1" colspan="1">
               <div class="cell">
                 {{ post.slug }}
               </div>
             </td>
-            <td rowspan="1" colspan="1" class="el-table_1_column_6">
+            <td rowspan="1" colspan="1">
               <div class="cell">
                 {{ post.category }}
               </div>
             </td>
-            <td rowspan="1" colspan="1" class="el-table_1_column_7">
+            <td rowspan="1" colspan="1" class="is-last">
               <div class="cell">
                 <div class="actions">
                   <button type="button" class="el-button el-button-primary" (click)="openEditModel(post.slug)">
@@ -131,25 +131,25 @@
                   </button>
                 </div>
               </td>
-              <td rowspan="1" colspan="1" class="el-table_1_column_3">
+              <td rowspan="1" colspan="1">
                 <div class="cell">{{ post.title }}</div>
               </td>
-              <td rowspan="1" colspan="1" class="el-table_1_column_4">
+              <td rowspan="1" colspan="1">
                 <div class="cell">
                   {{ post.created_at | date:'dd-MM-yyyy hh:mm:ss' }}
                 </div>
               </td>
-              <td rowspan="1" colspan="1" class="el-table_1_column_5">
+              <td rowspan="1" colspan="1">
                 <div class="cell">
                   {{ post.slug }}
                 </div>
               </td>
-              <td rowspan="1" colspan="1" class="el-table_1_column_6">
+              <td rowspan="1" colspan="1">
                 <div class="cell">
                   {{ post.category }}
                 </div>
               </td>
-              <td rowspan="1" colspan="1" class="el-table_1_column_7">
+              <td rowspan="1" colspan="1" class="is-last">
                 <div class="cell">
                   <div class="actions">
                     <button type="button" class="el-button el-button-primary" (click)="openEditModel(post.slug)">
