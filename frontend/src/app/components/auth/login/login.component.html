@@ -1,37 +1,41 @@
-<div class="container pt">
-  <div class="row mt">
-    <div class="col-lg-6 col-lg-offset-3 centered">
-      <h3>LOGIN PAGE</h3>
-    </div>
-  </div>
-  <div class="row mt">
-    <div class="col-lg-4 col-lg-offset-4">
-      <app-alert></app-alert>
-      <form class="login-form" (submit)="onLogin(postForm)" #postForm="ngForm">
-        <div class="form-group">
-          <input class="el-input" type="email" name="email" placeholder="E-Mail" ngModel required/>
-        </div>
-        <div class="form-group">
-          <input class="el-input" type="password" name="password" placeholder="Password" ngModel required/>
-        </div>
-        <button [disabled]="loading" type="submit" class="action-button"><div *ngIf="loading" class="loader"></div>LOGIN</button>
-      </form>
-    </div>
-  </div>
-  <div class="row mt">
-    <div class="col-lg-6 col-lg-offset-3 centered">
-      <h3>LOGIN WITH DEMO USERS</h3>
-      <p>An easy way to login without register.</p>
-    </div>
-  </div>
-  <div class="row mt">
-    <div class="col-lg-4 col-lg-offset-4">
-      <div class="el-card" *ngFor="let user of default_users">
-        <div class="el-card-body">
-          <img [src]="user.avatar" [alt]="user.name">
-          <button type="button" class="pull-right el-button" (click)="onLoginWithDemoUser(user.email)">Log in as {{ user.name }}</button>
-        </div>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mx-auto">
+        <app-alert></app-alert>
+        <form (submit)="onLogin(postForm)" #postForm="ngForm">
+          <fieldset>
+              <legend class="h3 mb-3">LOGIN PAGE</legend>
+              <div class="form-group">
+                  <label for="Email">Email address</label>
+                  <input id="Email" type="email" name="email" placeholder="Enter email" class="form-control" ngModel required>
+              </div>
+              <div class="form-group">
+                  <label for="Password">Password</label>
+                  <input id="Password" type="password" name="password" placeholder="Password" class="form-control" ngModel required>
+              </div>
+              <button type="submit" [disabled]="loading" class="btn btn-primary"><div *ngIf="loading" class="loader"></div>LOGIN</button>
+          </fieldset>
+        </form>
       </div>
     </div>
   </div>
-</div>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-lg-4 mx-auto">
+          <fieldset>
+              <legend class="h3 mb-3">LOGIN AS A DEMO USER</legend>
+              <div class="form-group">
+                  <label for="EasyLogIn">An easy way to login without register</label>
+                  <div class="el-card" *ngFor="let user of default_users">
+                      <div class="el-card-body">
+                        <img [src]="user.avatar" [alt]="user.name">
+                        <button type="button" class="float-right el-button mt-1" (click)="onLoginWithDemoUser(user.email)">Log in as {{ user.name }}</button>
+                      </div>
+                  </div>
+              </div>
+          </fieldset>        
+      </div>
+    </div>
+  </div>
+</section>
