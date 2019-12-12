@@ -2,7 +2,7 @@
   <h1>Dashboard</h1>
 
   <div class="">
-    <button type="button" class="el-button el-button-primary" (click)="openNewModel()">
+    <button type="button" class="btn btn-success" (click)="openNewModel()">
       New post
     </button>
   </div>
@@ -71,11 +71,9 @@
             </td>
             <td class="is-hidden">
               <div class="cell">
-                <button type="button" class="el-button el-button--default">
                   <span>
                     {{ post.id }}
                   </span>
-                </button>
               </div>
             </td>
             <td rowspan="1" colspan="1">
@@ -99,11 +97,11 @@
             <td rowspan="1" colspan="1" class="is-last">
               <div class="cell">
                 <div class="actions">
-                  <button type="button" class="el-button el-button-primary" (click)="openEditModel(post.slug)">
-                    <span class="typcn icon-default typcn-edit"></span>
+                  <button type="button" class="btn btn-info mx-2 p-1" (click)="openEditModel(post.slug)">
+                    <img src="../../../../assets/img/pencil.png" alt="create" style="width: 20px;">
                   </button>
-                  <button type="button" class="el-button el-button-danger">
-                    <span class="typcn icon-default typcn-trash"></span>
+                  <button type="button" class="btn btn-danger mx-2 p-1">
+                    <img src="../../../../assets/img/trash.png" alt="remove" style="width: 20px;">
                   </button>
                 </div>
               </div>
@@ -124,11 +122,9 @@
               </td>
               <td class="el-table_1_column_2 is-hidden">
                 <div class="cell">
-                  <button type="button" class="el-button el-button--default">
                     <span>
                       {{ post.id }}
                     </span>
-                  </button>
                 </div>
               </td>
               <td rowspan="1" colspan="1">
@@ -152,11 +148,11 @@
               <td rowspan="1" colspan="1" class="is-last">
                 <div class="cell">
                   <div class="actions">
-                    <button type="button" class="el-button el-button-primary" (click)="openEditModel(post.slug)">
-                      <span class="typcn icon-default typcn-edit"></span>
+                    <button type="button" class="btn btn-info mx-2 p-1" (click)="openEditModel(post.slug)">
+                      <img src="../../../../assets/img/pencil.png" alt="create" style="width: 20px;">
                     </button>
-                    <button type="button" class="el-button el-button-danger">
-                      <span class="typcn icon-default typcn-trash"></span>
+                    <button type="button" class="btn btn-danger mx-2 p-1">
+                      <img src="../../../../assets/img/trash.png" alt="remove" style="width: 20px;">
                     </button>
                   </div>
                 </div>
@@ -167,7 +163,6 @@
       </table>
     </div>
   </div>
-  <pagination-controls class="my-pagination" (pageChange)="$event" directionLinks="false"></pagination-controls>
 </div>
 
 

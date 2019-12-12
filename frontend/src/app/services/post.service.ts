@@ -1,23 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http'
-import {RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Post } from '../models/post.model';
-import { Tag } from '../models/tag.model';
-import { Category } from '../models/category.model';
 
 @Injectable({providedIn: 'root'})
-export class PostService{
+export class PostService {
   private posts: Post[] = [];
-  private post: Post;
   private postsUpdate = new Subject<any>();
 
   constructor(private http: HttpClient) { }
 
-  //Get all posts
-  getPosts(){
-    let url = 'api/posts/post/';
+  // Get all posts
+  getPosts() {
+    const url = 'api/posts/post/';
     this.http.get<Post[]>(url)
     .subscribe((postData) => {
       this.posts = postData;
@@ -25,9 +21,9 @@ export class PostService{
     });
   }
 
-  //Get feature posts
-  getFeaturePosts(){
-    let url = 'api/posts/feature/';
+  // Get feature posts
+  getFeaturePosts() {
+    const url = 'api/posts/feature/';
     this.http.get<Post[]>(url)
     .subscribe((postData) => {
       this.posts = postData;
@@ -35,19 +31,18 @@ export class PostService{
     });
   }
 
-  //Get a post by Slug
+  // Get a post by Slug
   getPost(slug: string) {
     const url = 'api/posts/post/' + slug;
     return this.http.get<Post>(url);
   }
 
-  //Add a post
-  addPosts(title: string, content: string, image: string, category: string, tags: number[]){
-    let url = 'api/posts/post/';
+  // Add a post
+  addPosts(title: string, content: string, image: string, category: string, tags: number[]) {
+    const url = 'api/posts/post/';
 
     const post: Post = {title: title, content: content, image: image, category: category, tags: tags};
 
-    console.log(post);
     this.http.post(url, post)
     .subscribe(responseData => {
       this.posts.push(post);
@@ -55,9 +50,9 @@ export class PostService{
     });
   }
 
-  //Update a post
-  updatePost(title: string, content: string, image: string, category: string, tags: number[], slug: string){
-    let url = `api/posts/post/${slug}/`
+  // Update a post
+  updatePost(title: string, content: string, image: string, category: string, tags: number[], slug: string) {
+    const url = `api/posts/post/${slug}/`;
 
     const post: Post = {title: title, content: content, image: image, category: category, tags: tags};
 
@@ -70,10 +65,10 @@ export class PostService{
       this.postsUpdate.next([...this.posts]);
     }, error => {
       console.log(error);
-    },);
+    }, );
   }
 
-  getPostsUpdateListener(){
+  getPostsUpdateListener() {
     return this.postsUpdate.asObservable();
   }
 }

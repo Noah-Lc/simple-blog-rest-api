@@ -3,7 +3,7 @@ import { HttpRequest, HttpHandler, HttpInterceptor } from '@angular/common/http'
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
-import { AuthService } from '../../../services/auth.service'
+import { AuthService } from '../../../services/auth.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -16,11 +16,10 @@ export class ErrorInterceptor implements HttpInterceptor {
                 console.log(err);
                 if (err.status === 401) {
                     this.authService.Logout();
-                    location.reload(true);
                 }
                 const error = err.error.message || err.statusText;
                 return throwError(error);
             })
-        )
-    }    
+        );
+    }
 }

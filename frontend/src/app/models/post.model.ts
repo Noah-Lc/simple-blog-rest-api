@@ -1,14 +1,11 @@
-import { Tag } from './tag.model';
-import { Category } from './category.model';
-
-export interface Post{
+export interface Post {
   id?: string;
-  created_by? : string;
-  title : string;
-  content : string;
-  image : string;
-  slug? : string;
-  category : string;
-  tags : number[];
-  created_at? : Date;
+  created_by?: string;
+  title: string;
+  content: string;
+  image: string;
+  slug?: string;
+  category: string;
+  tags: number[];
+  created_at?: Date;
 }

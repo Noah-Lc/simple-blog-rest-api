@@ -1,15 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { AuthInterceptor } from './components/auth/helpers/auth.interceptor';
 import { ErrorInterceptor } from './components/auth/helpers/error.interceptor';
-
-import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 import { PostListComponent } from './components/posts/posts-list/post-list.component';
 import { PostDetailsComponent } from './components/posts/post-details/post-details.component';
@@ -48,7 +46,6 @@ import { ModalComponent } from './components/modal/modal.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxPaginationModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
