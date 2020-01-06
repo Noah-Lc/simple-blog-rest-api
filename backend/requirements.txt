@@ -1,10 +1,10 @@
-django>=2.1.10
-djangorestframework==3.9.1
-flake8==3.6.0
-Pillow==5.3.0
+django==2.2
+djangorestframework==3.11.0
+flake8==3.7.9
+Pillow==7.0.0
 psycopg2==2.7.6.1
 factory_boy==2.11.1
-django-cors-headers==2.4.1
+django-cors-headers==3.2.1
 pytest==4.3.1
 pytest-django == 3.4.8
 pytest-cov==2.6.1
@@ -13,4 +13,3 @@ coveralls==1.6.0
 python-coveralls==2.9.1
 celery==4.2.2
 redis==3.2.1
-six==1.13.0

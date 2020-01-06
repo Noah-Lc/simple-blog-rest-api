@@ -105,9 +105,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost/'
-)
+CORS_ORIGIN_WHITELIST = [
+    'https://localhost'
+]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
