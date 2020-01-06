@@ -16,16 +16,17 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/pages/home/home.component';
-import { PagesComponent } from './components/pages/pages.component';
 import { DocsComponent } from './components/pages/docs/docs.component';
 import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 import { ProfileComponent } from './components/dashboard/profile/profile.component';
 import { AlertComponent } from './components/alert/alert.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { MainComponent } from './components/pages/main.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    MainComponent,
     PostListComponent,
     PostDetailsComponent,
     LoginComponent,
@@ -33,7 +34,6 @@ import { ModalComponent } from './components/modal/modal.component';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    PagesComponent,
     DocsComponent,
     DashboardComponent,
     ProfileComponent,

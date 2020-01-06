@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { PostListComponent } from './components/posts/posts-list/post-list.component';
 import { PostDetailsComponent } from './components/posts/post-details/post-details.component';
+import { MainComponent } from './components/pages/main.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { DocsComponent } from './components/pages/docs/docs.component';
 import { LoginComponent } from './components/auth/login/login.component';
@@ -12,14 +13,24 @@ import { ProfileComponent } from './components/dashboard/profile/profile.compone
 import { AuthGuard } from './components/auth/helpers/auth.guard';
 
 const routes: Routes = [
-  { path: 'posts', component: PostListComponent },
-  { path: 'post/:slug', component: PostDetailsComponent },
-  { path: '', component: HomeComponent },
-  { path: 'docs', component: DocsComponent },
+  { path: '',
+    component: MainComponent,
+    children: [
+      { path: '', component: HomeComponent },
+      { path: 'posts', component: PostListComponent },
+      { path: 'post/:slug', component: PostDetailsComponent },
+      { path: 'docs', component: DocsComponent },
+    ]
+  },
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: '', pathMatch: 'full' }
+  { path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] }
+    ]
+  },
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
