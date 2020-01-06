@@ -2,17 +2,14 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import { Post } from '../../../models/post.model';
-import { PostService } from '../../../services/post.service';
-
-import { Tag } from '../../../models/tag.model';
-import { TagService } from '../../../services/tag.service';
-
-import { Category } from '../../../models/category.model';
-import { CategoryService } from '../../../services/category.service';
-
 import { pull } from 'lodash';
 import { ModalService } from 'src/app/services/model.service';
+import { Category } from 'src/app/models/category.model';
+import { CategoryService } from 'src/app/services/category.service';
+import { Post } from 'src/app/models/post.model';
+import { PostService } from 'src/app/services/post.service';
+import { Tag } from 'src/app/models/tag.model';
+import { TagService } from 'src/app/services/tag.service';
 
 
 class ImageSnippet {
@@ -24,11 +21,11 @@ class ImageSnippet {
 }
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css', './../dashboard.component.css']
+  selector: 'app-posts-editor',
+  templateUrl: './posts-editor.component.html',
+  styleUrls: ['./posts-editor.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class PostsEditorComponent implements OnInit {
   selectedFile: ImageSnippet;
   post: Post;
   newTags: Tag[] = [];
@@ -80,7 +77,13 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  constructor(private fb: FormBuilder, public postService: PostService, public tagService: TagService, public categoryService: CategoryService, private modalService: ModalService) {}
+  constructor(
+    private fb: FormBuilder,
+    public postService: PostService,
+    public tagService: TagService,
+    public categoryService: CategoryService,
+    private modalService: ModalService
+    ) {}
 
   ngOnInit() {
     this.form = this.fb.group({
