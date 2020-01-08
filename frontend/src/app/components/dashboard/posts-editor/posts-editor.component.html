@@ -1,171 +1,43 @@
-<div class="container">
-    <h1>Dashboard</h1>
-  
-    <div class="">
-      <button type="button" class="btn btn-success" (click)="openNewModel()">
-        New post
-      </button>
-    </div>
-  
-    <div class="el-table">
-      <div class="el-table__body-wrapper is-scrolling-none">
-        <table class="el-table__body">
-          <colgroup>
-            <col width="48">
-            <col width="100">
-            <col width="250">
-            <col width="300">
-            <col width="250">
-            <col width="250">
-            <col width="250">
-          </colgroup>
-          <thead class="has-gutter">
-            <tr class="el-header-table">
-              <th class="is-leaf">
-                <div class="cell">
-                  <label role="checkbox" class="el-checkbox">
-                    <input type="checkbox" aria-hidden="true" class="el-checkbox-original" />
-                    <span aria-checked="mixed" class="el-checkbox-input">
-                      <span class="el-checkbox-inner">
-                      </span>
-                    </span>
-                  </label>
-                </div>
-              </th>
-              <th class="is-leaf">
-                <div class="cell">
-                  ID
-                  <span class="caret-wrapper"><i class="sort-caret ascending"></i><i
-                      class="sort-caret descending"></i></span>
-                </div>
-              </th>
-              <th class="is-leaf">
-                <div class="cell">Title</div>
-              </th>
-              <th class="is-leaf">
-                <div class="cell">Created On</div>
-              </th>
-              <th class="is-leaf">
-                <div class="cell">Slug</div>
-              </th>
-              <th class="is-leaf">
-                <div class="cell">Category</div>
-              </th>
-              <th class="is-leaf is-last">
-                <div class="cell">Actions</div>
-              </th>
-            </tr>
-          </thead>
-          <tbody *ngFor="let post of posts ; let i = index">
-            <tr class="el-table-row" *ngIf="i % 2 == 0; else trstriped">
-              <td class="is-leaf">
-                <div class="cell">
-                  <label role="checkbox" class="el-checkbox">
-                    <input type="checkbox" aria-hidden="true" class="el-checkbox-original" />
-                    <span aria-checked="mixed" class="el-checkbox-input">
-                      <span class="el-checkbox-inner">
-                      </span>
-                    </span>
-                  </label>
-                </div>
-              </td>
-              <td class="is-hidden">
-                <div class="cell">
-                    <span>
-                      {{ post.id }}
-                    </span>
-                </div>
-              </td>
-              <td rowspan="1" colspan="1">
-                <div class="cell">{{ post.title }}</div>
-              </td>
-              <td rowspan="1" colspan="1">
-                <div class="cell">
-                  {{ post.created_at | date:'dd-MM-yyyy hh:mm:ss' }}
-                </div>
-              </td>
-              <td rowspan="1" colspan="1">
-                <div class="cell">
-                  {{ post.slug }}
-                </div>
-              </td>
-              <td rowspan="1" colspan="1">
-                <div class="cell">
-                  {{ post.category }}
-                </div>
-              </td>
-              <td rowspan="1" colspan="1" class="is-last">
-                <div class="cell">
-                  <div class="actions">
-                    <button type="button" class="btn btn-info mx-2 p-1" (click)="openEditModel(post.slug)">
-                      <img src="../../../../assets/img/pencil.png" alt="create" style="width: 20px;">
-                    </button>
-                    <button type="button" class="btn btn-danger mx-2 p-1">
-                      <img src="../../../../assets/img/trash.png" alt="remove" style="width: 20px;">
-                    </button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <ng-template #trstriped>
-              <tr class="el-table-row el-table-row-striped">
-                <td class="el-table_1_column_1 is-leaf">
-                  <div class="cell">
-                    <label role="checkbox" class="el-checkbox">
-                      <input type="checkbox" aria-hidden="true" class="el-checkbox-original" />
-                      <span aria-checked="mixed" class="el-checkbox-input">
-                        <span class="el-checkbox-inner">
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-                </td>
-                <td class="el-table_1_column_2 is-hidden">
-                  <div class="cell">
-                      <span>
-                        {{ post.id }}
-                      </span>
-                  </div>
-                </td>
-                <td rowspan="1" colspan="1">
-                  <div class="cell">{{ post.title }}</div>
-                </td>
-                <td rowspan="1" colspan="1">
-                  <div class="cell">
-                    {{ post.created_at | date:'dd-MM-yyyy hh:mm:ss' }}
-                  </div>
-                </td>
-                <td rowspan="1" colspan="1">
-                  <div class="cell">
-                    {{ post.slug }}
-                  </div>
-                </td>
-                <td rowspan="1" colspan="1">
-                  <div class="cell">
-                    {{ post.category }}
-                  </div>
-                </td>
-                <td rowspan="1" colspan="1" class="is-last">
-                  <div class="cell">
-                    <div class="actions">
-                      <button type="button" class="btn btn-info mx-2 p-1" (click)="openEditModel(post.slug)">
-                        <img src="../../../../assets/img/pencil.png" alt="create" style="width: 20px;">
-                      </button>
-                      <button type="button" class="btn btn-danger mx-2 p-1">
-                        <img src="../../../../assets/img/trash.png" alt="remove" style="width: 20px;">
-                      </button>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </ng-template>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-  
-  
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Posts</h1>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Created On</th>
+        <th>Slug</th>
+        <th>Category</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let post of posts">
+      <tr>
+        <td>{{ post.id }}</td>
+        <td>{{ post.title }}</td>
+        <td>{{ post.created_at | date:'dd-MM-yyyy hh:mm:ss' }}</td>
+        <td>{{ post.slug }}</td>
+        <td>{{ post.category }}</td>
+        <td>
+          <div class="actions">
+            <button type="button" class="btn btn-info mx-2 p-1" (click)="openEditModel(post.slug)">
+              <img src="../../../../assets/img/pencil.png" alt="create" style="width: 20px;">
+            </button>
+            <button type="button" class="btn btn-danger mx-2 p-1">
+              <img src="../../../../assets/img/trash.png" alt="remove" style="width: 20px;">
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<button type="button" class="btn btn-success" (click)="openNewModel()">
+  New post
+</button>
+
   <jw-modal id="newPost">
     <div class="el-dialog-wrapper">
       <div role="dialog" aria-modal="true" aria-label="New Post" class="el-dialog">

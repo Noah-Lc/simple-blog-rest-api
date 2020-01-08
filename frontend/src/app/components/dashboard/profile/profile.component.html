@@ -1,25 +1,26 @@
-<div class="container pt">
-  <h1>User Profile</h1>
-  <div class="pad-all" *ngIf="profile != undefined">
-    <h3>Basic Information</h3>
-    <div class="media mar-btm">
-      <div class="media-left">
-        <img [src]="profile.avatar" class="img-md img-circle" alt="Avatar">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">User Profile</h1>
+</div>
+<div class="col-xl-6 col-lg-7 col-md-12 my-4">
+  <div class="profile-header" *ngIf="profile != undefined">
+    <div class="d-flex">
+      <div class="">
+        <div class="profile-image float-md-right"> <img [src]="profile.avatar" alt=""> </div>
       </div>
-      <div class="media-body">
-        <p class="text-lg text-main text-semibold mar-no">{{ profile.name | titlecase}}</p>
-        <p>{{ getRoleProfile() }}</p>
+      <div class="px-4">
+        <h4 class="m-t-0 m-b-0"><strong>{{ profile.name | titlecase}}</strong></h4>
+        <span>{{ getRoleProfile() }}</span><br>
+        <span>{{ profile.email }}</span>
+        <p>795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+        </div>
       </div>
-    </div>
-    <div class="bq-sm"><b>ID :</b> {{ profile.pk }}</div>
-    <div class="bq-sm"><b>Email :</b> {{ profile.email }}</div>
-    <div class="bq-sm"><b>Role :</b> {{ getRoleProfile() }}</div>
-    <br>
-    <h3 class="">About Roles</h3>
+  </div>
+</div>
+<div class="">
+    <h1 class="h2">About Roles</h1>
     <ul class="">
       <li class=""><b class="">Super Users</b> have full permissions</li>
       <li class=""><b class="">Staff Users</b> can access the admin interfaces and can be granted specific per model permissions</li>
       <li class=""><b class="">Active Users</b> active users can authenticate, but do not have access to the Django Admin interface</li>
     </ul>
-  </div>
 </div>

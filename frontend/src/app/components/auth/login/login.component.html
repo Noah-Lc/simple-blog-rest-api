@@ -1,25 +1,21 @@
 <section>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-4 mx-auto">
-        <app-alert></app-alert>
-        <form (submit)="onLogin(postForm)" #postForm="ngForm">
-          <fieldset>
-              <legend class="h3 mb-3">LOGIN PAGE</legend>
-              <div class="form-group">
-                  <label for="Email">Email address</label>
-                  <input id="Email" type="email" name="email" placeholder="Enter email" class="form-control" ngModel required>
-              </div>
-              <div class="form-group">
-                  <label for="Password">Password</label>
-                  <input id="Password" type="password" name="password" placeholder="Password" class="form-control" ngModel required>
-              </div>
-              <button type="submit" [disabled]="loading" class="btn btn-primary"><div *ngIf="loading" class="loader"></div>LOGIN</button>
-          </fieldset>
-        </form>
-      </div>
+  <form class="form-signin text-center" (submit)="onLogin(postForm)" #postForm="ngForm">
+    <img class="mb-4" src="../../../../assets/img/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <label for="Email" class="sr-only">Email address</label>
+    <input type="email" id="Email" name="email" class="form-control" placeholder="Email address" required ngModel autofocus>
+    <label for="Password" class="sr-only">Password</label>
+    <input type="password" id="Password" name="password" class="form-control" placeholder="Password" required ngModel>
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
     </div>
-  </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="loading"><div *ngIf="loading" class="loader"></div>Sign in</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>
+  </form>
+</section>
+<div style="display: none;">
   <div class="container mt-5">
     <div class="row">
       <div class="col-lg-4 mx-auto">
@@ -38,4 +34,4 @@
       </div>
     </div>
   </div>
-</section>
+</div>

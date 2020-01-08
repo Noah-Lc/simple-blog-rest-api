@@ -1,50 +1,13 @@
-<div id="login" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade bd-example-modal-lg">
-    <div role="document" class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content">
-        <div class="modal-header border-bottom-0">
-          <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
-        </div>
-        <div class="modal-body p-4 p-lg-5">
-          <form action="#" class="login-form text-left">
-            <div class="form-group mb-4">
-              <label>Email address</label>
-              <input type="email" name="email" placeholder="name@company.com" class="form-control">
-            </div>
-            <div class="form-group mb-4">
-              <label>Password</label>
-              <input type="password" name="password" placeholder="Min 8 characters" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="submit" value="Login" class="btn btn-primary">
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Intro Section-->
-  <section>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 mx-auto">
-          <div class="text-center">
-            <h2>Simple Blog</h2>
-            <p class="lead text-muted mt-2">Hello everybody. I'm a Simple Blog, a free source coded by Noah Lc. A really
-              simple blog with ship high quality code && clean code for people with all levels of skill.</p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-7 mx-auto mt-5"><img src="../../../../assets/img/illustration-1.svg" alt="background" class="intro-image img-fluid"></div>
-      </div>
-      <div class="row mt-5">
-        <div class="col-lg-8 mx-auto">
-          <div class="text-center">
-            <a href="#" class="btn btn-primary">Learn More</a>
-          </div>
-        </div>
-      </div>
 
+  <!-- Intro Section-->
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1>Album example</h1>
+      <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+      <p>
+        <a href="#" class="btn btn-primary my-2">Main call to action</a>
+        <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+      </p>
     </div>
   </section>
   <!-- Integrations Section-->
@@ -145,23 +108,22 @@
     </div>
   </section>
 
-  <section id="blog">
-    <div class="container">
-      <div class="text-center">
+  <section>
+    <div class="album py-5 bg-light">
+      <div class="container">
         <h2>Latest posts</h2>
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
-            <p class="lead text-muted mt-2">Lorem ipsum dolor sit amet.</p>
-          </div>
-        </div>
-        <div class="row mt-4" *ngIf="posts.length > 0">
-          <div class="col-md-6 col-lg-4" *ngFor="let post of posts | slice:0:3">
-            <div class="block-blog text-left">
-              <a [routerLink]="['/post/', post.slug]"><img [src]="post.image" [alt]="post.title"></a>
-              <div class="content-blog">
-                <h4><a [routerLink]="['/post/', post.slug]">{{ post.title }}</a></h4>
-                <span>{{ post.created_at | date: 'dd, MMM yyyy' }}</span>
-                <a class="float-right readmore" [routerLink]="['/post/', post.slug]">read more</a>
+        <div class="row" *ngIf="posts.length > 0">
+          <div class="col-md-4" *ngFor="let post of posts | slice:0:6">
+            <div class="card mb-4 shadow-sm">
+              <img class="bd-placeholder-img card-img-top" [src]="post.image" [alt]="post.title" width="100%" height="225">
+              <div class="card-body">
+                <p class="card-text">{{ post.title }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a [routerLink]="['/post/', post.slug]" class="btn btn-sm btn-outline-secondary">View</a>
+                  </div>
+                  <small class="text-muted">{{ post.created_at | date: 'dd, MMM yyyy' }}</small>
+                </div>
               </div>
             </div>
           </div>
