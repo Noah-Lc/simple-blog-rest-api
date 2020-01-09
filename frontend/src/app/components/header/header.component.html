@@ -3,14 +3,17 @@
   <div class="container">
     <div class="logo float-left">
       <!-- Uncomment below if you prefer to use an image logo -->
-      <h1 class="text-light"><a href="#intro" class="scrollto"><span>Simple Blog</span></a></h1>
+      <h1 class="text-light">
+        <a [routerLink]="['']" class="scrollto">
+          <span>Simple Blog</span>
+        </a>
+      </h1>
     </div>
-
     <nav class="main-nav float-right d-none d-lg-block">
       <ul>
         <li><a [routerLink]="['']">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a [routerLink]="['docs']">docs</a></li>
+        <li><a [routerLink]="['/about']">About</a></li>
+        <li><a [routerLink]="['/docs']">docs</a></li>
       </ul>
     </nav>
   </div>

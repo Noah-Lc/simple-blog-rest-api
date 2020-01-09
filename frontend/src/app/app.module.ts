@@ -23,6 +23,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { MainComponent } from './components/pages/main.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PostsEditorComponent } from './components/dashboard/posts-editor/posts-editor.component';
+import { AboutComponent } from './components/pages/about/about.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { PostsEditorComponent } from './components/dashboard/posts-editor/posts-
     ProfileComponent,
     AlertComponent,
     ModalComponent,
-    PostsEditorComponent
+    PostsEditorComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
