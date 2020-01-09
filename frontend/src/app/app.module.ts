@@ -13,8 +13,8 @@ import { PostListComponent } from './components/posts/posts-list/post-list.compo
 import { PostDetailsComponent } from './components/posts/post-details/post-details.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/pages/header/header.component';
+import { FooterComponent } from './components/pages/footer/footer.component';
 import { HomeComponent } from './components/pages/home/home.component';
 import { DocsComponent } from './components/pages/docs/docs.component';
 import { ProfileComponent } from './components/dashboard/profile/profile.component';

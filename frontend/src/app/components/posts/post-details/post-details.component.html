@@ -1,38 +1,26 @@
-
-<div *ngIf="post != undefined">
-	<section class="header bg-gray">
-		<div class="container text-center">
-		  <h1>{{ post.title }}</h1>
-		  <p>{{ post.created_by }}</p>
-		  <p>{{ post.created_at | date : 'MMMM dd, yyyy' }}</p>
-		</div>
-	 </section>
-	 <section>
-		<div class="container">
-		  <div class="row">
-			<div class="col-lg-8 mx-auto">
-			  <p class="lead text-muted mb-5"><strong>Pellentesque habitant </strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae </code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.  <a href="#">Donec non enim  </a> in turpis pulvinar facilisis. Ut felis.</p>
-			  <h2 class="mb-3">Header Level 2</h2>
-			  <p>{{ post.content }}</p>
-			  <ol class="mb-5 text-left">
-				<li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-				<li>Aliquam tincidunt mauris eu risus.</li>
-			  </ol>
-			  <blockquote class="blockquote mb-5 text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</blockquote>
-			  <h3 class="mb-5">Header Level 3</h3>
-			  <p class="mb-5">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-			  <ul class="mb-4 text-left">
-				<li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-				<li>Aliquam tincidunt mauris eu risus.</li>
-			  </ul>
-			  <p><img class="img-fluid" [src]="post.image" [alt]="post.title"></p>
-			  <p class="mt-5">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-			  <br>
-			  <p>TAGS: <span *ngFor="let tag of post.tags"><a href="#" [rel]="tag">{{ tag }}</a>, </span></p>
-			  <hr>
-			  <p><a [routerLink]="['']"># Back</a></p>
-			</div>
-		  </div>
-		</div>
-	  </section>	
-	</div>
+<section class="bg-light" *ngIf="post">
+    <div class="container">
+        <div class="row">
+            <!-- Post Content Column -->
+            <div class="col-lg-12">
+                <!-- Title -->
+                <h1 class="mt-4">{{ post.title | titlecase }}</h1>
+                <!-- Author -->
+                <p class="lead"> by <a href="#">{{ post.created_by | titlecase }}</a></p>
+                <hr>
+                <!-- Date/Time -->
+                <p>Posted on {{ post.created_at | date : 'MMMM dd, yyyy' }}</p>
+                <hr>
+                <!-- Preview Image -->
+                <div class="text-center">
+                    <img class="img-fluid rounded" [src]="post.image" [alt]="post.title">
+                </div>
+                <hr>
+                <!-- Post Content -->
+                <p>{{ post.content }}</p>
+                <hr>
+                <p>TAGS: <span *ngFor="let tag of post.tags"><a href="#" [rel]="tag">{{ tag }}</a>, </span></p>
+            </div>
+        </div>
+    </div>
+</section>

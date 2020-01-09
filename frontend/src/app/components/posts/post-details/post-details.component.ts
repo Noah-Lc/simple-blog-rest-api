@@ -9,14 +9,13 @@ import { PostService } from '../../../services/post.service';
   styleUrls: ['./post-details.component.css']
 })
 export class PostDetailsComponent implements OnInit {
-  private post: Post;
+  post: Post;
 
   constructor(public postService: PostService, public route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       const postId = paramMap.get('slug');
-
       this.postService.getPost(postId).subscribe(post => {
         this.post = post;
       });
