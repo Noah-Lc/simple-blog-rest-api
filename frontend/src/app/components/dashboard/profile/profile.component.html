@@ -2,15 +2,15 @@
   <h1 class="h2">User Profile</h1>
 </div>
 <div class="col-xl-6 col-lg-7 col-md-12 my-4">
-  <div class="profile-header" *ngIf="profile != undefined">
+  <div class="profile-header" *ngIf="userProfile">
     <div class="d-flex">
       <div class="">
-        <div class="profile-image float-md-right"> <img [src]="profile.avatar" alt=""> </div>
+        <div class="profile-image float-md-right"> <img [src]="userProfile.avatar" alt=""> </div>
       </div>
       <div class="px-4">
-        <h4 class="m-t-0 m-b-0"><strong>{{ profile.name | titlecase}}</strong></h4>
-        <span>{{ getRoleProfile() }}</span><br>
-        <span>{{ profile.email }}</span>
+        <h4 class="m-t-0 m-b-0"><strong>{{ userProfile.name | titlecase}}</strong></h4>
+        <span>{{ currentRole }}</span><br>
+        <span>{{ userProfile.email }}</span>
         <p>795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
         </div>
       </div>

@@ -10,8 +10,10 @@ import { ProfileService } from '../../../services/profile.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit, OnDestroy {
-  profile: User;
   private profileSubscribe: Subscription;
+
+  userProfile: User;
+  currentRole: string;
 
   constructor(public profileService: ProfileService) {}
 
@@ -19,7 +21,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.profileService.getProfile();
     this.profileSubscribe = this.profileService.getPostsUpdateListener()
     .subscribe(profile => {
-      this.profile = profile[0];
+      this.userProfile = profile;
+      this.currentRole = this.getRoleProfile(profile);
     });
   }
 
@@ -27,7 +30,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.profileSubscribe.unsubscribe();
   }
 
-  getRoleProfile() {
-    if (this.profile.is_superuser) { return 'Super User'; } else if (this.profile.is_superuser) { return 'Staff User'; } else { return 'Active User'; }
+  private getRoleProfile(user: User) {
+    if (user.is_superuser) {
+      return 'Super User';
+    } else if (user.is_superuser) {
+      return 'Staff User';
+    } else {
+      return 'Active User';
+    }
   }
 }
