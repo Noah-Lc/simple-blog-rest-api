@@ -23,6 +23,7 @@ const routes: Routes = [
       { path: 'post/:slug', component: PostDetailsComponent },
       { path: 'about', component: AboutComponent },
       { path: 'docs', component: DocsComponent },
+      { path: 'home', redirectTo: '', pathMatch: 'full' },
     ]
   },
   { path: 'login', component: LoginComponent },
@@ -31,7 +32,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', component: ProfileComponent },
-      { path: 'posts', component: PostsEditorComponent }
+      { path: 'posts', component: PostsEditorComponent },
+      { path: '**', redirectTo: '', pathMatch: 'full' }
     ]
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },

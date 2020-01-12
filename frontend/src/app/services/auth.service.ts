@@ -9,15 +9,16 @@ import { AlertService } from './../services/alert.service';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-  private isAuthenticated = false;
-  private token: string;
-  private tokenTimer: any;
   private authStatusListener = new Subject<boolean>();
+
+  private isAuthenticated = false;
+  private currentToken: string;
+  private tokenTimer: any;
 
   constructor(private http: HttpClient, private router: Router, private alertService: AlertService) { }
 
   getToken() {
-    return this.token;
+    return this.currentToken;
   }
 
   getIsAuth() {
@@ -44,15 +45,13 @@ export class AuthService {
     this.http.post<{token: string}>(url, user)
       .subscribe(response => {
         const token = response.token;
-        this.token = token;
+        this.currentToken = token;
         if (token) {
           this.setAuthTimer(3600);
           this.saveAuthData(token);
 
           this.authStatusListener.next(true);
           this.isAuthenticated = true;
-
-          this.router.navigate(['/dashboard']);
         }
       }, (error: any) => {
         this.authStatusListener.next(false);
@@ -63,10 +62,10 @@ export class AuthService {
 
   Logout() {
     this.isAuthenticated = false;
-    this.token = null;
+    this.currentToken = null;
     clearTimeout(this.tokenTimer);
     this.clearAuthData();
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
 
   autoAuthUser() {
@@ -80,7 +79,7 @@ export class AuthService {
     const expiresIn = authInformation.expirationDate.getTime() - dateNow.getTime();
 
     if (expiresIn > 0) {
-      this.token = authInformation.token;
+      this.currentToken = authInformation.token;
       this.isAuthenticated = true;
       this.setAuthTimer(expiresIn / 1000);
       this.authStatusListener.next(true);

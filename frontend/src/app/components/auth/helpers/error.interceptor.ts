@@ -13,7 +13,6 @@ export class ErrorInterceptor implements HttpInterceptor {
         // auto logout if 401 response returned from api
         return next.handle(request).pipe(
             catchError(err => {
-                console.log(err);
                 if (err.status === 401) {
                     this.authService.Logout();
                 }

@@ -1,21 +1,25 @@
 <section>
   <form class="form-signin text-center" (submit)="onLogin(postForm)" #postForm="ngForm">
     <img class="mb-4" src="../../../../assets/img/bootstrap-solid.svg" alt="" width="72" height="72">
+    <app-alert></app-alert>
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <label for="Email" class="sr-only">Email address</label>
-    <input type="email" id="Email" name="email" class="form-control" placeholder="Email address" required ngModel autofocus>
+    <input type="email" name="email" class="form-control" placeholder="Email address" #email="ngModel" required email ngModel autofocus [ngClass]="{ 'is-invalid': isSubmited && email.invalid }">
     <label for="Password" class="sr-only">Password</label>
-    <input type="password" id="Password" name="password" class="form-control" placeholder="Password" required ngModel>
+    <input type="password" name="password" class="form-control" placeholder="Password" #password="ngModel" required password ngModel [ngClass]="{ 'is-invalid': isSubmited && password.invalid }">
     <div class="checkbox mb-3">
       <label>
         <input type="checkbox" value="remember-me"> Remember me
       </label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="loading"><div *ngIf="loading" class="loader"></div>Sign in</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="isLoading">
+      <div *ngIf="isLoading; else text" class="spinner-grow text-light" role="status"></div>
+      <ng-template #text>Sign in</ng-template>
+    </button>
     <p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>
   </form>
 </section>
-<div style="display: none;">
+<div>
   <div class="container mt-5">
     <div class="row">
       <div class="col-lg-4 mx-auto">
