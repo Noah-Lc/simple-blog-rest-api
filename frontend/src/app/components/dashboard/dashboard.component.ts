@@ -40,10 +40,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   initDashboard(user: User) {
     this.dashboardMenu = [
       { name: 'Dsahboard', icon: 'home', action: 'home', valid: true },
-      { name: 'Profile', icon: 'home', action: 'profile', valid: true },
-      { name: 'Posts', icon: 'home', action: 'posts', valid: true },
-      { name: 'Notification', icon: 'home', action: 'notification', valid: user.is_staff },
-      { name: 'Admin', icon: 'home', action: 'admin', valid: user.is_superuser },
+      { name: 'Profile', icon: 'User', action: 'profile', valid: true },
+      { name: 'Posts', icon: 'Feather', action: 'posts', valid: true },
+      { name: 'Notification', icon: 'Bell', action: 'notification', valid: user.is_staff },
+      { name: 'Admin', icon: 'Grid', action: 'admin', valid: user.is_superuser },
     ];
   }
 

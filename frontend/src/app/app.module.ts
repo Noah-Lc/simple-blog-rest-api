@@ -24,6 +24,7 @@ import { MainComponent } from './components/pages/main.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PostsEditorComponent } from './components/dashboard/posts-editor/posts-editor.component';
 import { AboutComponent } from './components/pages/about/about.component';
+import { IconsModule } from './icons/icons.module';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { AboutComponent } from './components/pages/about/about.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    IconsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
