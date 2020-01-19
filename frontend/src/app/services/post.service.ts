@@ -43,8 +43,8 @@ export class PostService {
 
     const post: Post = {title: title, content: content, image: image, category: category, tags: tags};
 
-    this.http.post(url, post)
-    .subscribe(responseData => {
+    this.http.post(url, post).subscribe(responseData => {
+      console.log(responseData);
       this.posts.push(post);
       this.postsUpdate.next([...this.posts]);
     });

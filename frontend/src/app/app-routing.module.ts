@@ -13,6 +13,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/dashboard/profile/profile.component';
 import { PostsEditorComponent } from './components/dashboard/posts-editor/posts-editor.component';
 import { AboutComponent } from './components/pages/about/about.component';
+import { NewPostComponent } from './components/dashboard/new-post/new-post.component';
 
 const routes: Routes = [
   { path: '',
@@ -33,6 +34,7 @@ const routes: Routes = [
     children: [
       { path: '', component: ProfileComponent },
       { path: 'posts', component: PostsEditorComponent },
+      { path: 'new', component: NewPostComponent },
       { path: '**', redirectTo: '', pathMatch: 'full' }
     ]
   },

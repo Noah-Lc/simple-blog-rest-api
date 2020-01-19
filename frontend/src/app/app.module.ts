@@ -25,6 +25,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PostsEditorComponent } from './components/dashboard/posts-editor/posts-editor.component';
 import { AboutComponent } from './components/pages/about/about.component';
 import { IconsModule } from './icons/icons.module';
+import { NewPostComponent } from './components/dashboard/new-post/new-post.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { IconsModule } from './icons/icons.module';
     AlertComponent,
     ModalComponent,
     PostsEditorComponent,
-    AboutComponent
+    AboutComponent,
+    NewPostComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
