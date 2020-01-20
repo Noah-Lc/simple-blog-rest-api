@@ -25,16 +25,8 @@
                 <div class="form-group">
                     <textarea class="form-control" name="content" placeholder="Content" ngModel required></textarea>
                 </div>
-                <div class="form-group mb-0">
-                    <div class="form-control" (click)="focusTagInput()">
-                        <span class="border-0 btn-primary p-1 mx-1" *ngFor="let tag of newTags">
-                            {{ tag.name }} <button type="button" class="border-0 btn-primary p-0" (click)="removeTag(tag)">×</button>
-                        </span>
-                        <input class="border-0" placeholder="Tags" #tagInput required type="text" (keyup)="onKeyUp($event)">
-                    </div>
-                </div>
-                <div class="border p-2" *ngIf="filterTag">
-                    <button *ngFor="let tag of tags | filter: filterTag" class="border-0 btn-primary p-1 mx-1" type="button" (click)="addTag(tag)">{{ tag.name }}</button>
+                <div class="form-group">
+                    <app-tags-input (currentTags)="loadTags($event)"></app-tags-input>
                 </div>
                 <div class="py-3">
                     <button type="submit" class="btn btn-primary" (click)="onAddPost(postForm)">Creat</button>

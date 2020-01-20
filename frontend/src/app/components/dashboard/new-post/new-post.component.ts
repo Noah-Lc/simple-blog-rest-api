@@ -14,27 +14,18 @@ import { ImageSnippet } from 'src/app/models/image.model';
   styleUrls: ['./new-post.component.css']
 })
 export class NewPostComponent implements OnInit, OnDestroy {
-  tags: Tag[] = [];
-  private tagSubscribe: Subscription;
 
   categories: Category[] = [];
   private categorySubscribe: Subscription;
 
-  newTags: Tag[] = [];
+  postTags: number[];
   filterTag: string;
   imageSrc: string;
 
-  @ViewChild('tagInput', {static: false} ) tagInputRef: ElementRef;
 
-  constructor(public tagService: TagService, public categoryService: CategoryService, public postService: PostService) { }
+  constructor(public categoryService: CategoryService, public postService: PostService) { }
 
   ngOnInit() {
-    this.tagService.getTags();
-    this.tagSubscribe = this.tagService.getTagUpdateListener()
-      .subscribe((tags: Tag[]) => {
-        this.tags = tags;
-      });
-
     this.categoryService.getCategories();
     this.categorySubscribe = this.categoryService.getCategoryUpdateListener()
       .subscribe((categories: Category[]) => {
@@ -42,43 +33,8 @@ export class NewPostComponent implements OnInit, OnDestroy {
       });
   }
 
-  focusTagInput(): void {
-    this.tagInputRef.nativeElement.focus();
-  }
-
-  onKeyUp(event: KeyboardEvent): void {
-    let inputValue: string = this.tagInputRef.nativeElement.value;
-
-    if (event.code === 'Backspace' && !this.filterTag) {
-      this.filterTag = inputValue;
-      this.removeTag();
-    } else {
-      this.filterTag = inputValue;
-      if (event.code === 'Comma' || event.code === 'Space') {
-        if (inputValue[inputValue.length - 1] === ',' || inputValue[inputValue.length - 1] === ' ') {
-          inputValue = inputValue.slice(0, -1);
-        }
-        const newTag: Tag = this.tags.find(t => t.name === inputValue);
-        this.addTag(newTag);
-      }
-    }
-  }
-
-  addTag(tag: Tag): void {
-    const exist: Tag = this.newTags.find(t => t === tag);
-    if (tag && !exist) {
-      this.newTags.push(tag);
-      this.tagInputRef.nativeElement.value = '';
-      this.filterTag = '';
-    }
-  }
-
-  removeTag(tag?: Tag): void {
-    if (tag) {
-      this.newTags = this.newTags.filter(t => t !== tag);
-    } else {
-      this.newTags.splice(-1);
-    }
+  loadTags(tags: number[]) {
+    this.postTags = tags;
   }
 
   loadImage(image: string) {
@@ -88,14 +44,11 @@ export class NewPostComponent implements OnInit, OnDestroy {
   onAddPost(postForm: NgForm) {
     if (postForm.invalid) { return; }
 
-    this.postService.addPosts(postForm.value.title, postForm.value.content, this.imageSrc, postForm.value.category, this.newTags.map(t => t.id));
-    this.newTags.splice(0, this.newTags.length);
-    this.imageSrc = null;
+    this.postService.addPosts(postForm.value.title, postForm.value.content, this.imageSrc, postForm.value.category, this.postTags);
     postForm.reset();
   }
 
   ngOnDestroy() {
-    this.tagSubscribe.unsubscribe();
     this.categorySubscribe.unsubscribe();
   }
 }

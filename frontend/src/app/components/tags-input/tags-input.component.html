@@ -1,0 +1,11 @@
+<div>
+    <div class="form-control" (click)="focusTagInput()">
+        <span class="border-0 btn-primary p-1 mx-1" *ngFor="let tag of customTags">
+            {{ tag.name }} <button type="button" class="border-0 btn-primary p-0" (click)="removeTag(tag)">×</button>
+        </span>
+        <input class="border-0" placeholder="Tags" #tagInput required type="text" (keyup)="onKeyUp($event)">
+    </div>
+</div>
+<div class="border p-2" *ngIf="filterTag">
+    <button *ngFor="let tag of availableTags | filter: filterTag" class="border-0 btn-primary p-1 mx-1" type="button" (click)="addTag(tag)">{{ tag.name }}</button>
+</div>

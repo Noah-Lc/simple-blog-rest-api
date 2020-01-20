@@ -28,6 +28,7 @@ import { IconsModule } from './icons/icons.module';
 import { NewPostComponent } from './components/dashboard/new-post/new-post.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { ImageSnippetComponent } from './components/image-snippet/image-snippet.component';
+import { TagsInputComponent } from './components/tags-input/tags-input.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ImageSnippetComponent } from './components/image-snippet/image-snippet.
     AboutComponent,
     NewPostComponent,
     FilterPipe,
-    ImageSnippetComponent
+    ImageSnippetComponent,
+    TagsInputComponent
   ],
   imports: [
     BrowserModule,
