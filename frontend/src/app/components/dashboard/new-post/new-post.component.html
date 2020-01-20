@@ -20,14 +20,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <button type="button" class="btn btn-primary mr-2" id="avatar" (click)="imageInput.click()">Chose Image</button>
-                    <ng-container *ngIf="selectedFile; then fileChosen; else fileNoChosen"></ng-container>
-                    <ng-template #fileChosen>{{ selectedFile.name }}</ng-template>
-                    <ng-template #fileNoChosen>No Image chosen</ng-template>
-                    <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" [hidden]="true" name="image" />
-                </div>
-                <div class="form-group" *ngIf="selectedFile">
-                    <img class="image-preview" [src]="selectedFile.src" [alt]="selectedFile.name">
+                    <app-image-snippet (imageSrc)="loadImage($event)"></app-image-snippet>
                 </div>
                 <div class="form-group">
                     <textarea class="form-control" name="content" placeholder="Content" ngModel required></textarea>

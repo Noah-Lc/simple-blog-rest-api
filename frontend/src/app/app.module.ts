@@ -27,6 +27,7 @@ import { AboutComponent } from './components/pages/about/about.component';
 import { IconsModule } from './icons/icons.module';
 import { NewPostComponent } from './components/dashboard/new-post/new-post.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { ImageSnippetComponent } from './components/image-snippet/image-snippet.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     PostsEditorComponent,
     AboutComponent,
     NewPostComponent,
-    FilterPipe
+    FilterPipe,
+    ImageSnippetComponent
   ],
   imports: [
     BrowserModule,

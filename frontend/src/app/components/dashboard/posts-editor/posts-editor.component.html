@@ -38,62 +38,6 @@
   New post
 </button>
 
-  <jw-modal id="newPost">
-    <div class="el-dialog-wrapper">
-      <div role="dialog" aria-modal="true" aria-label="New Post" class="el-dialog">
-        <div class="row mt">
-          <div class="col-lg-6 col-lg-offset-3 centered">
-            <h3>NEW POST</h3>
-          </div>
-          <button type="button" aria-label="Close" class="el-dialog-headerbtn"
-            (click)="closeModal('newPost')">close</button>
-        </div>
-        <div class="row mt">
-          <div class="col-lg-10 col-lg-offset-1">
-            <form class="login-form" #postForm="ngForm">
-              <div class="form-group">
-                <input class="el-input" type="text" name="title" placeholder="Title" ngModel reauired />
-              </div>
-              <div class="form-group">
-                <select class="el-input el-select" name="category" ngModel reauired>
-                  <option disabled value>Category</option>
-                  <option *ngFor="let category of categories" [ngValue]="category.name">{{ category.name }}</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <button type="button" class="el-button" id="avatar" (click)="imageInput.click()">Chose Image</button>
-                &nbsp;&nbsp;
-                <ng-container *ngIf="selectedFile; then fileChosen; else fileNoChosen"></ng-container>
-                <ng-template #fileChosen>{{ selectedFile.name }}</ng-template>
-                <ng-template #fileNoChosen>No Image chosen</ng-template>
-                <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" [hidden]="true"
-                  name="image" />
-              </div>
-              <div class="form-group" *ngIf="selectedFile">
-                <img class="el-image-preview" [src]="selectedFile.src" [alt]="selectedFile.name">
-              </div>
-              <div class="form-group">
-                <textarea rows=8 class="el-input el-textarea" name="content" placeholder="Content" ngModel
-                  required></textarea>
-              </div>
-              <div class="form-group">
-                <div [formGroup]="form">
-                  <div class="el-input-tag " (click)="focusTagInput()">
-                    <span class="tag-item" *ngFor="let tag of newTags">
-                      {{ tag.name }}
-                      <span type="button" class="remove-tag" (click)="removeTag(tag)">×</span>
-                    </span>
-                    <input placeholder="Tags" #tagInput type="text" (keyup)="onKeyUp($event)" formControlName="tag">
-                  </div>
-                </div>
-              </div>
-              <button type="button" (click)="onAddPost(postForm)" class="action-button">CREATE</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </jw-modal>
   
   <jw-modal id="editPost">
     <div class="el-dialog-wrapper">

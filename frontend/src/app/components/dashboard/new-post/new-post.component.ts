@@ -6,14 +6,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { PostService } from 'src/app/services/post.service';
-
-class ImageSnippet {
-  pending = false;
-  status = 'Init';
-  name = 'No Image chosen';
-
-  constructor(public src: string, public file: File) {}
-}
+import { ImageSnippet } from 'src/app/models/image.model';
 
 @Component({
   selector: 'app-new-post',
@@ -29,10 +22,9 @@ export class NewPostComponent implements OnInit, OnDestroy {
 
   newTags: Tag[] = [];
   filterTag: string;
+  imageSrc: string;
 
   @ViewChild('tagInput', {static: false} ) tagInputRef: ElementRef;
-  form: any;
-  selectedFile: ImageSnippet;
 
   constructor(public tagService: TagService, public categoryService: CategoryService, public postService: PostService) { }
 
@@ -89,34 +81,17 @@ export class NewPostComponent implements OnInit, OnDestroy {
     }
   }
 
+  loadImage(image: string) {
+    this.imageSrc = image;
+  }
 
   onAddPost(postForm: NgForm) {
     if (postForm.invalid) { return; }
 
-    this.postService.addPosts(postForm.value.title, postForm.value.content, this.selectedFile.src, postForm.value.category, this.newTags.map(t => t.id));
-  }
-
-  processFile(imageInput: any) {
-    const file: File = imageInput.files[0];
-    const reader = new FileReader();
-
-    if (file === undefined) { return; }
-
-    const mimeType = file.type;
-    if (mimeType.match(/image\/*/) == null) {
-      alert('Only images are supported.');
-      return;
-    }
-
-    reader.addEventListener('load', (event: any) => {
-
-      this.selectedFile = new ImageSnippet(event.target.result, file);
-
-      this.selectedFile.pending = true;
-      this.selectedFile.name = file.name;
-    });
-
-    reader.readAsDataURL(file);
+    this.postService.addPosts(postForm.value.title, postForm.value.content, this.imageSrc, postForm.value.category, this.newTags.map(t => t.id));
+    this.newTags.splice(0, this.newTags.length);
+    this.imageSrc = null;
+    postForm.reset();
   }
 
   ngOnDestroy() {

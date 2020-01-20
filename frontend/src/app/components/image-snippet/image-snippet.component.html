@@ -1,0 +1,13 @@
+<div>
+    <button type="button" class="btn btn-primary mr-2" (click)="imageInput.click()">Chose Image</button>
+    <ng-container *ngIf="selectedFile; then fileChosen; else fileNoChosen"></ng-container>
+    <ng-template #fileChosen>{{ selectedFile.name }}</ng-template>
+    <ng-template #fileNoChosen>No Image chosen</ng-template>
+    <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" [hidden]="true" name="image" />
+</div>
+<div class="form-group" *ngIf="selectedFile">
+    <img class="el-image-preview" [src]="selectedFile.src" [alt]="selectedFile.name">
+</div>
+<div class="form-group" *ngIf="!selectedFile && postImage">
+    <img class="el-image-preview" [src]="postImage">
+</div>
